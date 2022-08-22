@@ -1,0 +1,9 @@
+* {
+  /* COLOR VARIABLES */
+  --primary-color-green: #5a630d;
+  --secondary-color-white: #ffffff;
+  --secondary-color-light-blue: #c4d1c4;
+
+  /* FONT VARIABLES */
+  --logo-font: 'Alfa Slab One', cursive;
+}
