@@ -1,0 +1,15 @@
+.button_green {
+  background-color: var(--primary-color-green);
+  min-width: 8rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid var(--primary-color-green);
+  transition: all 0.2s;
+}
+
+.button_green:hover {
+  background-color: inherit;
+  /* border: 2px solid var(--primary-color-green); */
+}

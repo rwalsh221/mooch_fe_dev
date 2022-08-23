@@ -19,7 +19,7 @@
   padding: 1rem;
   border-bottom: 2px solid var(--primary-color-green);
 
-  border-bottom: 2px solid wheat;
+  border-bottom: 2px solid var(--primary-color-green-300);
 }
 
 .register_heading {
@@ -28,39 +28,61 @@
   margin: 0 auto 0 20rem;
 }
 
-.register_main h2 {
+.register_secondary_heading {
   justify-self: center;
-  padding: 1rem;
+  padding: 2rem;
   text-transform: capitalize;
+  border-bottom: 5px solid var(--primary-color-green-300);
+  width: 40%;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
 }
 
 .register_form__container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
+  /* align-items: center; */
+  /* justify-content: center; */
+  margin: 2rem auto;
+  width: 50%;
+  /* height: 100%; */
+  padding: 2rem;
   align-self: center;
-
-  background-image: url('../../assets/img/forest_bg.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('../../assets/img/forest_bg.jpg');
-  background-position: center top; */
-  background-color: rgba(0, 0, 0, 0.4);
-  background-blend-mode: lighten;
+  border: 2px solid var(--primary-color-green-300);
 }
 
-.register_form__card {
+.register_form__content {
   display: flex;
   flex-direction: column;
   background-color: var(--secondary-color-white);
-  border: 2px solid var(--primary-color-green);
+
   height: max-content;
-  flex-basis: 25%;
+  flex: 1 1 50%;
   margin: 1rem;
   padding: 2rem;
   /* height: 100%; */
+}
+
+.register_form__content input {
+  margin: 0.5rem 0;
+  border: 2px solid var(--primary-color-green-300);
+}
+
+input[name='register-email'] {
+  width: 100%;
+}
+input[name='register-password'] {
+  margin: 0 0.5rem 1rem 0;
+}
+
+.register .register_form__content h2,
+.register_form__content h3 {
+  margin-bottom: 2rem;
+}
+
+.register_form__img {
+  width: 300px;
+  padding: 2rem;
+  align-self: center;
+  border: 2px solid var(--primary-color-green-300);
 }
