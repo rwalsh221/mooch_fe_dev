@@ -8,3 +8,22 @@
 
   /* background-color: hotpink; */
 }
+
+.footer_content ul {
+  list-style: none;
+}
+
+.footer_content ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer_list__social li {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.footer_list__social span {
+  font-size: 3rem;
+  margin-right: 1rem;
+}
