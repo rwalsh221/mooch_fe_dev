@@ -7,27 +7,30 @@ import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 import forestBackground from '../../assets/img/forest_bg.jpg';
 
 const Register = () => (
-  <div class={classes.register_grid}>
-    <main class={classes.register_main}>
-      <div class={classes.register_heading_container}>
-        <h1 class={classes.register_heading} data-heading={'logo'}>
+  <div className={classes.register_grid}>
+    <main className={classes.register_main}>
+      <div className={classes.register_heading_container}>
+        <h1 className={classes.register_heading} data-heading={'logo'}>
           MoOCH
         </h1>
       </div>
-      <h2 class={classes.register_secondary_heading}>
+      <h2 className={classes.register_secondary_heading}>
         The #1 app for mooching about
       </h2>
-      <div class={classes.register_form__container}>
+      <div className={classes.register_form__container}>
         {/* <div class={classes.register_bg_container}>
           <img src={forestBackground} alt="background" />
         </div> */}
         <div
-          class={`${classes.sign_up_card} ${classes.register_form__content}`}
+          className={`${classes.sign_up_card} ${classes.register_form__content}`}
         >
-          <h2 class={classes.register_card__logo} data-heading={'logo-small'}>
+          <h2
+            className={classes.register_card__logo}
+            data-heading={'logo-small'}
+          >
             MoOCH
           </h2>
-          <h3 class={classes.register_card__heading}>
+          <h3 className={classes.register_card__heading}>
             Create your MoOCH Account
           </h3>
           <form action="post">
