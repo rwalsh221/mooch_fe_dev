@@ -74,7 +74,7 @@ const Register = () => (
               // autoComplete="new-password"
             />
             <br />
-            <ButtonGreen contentProps={'Sign Up'} />
+            <ButtonGreen contentProps={'sign up'} />
           </form>
         </div>
         <div className={classes.register_form__img}>
