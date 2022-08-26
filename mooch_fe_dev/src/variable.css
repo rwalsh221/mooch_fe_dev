@@ -7,4 +7,7 @@
 
   /* FONT VARIABLES */
   --logo-font: 'Alfa Slab One', cursive;
+
+  /* BASE REM FOR HELPERS */
+  --base-rem: 1rem;
 }

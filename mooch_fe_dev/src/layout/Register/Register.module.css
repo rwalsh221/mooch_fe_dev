@@ -86,3 +86,8 @@ input[name='register-password'] {
   align-self: center;
   border: 2px solid var(--primary-color-green-300);
 }
+
+.form_change {
+  cursor: pointer;
+  color: var(--primary-color-green);
+}
