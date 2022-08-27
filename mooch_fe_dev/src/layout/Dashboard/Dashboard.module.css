@@ -1,0 +1,18 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  min-height: 100vh;
+  /* max-width: 2048px; */
+}
+
+.dashboard_user {
+  background-color: hotpink;
+}
+
+.dashboard_recent {
+  background-color: goldenrod;
+}
+
+.dashboard_segments {
+  background-color: brown;
+}
