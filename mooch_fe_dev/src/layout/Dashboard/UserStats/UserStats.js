@@ -18,12 +18,20 @@ const UserStats = () => (
       </button>
     </div>
     <div>
-      <p className={classes.stat_title}>this week</p>
-      <p className={classes.stat_total}>49km</p>
+      <p className={classes.stat_title} data-card-style="title">
+        this week
+      </p>
+      <p className={classes.stat_total} data-card-style="total">
+        49km
+      </p>
     </div>
     <div>
-      <p className={classes.stat_title}>this year</p>
-      <p className={classes.stat_total}>249km</p>
+      <p className={classes.stat_title} data-card-style="title">
+        this year
+      </p>
+      <p className={classes.stat_total} data-card-style="total">
+        249km
+      </p>
     </div>
   </div>
 );

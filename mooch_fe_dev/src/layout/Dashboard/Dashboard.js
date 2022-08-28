@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './Dashboard.module.css';
+import SegmentSnapshotSmall from './SegmentSnapshotSmall/SegmentSnapshotSmall';
 
 import UserInfo from './UserInfo/UserInfo';
 import UserStats from './UserStats/UserStats';
@@ -11,7 +12,11 @@ const Dashboard = () => (
       <UserStats />
     </section>
     <section className={classes.dashboard_recent}></section>
-    <section className={classes.dashboard_segments}></section>
+    <section className={classes.dashboard_segments}>
+      <SegmentSnapshotSmall />
+      <SegmentSnapshotSmall />
+      <SegmentSnapshotSmall />
+    </section>
   </main>
 );
 

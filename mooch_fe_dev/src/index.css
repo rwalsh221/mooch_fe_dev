@@ -24,7 +24,8 @@ figure,
 blockquote,
 dl,
 dd,
-ul {
+ul,
+ol {
   margin: 0;
   padding: 0;
 }
@@ -121,6 +122,10 @@ body {
   vertical-align: bottom;
 }
 
+[data-font='speedUnit'] {
+  font-size: 1rem;
+}
+
 [data-margin-bottom='100'] {
   margin-bottom: var(--base-rem);
 }
@@ -132,4 +137,15 @@ body {
 [data-wrapper='max-content-width'] {
   width: 2048px;
   margin: 0 auto;
+}
+
+[data-card-style='title'] {
+  font-size: 1.2rem;
+  color: var(--secondary-color-white);
+  text-transform: uppercase;
+}
+
+[data-card-style='total'] {
+  font-size: 2rem;
+  font-weight: bold;
 }

@@ -29,14 +29,6 @@
   border-right: 1px solid lightblue;
 }
 
-.stat_title {
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  /* font-weight: bold; */
-}
-
 .stat_total {
   text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
 }
