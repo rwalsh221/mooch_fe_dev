@@ -4,6 +4,7 @@ import SegmentSnapshotSmall from './SegmentSnapshotSmall/SegmentSnapshotSmall';
 
 import UserInfo from './UserInfo/UserInfo';
 import UserStats from './UserStats/UserStats';
+import ActivityCard from './ActivityCard/ActivityCard';
 
 const Dashboard = () => (
   <main className={classes.dashboard}>
@@ -11,7 +12,10 @@ const Dashboard = () => (
       <UserInfo />
       <UserStats />
     </section>
-    <section className={classes.dashboard_recent}></section>
+    <section className={classes.dashboard_recent}>
+      <ActivityCard />
+      <ActivityCard />
+    </section>
     <section className={classes.dashboard_segments}>
       <SegmentSnapshotSmall />
       <SegmentSnapshotSmall />
