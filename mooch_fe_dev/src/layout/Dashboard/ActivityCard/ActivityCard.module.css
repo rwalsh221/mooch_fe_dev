@@ -1,0 +1,51 @@
+.activity_card {
+  margin: 5rem;
+  background-color: var(--primary-color-green-600);
+  padding: 1rem 2rem;
+}
+
+.activity_card > div {
+  display: flex;
+}
+
+.user_img,
+.content_icon {
+  margin: 0.5rem;
+  flex: 0 0 10%;
+}
+
+.user_img img {
+  width: 5rem;
+  border-radius: 50%;
+  height: 5rem;
+  margin: 0 auto;
+}
+
+.user_name {
+  align-self: center;
+}
+.user_name p:first-of-type {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.content_icon span {
+  display: block;
+  text-align: center;
+}
+
+.content_stats {
+  flex: 0 0 50%;
+}
+
+.content_stats > div {
+  /* width: 50%; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.activity_card__map div {
+  background-color: cornflowerblue;
+  width: 100%;
+  height: 20rem;
+}

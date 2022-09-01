@@ -11,16 +11,16 @@ const ActivityCard = () => (
       </div>
       <div className={classes.user_name}>
         <p>Richard</p>
-        <p>date at time&sdot; location,location</p>
+        <p data-card-style="title">date at time&sdot; location,location</p>
       </div>
     </div>
     <div className={classes.activity_card__content}>
-      <div>
+      <div className={classes.content_icon}>
         <span class="material-icons">pedal_bike</span>
       </div>
-      <div>
+      <div className={classes.content_stats}>
         <h2>Activity Name</h2>
-        <div className={classes.content_stats}>
+        <div>
           <div>
             <p data-card-style="title">Distance</p>
             <p data-card-style="total">36.37km</p>
@@ -42,7 +42,9 @@ const ActivityCard = () => (
         </div>
       </div>
     </div>
-    <div className={classes.activity_card__map}>map</div>
+    <div className={classes.activity_card__map}>
+      <div>map</div>
+    </div>
   </div>
 );
 
