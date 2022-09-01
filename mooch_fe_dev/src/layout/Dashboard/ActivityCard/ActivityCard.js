@@ -16,7 +16,9 @@ const ActivityCard = () => (
     </div>
     <div className={classes.activity_card__content}>
       <div className={classes.content_icon}>
-        <span class="material-icons">pedal_bike</span>
+        <span class="material-icons" data-font="icon">
+          pedal_bike
+        </span>
       </div>
       <div className={classes.content_stats}>
         <h2>Activity Name</h2>
@@ -33,10 +35,14 @@ const ActivityCard = () => (
             <p data-card-style="title">time</p>
             <p data-card-style="total">2h:35m</p>
           </div>
-          <div>
-            <p data-card-style="title">achievments</p>
+          <div className={classes.content_stats__achievements}>
+            <p data-card-style="title">achievements</p>
+
             <p data-card-style="total">
-              <span class="material-icons">emoji_events</span>&nbsp;12
+              <span class="material-icons" data-font="icon">
+                emoji_events
+              </span>
+              &nbsp;12
             </p>
           </div>
         </div>

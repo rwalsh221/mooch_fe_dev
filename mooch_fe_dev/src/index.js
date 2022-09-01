@@ -9,7 +9,7 @@ import Dashboard from './layout/Dashboard/Dashboard';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <Register /> */}
+    <Register />
     <Dashboard />
   </React.StrictMode>
 );

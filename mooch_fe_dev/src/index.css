@@ -119,7 +119,7 @@ body {
 }
 
 [data-font='icon'] {
-  vertical-align: bottom;
+  vertical-align: text-bottom;
 }
 
 [data-font='speedUnit'] {

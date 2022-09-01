@@ -44,6 +44,10 @@
   justify-content: space-between;
 }
 
+.content_stats__achievements {
+  display: inline-block;
+}
+
 .activity_card__map div {
   background-color: cornflowerblue;
   width: 100%;
