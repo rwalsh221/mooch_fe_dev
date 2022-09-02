@@ -6,7 +6,7 @@
 .register_main {
   display: grid;
   grid-template-rows: repeat(2, max-content) auto;
-  background-color: var(--secondary-color-white);
+  /* background-color: var(--secondary-color-white); */
 }
 
 .register_bg_container {
@@ -41,6 +41,7 @@
 
 .register_form__container {
   display: flex;
+  background-color: var(--primary-color-green-100);
   /* align-items: center; */
   /* justify-content: center; */
   margin: 2rem auto;
@@ -54,7 +55,7 @@
 .register_form__content {
   display: flex;
   flex-direction: column;
-  background-color: var(--secondary-color-white);
+  /* background-color: var(--secondary-color-white); */
 
   height: max-content;
   flex: 1 1 50%;

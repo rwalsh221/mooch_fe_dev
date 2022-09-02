@@ -1,5 +1,5 @@
 .segment_snapshot_sml {
-  background-color: var(--primary-color-green);
+  background-color: var(--primary-color-green-100);
   /* margin: 1rem; */
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   width: 70%;
   margin: 1rem auto;
   padding: 1rem;
-  border: 1px solid black;
+  border: 1px solid var(--primary-color-green-800);
 }
 
 .segment_snapshot_sml h2,

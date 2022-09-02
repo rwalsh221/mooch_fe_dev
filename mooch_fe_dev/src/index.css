@@ -90,7 +90,7 @@ html {
 }
 body {
   font-size: 1.6rem;
-  max-width: 2256px;
+  /* max-width: 2256px; */
   margin: 0 auto;
   font-family: 'Roboto', sans-serif;
 }
@@ -135,13 +135,15 @@ body {
 }
 
 [data-wrapper='max-content-width'] {
-  width: 2048px;
+  min-width: 100%;
+  max-width: 2048px;
   margin: 0 auto;
+  background-color: var(--primary-color-green-200);
 }
 
 [data-card-style='title'] {
   font-size: 1.2rem;
-  color: var(--secondary-color-white);
+  color: var(--primary-color-green);
   text-transform: uppercase;
 }
 

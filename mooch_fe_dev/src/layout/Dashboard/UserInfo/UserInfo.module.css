@@ -1,5 +1,5 @@
 .user_info {
-  background-color: var(--primary-color-green);
+  background-color: var(--primary-color-green-100);
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -7,6 +7,7 @@
   width: 70%;
   margin: 5rem auto 0 auto;
   padding: 1rem;
+  border: 1px solid var(--primary-color-green-800);
 }
 
 .user_img {
@@ -40,7 +41,7 @@
 .user_stats div:not(:last-of-type)::after {
   position: absolute;
   content: '';
-  background-color: black;
+  background-color: var(--primary-color-green-800);
   width: 1px;
   height: 24px;
   top: 50%;
@@ -56,7 +57,7 @@
 
 .user_stats_title {
   font-size: 1.2rem;
-  color: var(--secondary-color-white);
+  /* color: var(--secondary-color-white); */
 }
 
 .user_stats_content {

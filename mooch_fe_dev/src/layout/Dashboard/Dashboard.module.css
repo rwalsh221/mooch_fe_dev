@@ -2,17 +2,20 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   min-height: 100vh;
-  /* max-width: 2048px; */
+  width: 80%;
+  background-color: var(--primary-color-green-200);
+  margin: 0 auto;
 }
 
 .dashboard_user {
-  background-color: hotpink;
+  /* background-color: hotpink; */
 }
 
 .dashboard_recent {
-  background-color: goldenrod;
+  /* background-color: goldenrod; */
+  /* padding: 0 5rem; */
 }
 
 .dashboard_segments {
-  background-color: brown;
+  /* background-color: brown; */
 }
