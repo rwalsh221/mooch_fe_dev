@@ -33,7 +33,7 @@
   background-color: var(--primary-color-green-100);
   /* align-items: center; */
   /* justify-content: center; */
-  margin: 2rem auto;
+  margin: var(--margin-200) auto;
   width: 50%;
   /* height: 100%; */
   padding: var(--padding-100);
@@ -48,13 +48,13 @@
 
   height: max-content;
   flex: 1 1 50%;
-  margin: 1rem;
+  margin: var(--margin-100);
   padding: var(--padding-100);
   /* height: 100%; */
 }
 
 .register_form__content input {
-  margin: 0.5rem 0;
+  margin: calc(var(--margin-100) / 2) 0;
   border: 2px solid var(--primary-color-green-600);
 }
 
@@ -62,12 +62,12 @@ input[name='register-email'] {
   width: 100%;
 }
 input[name='register-password'] {
-  margin: 0 0.5rem 1rem 0;
+  margin: 0 calc(var(--margin-100) / 2) 1rem 0;
 }
 
 .register .register_form__content h2,
 .register_form__content h3 {
-  margin-bottom: 2rem;
+  margin-bottom: var(--margin-200);
 }
 
 .register_form__img {

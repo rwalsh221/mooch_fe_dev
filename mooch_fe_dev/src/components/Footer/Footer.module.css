@@ -16,7 +16,7 @@
 .footer_logo {
   color: var(--secondary-color-white);
   font-size: 4rem;
-  margin-bottom: 2rem;
+  margin-bottom: var(--margin-200);
 }
 
 .footer_copyright {
@@ -29,7 +29,7 @@
 }
 
 .footer_content h5 {
-  margin: 1.7rem 0 2rem 0;
+  margin: calc(var(--margin-100) * 1.7) 0 var(--margin-200) 0;
   color: var(--primary-color-green);
 }
 
@@ -38,7 +38,7 @@
 }
 
 .footer_content ul li {
-  margin-bottom: 2rem;
+  margin-bottom: var(--margin-200);
   font-size: 1rem;
 }
 
@@ -58,5 +58,5 @@
 
 .footer_list__social span {
   font-size: 3rem;
-  margin-right: 1rem;
+  margin-right: var(--margin-100);
 }
