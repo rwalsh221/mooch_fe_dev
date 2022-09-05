@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: 2fr repeat(2, 1fr) 2fr;
   color: var(--secondary-color-white);
-  padding: 4rem 2rem;
+  padding: var(--padding-400) var(--padding-200);
 }
 
 .footer_container > :first-child {

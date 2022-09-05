@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70%;
+  width: 80%;
   /* margin: 5rem auto 0 auto; */
-  padding: 1rem;
+  padding: var(--padding-100);
   border: 1px solid var(--primary-color-green-800);
 }
 

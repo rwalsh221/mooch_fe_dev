@@ -16,4 +16,26 @@
   --base-rem: 1rem;
   --base-margin: 1rem;
   --base-padding: 1rem;
+
+  /* MARGIN */
+  --margin-100: var(--base-margin);
+  --margin-200: calc(var(--base-margin) * 2);
+  --margin-300: calc(var(--base-margin) * 3);
+  --margin-400: calc(var(--base-margin) * 4);
+  --margin-500: calc(var(--base-margin) * 5);
+  --margin-600: calc(var(--base-margin) * 6);
+  --margin-700: calc(var(--base-margin) * 7);
+  --margin-800: calc(var(--base-margin) * 8);
+  --margin-900: calc(var(--base-margin) * 9);
+
+  /* PADDING */
+  --padding-100: var(--base-padding);
+  --padding-200: calc(var(--base-padding) * 2);
+  --padding-300: calc(var(--base-padding) * 3);
+  --padding-400: calc(var(--base-padding) * 4);
+  --padding-500: calc(var(--base-padding) * 5);
+  --padding-600: calc(var(--base-padding) * 6);
+  --padding-700: calc(var(--base-padding) * 7);
+  --padding-800: calc(var(--base-padding) * 8);
+  --padding-900: calc(var(--base-padding) * 9);
 }

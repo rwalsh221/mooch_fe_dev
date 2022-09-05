@@ -1,6 +1,6 @@
 .header {
   background-color: var(--secondary-color-white);
-  padding: 1rem;
+  padding: var(--padding-100);
   border-bottom: 2px solid var(--primary-color-green);
 
   border-bottom: 2px solid var(--primary-color-green-600);
@@ -8,6 +8,6 @@
 
 .heading {
   border: 1px solid var(--primary-color-green);
-  padding: 0.5rem 1rem;
+  padding: calc(var(--padding-100) / 2) var(--padding-100);
   margin: 0 auto 0 20rem;
 }

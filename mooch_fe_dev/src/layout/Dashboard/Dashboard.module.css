@@ -1,6 +1,6 @@
 .dashboard {
   background-color: var(--primary-color-green-200);
-  padding: calc(var(--base-padding) * 2) 0;
+  padding: var(--padding-200) 0;
 }
 
 .dashboard_container {

@@ -6,7 +6,7 @@
   align-items: flex-start;
   width: 70%;
   margin: 0 auto 2rem auto;
-  padding: 1rem;
+  padding: var(--padding-100);
   border: 1px solid var(--primary-color-green-800);
 }
 
@@ -88,7 +88,7 @@
 }
 
 .leaderboard_top ol {
-  padding: 0.5rem;
+  padding: calc(var(--padding-100) / 2);
   background-color: var(--primary-color-green-600);
 }
 

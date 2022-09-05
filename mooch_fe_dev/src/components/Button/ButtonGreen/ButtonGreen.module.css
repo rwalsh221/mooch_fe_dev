@@ -1,7 +1,7 @@
 .button_green {
   background-color: var(--primary-color-green);
   min-width: 8rem;
-  padding: 1rem;
+  padding: var(--padding-100);
   border: none;
   border-radius: 10px;
   cursor: pointer;
