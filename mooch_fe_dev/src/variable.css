@@ -6,12 +6,14 @@
   --primary-color-green-600: hsl(66, 17%, 32%);
   --primary-color-green-800: hsl(66, 77%, 12%);
 
-  --secondary-color-white: #ffffff;
-  --secondary-color-light-blue: #c4d1c4;
+  --secondary-color-white: hsl(0, 0%, 100%);
+  --secondary-color-black: hsl(0, 2%, 12%);
 
   /* FONT VARIABLES */
   --logo-font: 'Alfa Slab One', cursive;
 
-  /* BASE REM FOR HELPERS */
+  /* BASE REM FOR MEDIA QUERIES AND CALC */
   --base-rem: 1rem;
+  --base-margin: 1rem;
+  --base-padding: 1rem;
 }

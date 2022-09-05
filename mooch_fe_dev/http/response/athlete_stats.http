@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Date: Sun, 04 Sep 2022 16:10:59 GMT
+Server: Apache/2.4.41 (Ubuntu)
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 362
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
+{"biggest_ride_distance":74749.1,"biggest_climb_elevation_gain":459.74,"recent_ride_totals":{"count":4,"distance":119932.662109375,"moving_time":30983,"elapsed_time":35939,"elevation_gain":1643.0595092773438,"achievement_count":99},"all_ride_totals":{"count":223,"distance":5351020,"moving_time":1470005,"elapsed_time":2012934,"elevation_gain":124613},"recent_run_totals":{"count":2,"distance":13536.197265625,"moving_time":4489,"elapsed_time":4493,"elevation_gain":281.9958038330078,"achievement_count":5},"all_run_totals":{"count":42,"distance":152960,"moving_time":49652,"elapsed_time":53034,"elevation_gain":2059},"recent_swim_totals":{"count":0,"distance":0.0,"moving_time":0,"elapsed_time":0,"elevation_gain":0.0,"achievement_count":0},"all_swim_totals":{"count":0,"distance":0,"moving_time":0,"elapsed_time":0,"elevation_gain":0},"ytd_ride_totals":{"count":17,"distance":399137,"moving_time":116846,"elapsed_time":156719,"elevation_gain":6267},"ytd_run_totals":{"count":7,"distance":41130,"moving_time":13671,"elapsed_time":13777,"elevation_gain":803},"ytd_swim_totals":{"count":0,"distance":0,"moving_time":0,"elapsed_time":0,"elevation_gain":0}}

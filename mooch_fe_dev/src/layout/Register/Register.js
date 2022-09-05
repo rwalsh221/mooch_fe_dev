@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classes from './Register.module.css';
 // COMPONENTS
+import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 // ASSETS
@@ -109,13 +110,15 @@ const Register = () => {
   );
 
   return (
-    <div className={classes.register_grid} data-wrapper="max-content-width">
-      <main className={classes.register_main}>
-        <div className={classes.register_heading_container}>
+    <div className={classes.register_grid}>
+      <Header />
+      <main className={classes.register_main} data-wrapper="max-content-width">
+        {/* <div className={classes.register_heading_container}>
           <h1 className={classes.register_heading} data-heading={'logo'}>
             MoOCH
           </h1>
-        </div>
+        </div> */}
+
         <h2 className={classes.register_secondary_heading}>
           The #1 app for mooching about
         </h2>

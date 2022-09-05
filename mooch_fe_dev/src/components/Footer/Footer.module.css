@@ -1,5 +1,8 @@
+.footer {
+  background-color: var(--secondary-color-black);
+}
+
 .footer_container {
-  background-color: rgb(31, 30, 30);
   display: grid;
   grid-template-columns: 2fr repeat(2, 1fr) 2fr;
   color: var(--secondary-color-white);

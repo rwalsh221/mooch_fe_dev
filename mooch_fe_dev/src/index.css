@@ -135,10 +135,9 @@ body {
 }
 
 [data-wrapper='max-content-width'] {
-  min-width: 100%;
+  width: 100%;
   max-width: 2048px;
   margin: 0 auto;
-  background-color: var(--primary-color-green-200);
 }
 
 [data-card-style='title'] {

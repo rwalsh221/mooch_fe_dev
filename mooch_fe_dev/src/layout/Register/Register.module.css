@@ -1,6 +1,9 @@
 .register_grid {
   display: grid;
-  grid-template-rows: minmax(70vh, max-content) minmax(30vh, max-content);
+  grid-template-rows: max-content minmax(70vh, max-content) minmax(
+      30vh,
+      max-content
+    );
 }
 
 .register_main {
@@ -12,20 +15,6 @@
 .register_bg_container {
   position: relative;
   /* z-index: -1; */
-}
-
-.register_heading_container {
-  background-color: var(--secondary-color-white);
-  padding: 1rem;
-  border-bottom: 2px solid var(--primary-color-green);
-
-  border-bottom: 2px solid var(--primary-color-green-600);
-}
-
-.register_heading {
-  border: 1px solid var(--primary-color-green);
-  padding: 0.5rem 1rem;
-  margin: 0 auto 0 20rem;
 }
 
 .register_secondary_heading {
