@@ -16,7 +16,7 @@ const ActivityCard = () => (
     </div>
     <div className={classes.activity_card__content}>
       <div className={classes.content_icon}>
-        <span class="material-icons" data-font="icon">
+        <span className="material-icons" data-font="icon">
           pedal_bike
         </span>
       </div>
@@ -39,7 +39,7 @@ const ActivityCard = () => (
             <p data-card-style="title">achievements</p>
 
             <p data-card-style="total">
-              <span class="material-icons" data-font="icon">
+              <span className="material-icons" data-font="icon">
                 emoji_events
               </span>
               &nbsp;12

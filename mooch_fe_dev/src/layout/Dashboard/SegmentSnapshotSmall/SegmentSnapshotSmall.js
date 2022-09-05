@@ -24,7 +24,7 @@ const SegmentSnapshotSmall = () => (
         <p className={classes.segment_info__title} data-card-style="title">
           sport
         </p>
-        <span class="material-icons" data-font="icon">
+        <span className="material-icons" data-font="icon">
           directions_bike
         </span>
       </div>

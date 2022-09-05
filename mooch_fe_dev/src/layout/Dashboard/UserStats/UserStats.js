@@ -5,16 +5,16 @@ const UserStats = () => (
   <div className={classes.user_stats}>
     <div className={classes.stat_btn_container}>
       <button>
-        <span class="material-icons">assignment</span>
+        <span className="material-icons">assignment</span>
       </button>
       <button>
-        <span class="material-icons">directions_bike</span>
+        <span className="material-icons">directions_bike</span>
       </button>
       <button>
-        <span class="material-icons">run_circle</span>
+        <span className="material-icons">run_circle</span>
       </button>
       <button>
-        <span class="material-icons">rowing</span>
+        <span className="material-icons">rowing</span>
       </button>
     </div>
     <div>
