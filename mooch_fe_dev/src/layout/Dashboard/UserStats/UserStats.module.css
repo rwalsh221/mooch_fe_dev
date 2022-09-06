@@ -36,6 +36,10 @@
   border-right: 1px solid var(--primary-color-green-200);
 }
 
-.stat_total {
+.stat_container {
   text-align: center;
+}
+
+.stat_total {
+  /* text-align: center; */
 }

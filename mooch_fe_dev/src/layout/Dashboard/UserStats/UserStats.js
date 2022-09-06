@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import classes from './UserStats.module.css';
 
+import { metersToKilometer } from '../../../helpers/unitConversion';
+
 const UserStats = ({
   rideYearProps,
   rideAllProps,
@@ -78,7 +80,7 @@ const UserStats = ({
           <span className="material-icons">pool</span>
         </button>
       </div>
-      <div>
+      <div className={classes.stat_container}>
         <p className={classes.stat_title} data-card-style="title">
           this year
         </p>
@@ -86,12 +88,12 @@ const UserStats = ({
           {stats[statDisplay.activity].yearTotal}km
         </p>
       </div>
-      <div>
+      <div className={classes.stat_container}>
         <p className={classes.stat_title} data-card-style="title">
           all time
         </p>
         <p className={classes.stat_total} data-card-style="total">
-          {stats[statDisplay.activity].allTimeTotal}km
+          {metersToKilometer(stats[statDisplay.activity].allTimeTotal)}km
         </p>
       </div>
     </div>
