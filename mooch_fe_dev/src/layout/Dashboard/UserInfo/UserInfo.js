@@ -5,14 +5,18 @@ import userImg from '../../../assets/img/forest_bg.jpg';
 
 const UserInfo = ({
   userImgProps,
-  usernameProps,
+  firstnameProps,
+  lastnameProps,
+  countryProps,
   followingProps,
   followsProps,
   totalActivitiesProps,
 }) => (
   <div className={classes.user_info}>
-    <img src={userImg} alt="user" className={classes.user_img} />
-    <h2>richard</h2>
+    <img src={userImgProps} alt="user" className={classes.user_img} />
+    <h2>
+      {firstnameProps}&nbsp;{lastnameProps}
+    </h2>
     <div className={classes.user_stats}>
       <div>
         <p className={classes.user_stats_title} data-card-style="title">
