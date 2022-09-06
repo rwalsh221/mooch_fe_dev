@@ -11,19 +11,24 @@ import ActivityCard from './ActivityCard/ActivityCard';
 // import http from '../../../http/response/';
 
 const Dashboard = () => {
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState({
+    firstname: 'test',
+    lastname: 'user',
+    profile_medium: '',
+  });
   console.log(userInfo);
   useEffect(() => {
+    console.log('GET');
     const getData = async () => {
       try {
         const getUserInfo = await fetch(
           'http://localhost/mooch_be_dev/athlete/',
           {
-            mode: 'no-cors',
+            // mode: 'no-cors',
           }
         );
         console.log(getUserInfo);
-        const getUserInfoJson = await getUserInfo.Json;
+        const getUserInfoJson = await getUserInfo.json();
         console.log(getUserInfoJson);
         setUserInfo(getUserInfoJson);
       } catch (error) {
@@ -31,8 +36,8 @@ const Dashboard = () => {
       }
     };
 
-    getData();
-  }, [userInfo]);
+    // getData();
+  }, []);
 
   return (
     <>
@@ -43,7 +48,11 @@ const Dashboard = () => {
           data-wrapper="max-content-width"
         >
           <section className={classes.dashboard_user}>
-            <UserInfo />
+            <UserInfo
+              userImgProps={userInfo.profile_medium}
+              firstnameProps={userInfo.firstname}
+              lastnameProps={userInfo.lastname}
+            />
             <UserStats />
           </section>
           <section className={classes.dashboard_recent}>
