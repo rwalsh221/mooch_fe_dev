@@ -16,10 +16,11 @@ const Dashboard = () => {
     lastname: 'user',
     profile_medium: '',
   });
+
   console.log(userInfo);
   useEffect(() => {
     console.log('GET');
-    const getData = async () => {
+    const getUserInfoData = async () => {
       try {
         const getUserInfo = await fetch(
           'http://localhost/mooch_be_dev/athlete/',
