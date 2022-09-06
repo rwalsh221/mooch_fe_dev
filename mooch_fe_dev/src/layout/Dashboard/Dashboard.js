@@ -11,34 +11,55 @@ import ActivityCard from './ActivityCard/ActivityCard';
 // import http from '../../../http/response/';
 
 const Dashboard = () => {
-  const [userInfo, setUserInfo] = useState({
-    firstname: 'test',
-    lastname: 'user',
-    profile_medium: '',
-  });
+  const [userInfo, setUserInfo] = useState(null);
 
   console.log(userInfo);
   useEffect(() => {
     console.log('GET');
-    const getUserInfoData = async () => {
+    const getUserData = async () => {
       try {
         const getUserInfo = await fetch(
-          'http://localhost/mooch_be_dev/athlete/',
-          {
-            // mode: 'no-cors',
-          }
+          'http://localhost/mooch_be_dev/athlete/'
         );
-        console.log(getUserInfo);
+
         const getUserInfoJson = await getUserInfo.json();
-        console.log(getUserInfoJson);
-        setUserInfo(getUserInfoJson);
+
+        const getUserStats = await fetch(
+          'http://localhost/mooch_be_dev/athlete/stats/'
+        );
+
+        const getUserStatsJson = await getUserStats.json();
+
+        setUserInfo({
+          userProfile: getUserInfoJson,
+          userStats: getUserStatsJson,
+        });
       } catch (error) {
         console.error(error);
       }
     };
 
-    // getData();
+    getUserData();
   }, []);
+
+  const userInfoContent = userInfo ? (
+    <UserInfo
+      userImgProps={userInfo.userProfile.profile_medium}
+      firstnameProps={userInfo.userProfile.firstname}
+      lastnameProps={userInfo.userProfile.lastname}
+    />
+  ) : null;
+
+  const userStatsContent = userInfo ? (
+    <UserStats
+      rideYearProps={userInfo.userStats.ytd_ride_totals.distance}
+      rideAllProps={userInfo.userStats.all_ride_totals.distance}
+      runYearProps={userInfo.userStats.ytd_run_totals.distance}
+      runAllProps={userInfo.userStats.all_run_totals.distance}
+      swimYearProps={userInfo.userStats.ytd_swim_totals.distance}
+      swimAllProps={userInfo.userStats.all_swim_totals.distance}
+    />
+  ) : null;
 
   return (
     <>
@@ -49,12 +70,8 @@ const Dashboard = () => {
           data-wrapper="max-content-width"
         >
           <section className={classes.dashboard_user}>
-            <UserInfo
-              userImgProps={userInfo.profile_medium}
-              firstnameProps={userInfo.firstname}
-              lastnameProps={userInfo.lastname}
-            />
-            <UserStats />
+            {userInfoContent}
+            {userStatsContent}
           </section>
           <section className={classes.dashboard_recent}>
             <ActivityCard />

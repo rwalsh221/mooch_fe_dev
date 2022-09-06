@@ -25,6 +25,11 @@
   cursor: pointer;
   padding: calc(var(--padding-100) / 2);
   font-size: 3rem;
+  background-color: var(--secondary-color-white);
+}
+
+.stat_btn_container button:first-of-type {
+  background-color: var(--primary-color-green-600);
 }
 
 .stat_btn_container button:not(:last-of-type) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import classes from './UserStats.module.css';
 
 const UserStats = ({
@@ -9,7 +9,15 @@ const UserStats = ({
   swimYearProps,
   swimAllProps,
 }) => {
-  const [statDisplay, setStatDisplay] = useState('allActivities');
+  const [statDisplay, setStatDisplay] = useState({
+    activity: 'allActivities',
+    prevRef: null,
+  });
+
+  const allActivitiesBtnRef = useRef(null);
+  const rideBtnRef = useRef(null);
+  const runBtnRef = useRef(null);
+  const swimBtnRef = useRef(null);
 
   const stats = {
     ride: { yearTotal: rideYearProps, allTimeTotal: rideAllProps },
@@ -21,8 +29,21 @@ const UserStats = ({
     },
   };
 
-  const statsDisplayHandler = (activity) => {
-    setStatDisplay(activity);
+  const statsDisplayHandler = (activity, ref) => {
+    const statDisplayCopy = { ...statDisplay };
+
+    statDisplayCopy.prevRef = ref;
+    statDisplayCopy.activity = activity;
+
+    if (statDisplay.prevRef === null) {
+      allActivitiesBtnRef.current.style.backgroundColor = 'hsl(0, 0%, 100%)';
+      ref.current.style.backgroundColor = 'hsl(66, 17%, 32%)';
+      setStatDisplay({ ...statDisplayCopy });
+      return;
+    }
+    statDisplay.prevRef.current.style.backgroundColor = 'hsl(0, 0%, 100%)';
+    ref.current.style.backgroundColor = 'hsl(66, 17%, 32%)';
+    setStatDisplay({ ...statDisplayCopy });
   };
 
   console.log(stats);
@@ -30,17 +51,31 @@ const UserStats = ({
   return (
     <div className={classes.user_stats}>
       <div className={classes.stat_btn_container}>
-        <button onClick={() => statsDisplayHandler('allActivities')}>
+        <button
+          ref={allActivitiesBtnRef}
+          onClick={() =>
+            statsDisplayHandler('allActivities', allActivitiesBtnRef)
+          }
+        >
           <span className="material-icons">assignment</span>
         </button>
-        <button onClick={() => statsDisplayHandler('allActivities')}>
+        <button
+          ref={rideBtnRef}
+          onClick={() => statsDisplayHandler('ride', rideBtnRef)}
+        >
           <span className="material-icons">directions_bike</span>
         </button>
-        <button onClick={() => statsDisplayHandler('allActivities')}>
+        <button
+          ref={runBtnRef}
+          onClick={() => statsDisplayHandler('run', runBtnRef)}
+        >
           <span className="material-icons">run_circle</span>
         </button>
-        <button onClick={() => statsDisplayHandler('allActivities')}>
-          <span className="material-icons">rowing</span>
+        <button
+          ref={swimBtnRef}
+          onClick={() => statsDisplayHandler('swim', swimBtnRef)}
+        >
+          <span className="material-icons">pool</span>
         </button>
       </div>
       <div>
@@ -48,7 +83,7 @@ const UserStats = ({
           this year
         </p>
         <p className={classes.stat_total} data-card-style="total">
-          {stats[statDisplay].yearTotal}km
+          {stats[statDisplay.activity].yearTotal}km
         </p>
       </div>
       <div>
@@ -56,7 +91,7 @@ const UserStats = ({
           all time
         </p>
         <p className={classes.stat_total} data-card-style="total">
-          {stats[statDisplay].allTimeTotal}km
+          {stats[statDisplay.activity].allTimeTotal}km
         </p>
       </div>
     </div>
