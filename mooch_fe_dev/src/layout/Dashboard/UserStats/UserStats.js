@@ -85,7 +85,7 @@ const UserStats = ({
           this year
         </p>
         <p className={classes.stat_total} data-card-style="total">
-          {stats[statDisplay.activity].yearTotal}km
+          {metersToKilometer(stats[statDisplay.activity].yearTotal)}km
         </p>
       </div>
       <div className={classes.stat_container}>
