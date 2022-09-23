@@ -7,6 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import UserInfo from './UserInfo/UserInfo';
 import UserStats from './UserStats/UserStats';
 import ActivityCard from './ActivityCard/ActivityCard';
+import StravaSyncBtn from './StravaSyncBtn/StravaSyncBtn';
 
 // import http from '../../../http/response/';
 
@@ -52,12 +53,12 @@ const Dashboard = () => {
 
   const userStatsContent = userInfo ? (
     <UserStats
-      rideYearProps={userInfo.userStats.ytd_ride_totals.distance}
-      rideAllProps={userInfo.userStats.all_ride_totals.distance}
-      runYearProps={userInfo.userStats.ytd_run_totals.distance}
-      runAllProps={userInfo.userStats.all_run_totals.distance}
-      swimYearProps={userInfo.userStats.ytd_swim_totals.distance}
-      swimAllProps={userInfo.userStats.all_swim_totals.distance}
+      rideYearProps={userInfo.userStats.ytd_ride_totals}
+      rideAllProps={userInfo.userStats.all_ride_totals}
+      runYearProps={userInfo.userStats.ytd_run_totals}
+      runAllProps={userInfo.userStats.all_run_totals}
+      swimYearProps={userInfo.userStats.ytd_swim_totals}
+      swimAllProps={userInfo.userStats.all_swim_totals}
     />
   ) : null;
 
@@ -72,6 +73,7 @@ const Dashboard = () => {
           <section className={classes.dashboard_user}>
             {userInfoContent}
             {userStatsContent}
+            <StravaSyncBtn />
           </section>
           <section className={classes.dashboard_recent}>
             <ActivityCard />

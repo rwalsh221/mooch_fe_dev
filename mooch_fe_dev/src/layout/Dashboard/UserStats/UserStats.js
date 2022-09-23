@@ -21,6 +21,7 @@ const UserStats = ({
   const runBtnRef = useRef(null);
   const swimBtnRef = useRef(null);
 
+  // CHECK FOR REFACTOR
   const stats = {
     ride: { yearTotal: rideYearProps, allTimeTotal: rideAllProps },
     run: { yearTotal: runYearProps, allTimeTotal: runAllProps },

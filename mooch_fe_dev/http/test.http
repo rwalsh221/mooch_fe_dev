@@ -1,9 +1,9 @@
 # TEST ROUTE RETURNS IPSUM JSON
-GET http://localhost/mooch_be_dev/test/
+# GET http://localhost/mooch_be_dev/test/
 
 
 # GET LOGGED IN ATHLETE
-GET http://localhost/mooch_be_dev/athlete/
+# GET http://localhost/mooch_be_dev/athlete/
 
 #GET LOGGED IN ATHLETE STATS
-# GET http://localhost/mooch_be_dev/athlete/stats
+GET http://localhost/mooch_be_dev/athlete/stats
