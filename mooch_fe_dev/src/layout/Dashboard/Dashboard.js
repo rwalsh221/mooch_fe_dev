@@ -20,16 +20,17 @@ const Dashboard = () => {
     const getUserData = async () => {
       try {
         const getUserInfo = await fetch(
-          'http://localhost/mooch_be_dev/athlete/'
+          'http://localhost/mooch_be_dev/athlete/?userId=1'
         );
 
         const getUserInfoJson = await getUserInfo.json();
-
+        console.log(getUserInfoJson);
         const getUserStats = await fetch(
-          'http://localhost/mooch_be_dev/athlete/stats/'
+          'http://localhost/mooch_be_dev/athlete/stats/?userId=1'
         );
 
         const getUserStatsJson = await getUserStats.json();
+        console.log(getUserStatsJson);
 
         setUserInfo({
           userProfile: getUserInfoJson,
@@ -45,20 +46,20 @@ const Dashboard = () => {
 
   const userInfoContent = userInfo ? (
     <UserInfo
-      userImgProps={userInfo.userProfile.profile_medium}
-      firstnameProps={userInfo.userProfile.firstname}
-      lastnameProps={userInfo.userProfile.lastname}
+      userImgProps={userInfo.userProfile[0].profileImgUrl}
+      firstnameProps={userInfo.userProfile[0].firstName}
+      lastnameProps={userInfo.userProfile[0].lastName}
     />
   ) : null;
 
   const userStatsContent = userInfo ? (
     <UserStats
-      rideYearProps={userInfo.userStats.ytd_ride_totals}
-      rideAllProps={userInfo.userStats.all_ride_totals}
-      runYearProps={userInfo.userStats.ytd_run_totals}
-      runAllProps={userInfo.userStats.all_run_totals}
-      swimYearProps={userInfo.userStats.ytd_swim_totals}
-      swimAllProps={userInfo.userStats.all_swim_totals}
+      rideYearProps={parseInt(userInfo.userStats[0].rideAllTimeDist)}
+      rideAllProps={parseInt(userInfo.userStats[0].rideYearDist)}
+      runYearProps={parseInt(userInfo.userStats[0].runAllTimeDist)}
+      runAllProps={parseInt(userInfo.userStats[0].runYearDist)}
+      swimYearProps={parseInt(userInfo.userStats[0].swimAllTimeDist)}
+      swimAllProps={parseInt(userInfo.userStats[0].swimYearDist)}
     />
   ) : null;
 

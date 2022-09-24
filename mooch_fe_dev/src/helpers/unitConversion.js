@@ -1,1 +1,1 @@
-export const metersToKilometer = (meters) => meters / 1000;
+export const metersToKilometer = (meters) => (meters / 1000).toFixed();
