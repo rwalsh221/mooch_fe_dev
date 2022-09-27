@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import classes from '../Register.module.css';
 
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 
 const SignUp = ({ formContentHandlerProps }) => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+
   return (
     <>
       <h3 className={classes.register_card__heading}>
@@ -17,6 +21,7 @@ const SignUp = ({ formContentHandlerProps }) => {
           aria-label="register email"
           name="register-email"
           placeholder="Email"
+          ref={emailRef}
           // autoComplete="new-password"
         />
         <br />
@@ -38,6 +43,7 @@ const SignUp = ({ formContentHandlerProps }) => {
           name="register-password"
           placeholder="Password"
           autoComplete="new-password"
+          ref={passwordRef}
         />
 
         {/* <label for="sign-up-password-confirm">confirm password</label> */}
@@ -48,6 +54,7 @@ const SignUp = ({ formContentHandlerProps }) => {
           name="register-password-confirm"
           placeholder="Confirm"
           // autoComplete="new-password"
+          ref={passwordConfirmRef}
         />
         <br />
         <ButtonGreen contentProps={'sign up'} />
