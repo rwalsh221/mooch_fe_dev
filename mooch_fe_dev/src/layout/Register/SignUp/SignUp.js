@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import classes from '../Register.module.css';
 
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
@@ -8,20 +8,37 @@ const SignUp = ({ formContentHandlerProps }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signUp } = useAuth();
+  const { signUp, currentUser } = useAuth();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    signUp(emailRef.current.value, passwordRef.current.value);
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError('Passwords do not match');
+    }
+
+    try {
+      setError('');
+      setLoading(true);
+      signUp(emailRef.current.value, passwordRef.current.value);
+    } catch (error) {
+      setError('Failed to create an account');
+      console.error(error.message);
+    }
+    setLoading(false);
   };
 
+  console.log(error);
   return (
     <>
       <h3 className={classes.register_card__heading}>
         Create your MoOCH Account
       </h3>
-      <form action="post" data-margin-bottom={'300'}>
+      <p>{error}</p>
+      <p>{currentUser.email}</p>
+      <form action="post" data-margin-bottom={'300'} onSubmit={handleSubmit}>
         {/* <label for="sign-up-email">email</label> */}
         <input
           type="email"
@@ -29,6 +46,7 @@ const SignUp = ({ formContentHandlerProps }) => {
           aria-label="register email"
           name="register-email"
           placeholder="Email"
+          required
           ref={emailRef}
           // autoComplete="new-password"
         />
@@ -65,7 +83,7 @@ const SignUp = ({ formContentHandlerProps }) => {
           ref={passwordConfirmRef}
         />
         <br />
-        <ButtonGreen contentProps={'sign up'} />
+        <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
       </form>
       <p>
         Have an account? Sign In&nbsp;
