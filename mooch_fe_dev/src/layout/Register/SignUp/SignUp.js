@@ -2,11 +2,19 @@ import React, { useRef } from 'react';
 import classes from '../Register.module.css';
 
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
+import { useAuth } from '../../../contexts/AuthContext';
 
 const SignUp = ({ formContentHandlerProps }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const { signUp } = useAuth();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    signUp(emailRef.current.value, passwordRef.current.value);
+  };
 
   return (
     <>
