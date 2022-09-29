@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import classes from '../Register.module.css';
 
+import { useNavigate } from 'react-router-dom';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import { useAuth } from '../../../contexts/AuthContext';
 
@@ -11,6 +12,7 @@ const SignUp = ({ formContentHandlerProps }) => {
   const { signUp, currentUser } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ const SignUp = ({ formContentHandlerProps }) => {
       setError('');
       setLoading(true);
       signUp(emailRef.current.value, passwordRef.current.value);
+      navigate('/dashboard');
     } catch (error) {
       setError('Failed to create an account');
       console.error(error.message);
@@ -38,7 +41,7 @@ const SignUp = ({ formContentHandlerProps }) => {
       </h3>
       <p>{error}</p>
       <p>{currentUser.email}</p>
-      <form action="post" data-margin-bottom={'300'} onSubmit={handleSubmit}>
+      <form data-margin-bottom={'300'} onSubmit={handleSubmit}>
         {/* <label for="sign-up-email">email</label> */}
         <input
           type="email"
