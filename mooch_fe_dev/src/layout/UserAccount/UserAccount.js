@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 const UserSettings = () => {
+  // ADD USER UPADTE FIELDS WATCH LAST CHAPTER
   const [error, setError] = useState('');
   const { currentUser, signOut } = useAuth();
   const navigate = useNavigate();
