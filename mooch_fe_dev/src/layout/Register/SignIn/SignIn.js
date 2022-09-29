@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import classes from '../Register.module.css';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 
@@ -65,6 +65,8 @@ const SignIn = ({ formContentHandlerProps }) => {
           here
         </span>
       </p>
+      <p>Forgot your password? reset your password</p>{' '}
+      <Link to="/forgot-password">here</Link>
     </>
   );
 };

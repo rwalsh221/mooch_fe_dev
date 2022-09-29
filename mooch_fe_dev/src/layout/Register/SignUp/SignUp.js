@@ -40,7 +40,7 @@ const SignUp = ({ formContentHandlerProps }) => {
         Create your MoOCH Account
       </h3>
       <p>{error}</p>
-      <p>{currentUser.email}</p>
+      {/* <p>{currentUser.email}</p> */}
       <form data-margin-bottom={'300'} onSubmit={handleSubmit}>
         {/* <label for="sign-up-email">email</label> */}
         <input
