@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Register from './layout/Register/Register';
 import Dashboard from './layout/Dashboard/Dashboard';
 import { AuthProvider } from './contexts/AuthContext';
-import UserSettings from './layout/UserSettings/UserSettings';
+import UserAccount from './layout/UserAccount/UserAccount';
 
 const App = () => (
   <AuthProvider>
@@ -11,7 +11,7 @@ const App = () => (
       <Route path="/" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="*" element={<Register />} />
-      <Route path="settings" element={<UserSettings />} />
+      <Route path="account" element={<UserAccount />} />
     </Routes>
   </AuthProvider>
 );
