@@ -6,4 +6,6 @@
 # GET http://localhost/mooch_be_dev/athlete/
 
 #GET LOGGED IN ATHLETE STATS
-GET http://localhost/mooch_be_dev/athlete/stats
+# GET http://localhost/mooch_be_dev/athlete/stats
+# 94702
+https://www.strava.com/oauth/authorize?client_id=94702&redirect_uri=http://localhost&response_type=code&scope=activity:read_all

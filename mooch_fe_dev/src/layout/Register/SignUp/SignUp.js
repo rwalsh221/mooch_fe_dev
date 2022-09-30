@@ -9,6 +9,9 @@ const SignUp = ({ formContentHandlerProps }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const clientIdRef = useRef();
+  const clientSecretRef = useRef();
+  const accessTokenRef = useRef();
   const { signUp, currentUser } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -40,9 +43,8 @@ const SignUp = ({ formContentHandlerProps }) => {
         Create your MoOCH Account
       </h3>
       <p>{error}</p>
-      {/* <p>{currentUser.email}</p> */}
-      <form data-margin-bottom={'300'} onSubmit={handleSubmit}>
-        {/* <label for="sign-up-email">email</label> */}
+      <form onSubmit={handleSubmit}>
+        <h4>User Account Information</h4>
         <input
           type="email"
           id="register-email"
@@ -51,20 +53,8 @@ const SignUp = ({ formContentHandlerProps }) => {
           placeholder="Email"
           required
           ref={emailRef}
-          // autoComplete="new-password"
         />
         <br />
-        {/* <label for="sign-up-strava-id">strava id</label> */}
-        <input
-          // type="number"
-          id="register-strava-id"
-          aria-label="strava id"
-          name="register-strava-id"
-          placeholder="Strava id"
-          // autoComplete="new-password"
-        />
-        <br />
-        {/* <label for="sign-up-password">password</label> */}
         <input
           type="password"
           id="register-password"
@@ -72,18 +62,40 @@ const SignUp = ({ formContentHandlerProps }) => {
           name="register-password"
           placeholder="Password"
           autoComplete="new-password"
+          required
           ref={passwordRef}
         />
-
-        {/* <label for="sign-up-password-confirm">confirm password</label> */}
         <input
           type="password"
           id="register-password-confirm"
           aria-label="confirm password"
           name="register-password-confirm"
           placeholder="Confirm"
-          // autoComplete="new-password"
+          required
           ref={passwordConfirmRef}
+        />
+        <h4>Strava Api Application Keys</h4>
+        <input
+          placeholder="Client ID"
+          aria-label="Client id"
+          name="register-client-id"
+          required
+          ref={clientIdRef}
+        />
+        <input
+          placeholder="Client Secret"
+          aria-label="Client Secret"
+          name="register-client-secret"
+          required
+          ref={clientSecretRef}
+        />
+        <br />
+        <input
+          placeholder="Your Access Token"
+          aria-label="Your Access Token"
+          name="register-access-token"
+          required
+          ref={accessTokenRef}
         />
         <br />
         <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
