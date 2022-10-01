@@ -9,6 +9,10 @@ import Footer from '../../components/Footer/Footer';
 const RegisterConfirm = () => {
   const emailTest = 'test@test.com';
 
+  const registerHandler = () => {
+    // send user info to mooch back end
+  };
+
   return (
     <>
       <Header />

@@ -16,7 +16,8 @@ const SignUp = ({ formContentHandlerProps }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const emailTest = 'test@test.com';
+  sessionStorage.setItem('email', emailTest);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,6 +36,25 @@ const SignUp = ({ formContentHandlerProps }) => {
     }
     setLoading(false);
   };
+
+  // SIGN UP CODE ABOVE NEEDS TO MOVE TO REGISTER CONFIRM
+
+  const setSignUpLocalStorage = () => {
+    const data = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      clientId: clientIdRef.current.value,
+      clientSecret: clientSecretRef.current.value,
+      accessToken: accessTokenRef.current.value,
+    };
+
+    localStorage.setItem('moochSignUP', JSON.stringify(data));
+    console.log(localStorage);
+    navigate(`https://www.strava.com/oauth/authorize?client_id=${clientIdRef.current.value}&redirect_uri=http://localhost:3000/register-confirm&response_type=code&scope=activity:read_all
+    `);
+  };
+
+  // handleSubmit2();
 
   console.log(error);
   return (
