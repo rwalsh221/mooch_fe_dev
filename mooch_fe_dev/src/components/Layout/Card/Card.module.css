@@ -1,0 +1,10 @@
+.card {
+  display: flex;
+  background-color: var(--primary-color-green-100);
+  margin: var(--margin-200) auto;
+  width: 50%;
+  padding: var(--padding-100);
+  align-self: center;
+  border: 2px solid var(--primary-color-green-600);
+  padding: var(--padding-100);
+}

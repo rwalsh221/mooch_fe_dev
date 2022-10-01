@@ -1,0 +1,31 @@
+.register_confirm {
+  min-height: 60vh;
+  /* CHILD WONT INHERIT HIGHT FROM MIN_HEIGHT SET HIEGHT 1PX WORK AROUND */
+  height: 1px;
+}
+
+.register_confirm_container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.strava {
+  font-family: 'Candal', sans-serif;
+  color: #ff4500;
+  font-size: 2rem;
+}
+
+.confirm_card_container {
+  width: 100%;
+}
+
+.confirm_card_container * {
+  margin-bottom: var(--margin-100);
+  /* background-color: aqua; */
+}
+
+.confirm_card_container h2 {
+  margin: 0 auto var(--margin-100) auto;
+}
