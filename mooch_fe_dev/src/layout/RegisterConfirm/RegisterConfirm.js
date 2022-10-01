@@ -19,14 +19,12 @@ const RegisterConfirm = () => {
         <div className={classes.register_confirm_container}>
           <Card>
             <div className={classes.confirm_card_container}>
-              <h2
-                className={classes.register_card__logo}
-                data-heading={'logo-small'}
-              >
-                MoOCH &amp; <span className={classes.strava}>STRAVA</span>
-                account link complete
-              </h2>
-              <p>{emailTest}&nbsp;Please Complete your account setup</p>
+              <p>
+                <span data-heading={'logo-small'}>MoOCH</span>&nbsp;&amp;&nbsp;
+                <span className={classes.strava}>STRAVA</span>&nbsp; account
+                link complete
+              </p>
+              <p>{emailTest}&nbsp;please complete your account setup</p>
               <ButtonGreen contentProps={'Complete Sign Up'} />
             </div>
           </Card>
