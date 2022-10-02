@@ -18,26 +18,6 @@ const SignUp = ({ formContentHandlerProps }) => {
   const navigate = useNavigate();
   const emailTest = 'test@test.com';
   sessionStorage.setItem('email', emailTest);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Passwords do not match');
-    }
-
-    try {
-      setError('');
-      setLoading(true);
-      signUp(emailRef.current.value, passwordRef.current.value);
-      navigate('/dashboard');
-    } catch (error) {
-      setError('Failed to create an account');
-      console.error(error.message);
-    }
-    setLoading(false);
-  };
-
-  // SIGN UP CODE ABOVE NEEDS TO MOVE TO REGISTER CONFIRM
 
   const setSignUpLocalStorage = () => {
     const data = {
@@ -50,9 +30,30 @@ const SignUp = ({ formContentHandlerProps }) => {
 
     localStorage.setItem('moochSignUP', JSON.stringify(data));
     console.log(localStorage);
-    navigate(`https://www.strava.com/oauth/authorize?client_id=${clientIdRef.current.value}&redirect_uri=http://localhost:3000/register-confirm&response_type=code&scope=activity:read_all
-    `);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError('Passwords do not match');
+    }
+
+    try {
+      setError('');
+      setLoading(true);
+      signUp(emailRef.current.value, passwordRef.current.value);
+      setSignUpLocalStorage();
+      navigate(`https://www.strava.com/oauth/authorize?client_id=${clientIdRef.current.value}&redirect_uri=http://localhost:3000/register-confirm&response_type=code&scope=activity:read_all
+    `);
+    } catch (error) {
+      setError('Failed to create an account');
+      console.error(error.message);
+    }
+    setLoading(false);
+  };
+
+  // SIGN UP CODE ABOVE NEEDS TO MOVE TO REGISTER CONFIRM
 
   // handleSubmit2();
 

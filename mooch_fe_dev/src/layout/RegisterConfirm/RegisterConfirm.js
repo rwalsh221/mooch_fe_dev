@@ -9,8 +9,18 @@ import Footer from '../../components/Footer/Footer';
 const RegisterConfirm = () => {
   const emailTest = 'test@test.com';
 
-  const registerHandler = () => {
-    // send user info to mooch back end
+  const registerHandler = async () => {
+    // 1 get code param from url
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authCode = urlParams.get('code');
+    // 2, get local stored sign up data
+    const signUpData = localStorage.getItem('moochSignUp');
+    // 3, send sign up data to mooch back end
+    const submitSignUp = await fetch('', {
+      method: 'POST',
+      data: signUpData,
+    });
   };
 
   return (
@@ -29,7 +39,10 @@ const RegisterConfirm = () => {
                 link complete
               </p>
               <p>{emailTest}&nbsp;please complete your account setup</p>
-              <ButtonGreen contentProps={'Complete Sign Up'} />
+              <ButtonGreen
+                contentProps={'Complete Sign Up'}
+                onClickProps={registerHandler}
+              />
             </div>
           </Card>
         </div>
