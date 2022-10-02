@@ -8,4 +8,7 @@
 #GET LOGGED IN ATHLETE STATS
 # GET http://localhost/mooch_be_dev/athlete/stats
 # 94702
-https://www.strava.com/oauth/authorize?client_id=94702&redirect_uri=http://localhost&response_type=code&scope=activity:read_all
+# https://www.strava.com/oauth/authorize?client_id=94702&redirect_uri=http://localhost&response_type=code&scope=activity:read_all
+# POST https://www.strava.com/oauth/token?client_id=94702&client_secret=cc7de5dea65e248c912898647081be8a10bc2291&code=6a623e237e00995b9199c9980bace6bd7fcd206e&grant_type=authorization_code
+
+GET https://www.strava.com/api/v3/athlete/activities?access_token=880f74323a602f806ea196e7a84dc3a4b4c11514 HTTP/1.1

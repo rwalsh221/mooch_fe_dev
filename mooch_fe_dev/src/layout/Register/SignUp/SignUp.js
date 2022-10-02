@@ -44,7 +44,8 @@ const SignUp = ({ formContentHandlerProps }) => {
       setLoading(true);
       signUp(emailRef.current.value, passwordRef.current.value);
       setSignUpLocalStorage();
-      navigate(`https://www.strava.com/oauth/authorize?client_id=${clientIdRef.current.value}&redirect_uri=http://localhost:3000/register-confirm&response_type=code&scope=activity:read_all
+      window.location
+        .replace(`https://www.strava.com/oauth/authorize?client_id=${clientIdRef.current.value}&redirect_uri=http://localhost:3000/register-confirm&response_type=code&scope=activity:read_all
     `);
     } catch (error) {
       setError('Failed to create an account');

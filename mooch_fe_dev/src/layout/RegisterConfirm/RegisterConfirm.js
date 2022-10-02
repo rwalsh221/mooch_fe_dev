@@ -6,8 +6,11 @@ import classes from './RegisterConfirm.module.css';
 import Card from '../../components/Layout/Card/Card';
 import Footer from '../../components/Footer/Footer';
 
+import { useAuth } from '../../contexts/AuthContext';
+
 const RegisterConfirm = () => {
   const emailTest = 'test@test.com';
+  const { signUp, currentUser } = useAuth();
 
   const registerHandler = async () => {
     // 1 get code param from url
@@ -15,12 +18,39 @@ const RegisterConfirm = () => {
     const urlParams = new URLSearchParams(queryString);
     const authCode = urlParams.get('code');
     // 2, get local stored sign up data
-    const signUpData = localStorage.getItem('moochSignUp');
+    let moochLocalStorage = localStorage.getItem('moochSignUP');
+    const signUpData = { ...JSON.parse(moochLocalStorage), authCode };
+    console.log(signUpData);
+    // const test:
     // 3, send sign up data to mooch back end
-    const submitSignUp = await fetch('', {
-      method: 'POST',
-      data: signUpData,
-    });
+    const submitSignUp = await fetch(
+      'http://localhost/mooch_be_dev/athlete/register/registerAuth/',
+      {
+        method: 'POST',
+        body: JSON.stringify(signUpData),
+        // authCode,
+      }
+    );
+    // console.log(JSON.parse(signUpData));
+    // console.log(authCode);
+    // console.log(localStorage);
+    const submitSignUpResponse = await submitSignUp.json();
+    console.log(submitSignUpResponse);
+    const completeSignUpBody = {
+      ...submitSignUpResponse,
+      userId: currentUser.uid,
+    };
+    console.log(completeSignUpBody);
+    const completeSignUp = await fetch(
+      'http://localhost/mooch_be_dev/athlete/register/',
+      {
+        method: 'POST',
+        body: JSON.stringify(completeSignUpBody),
+      }
+    );
+
+    const completeSignUpJson = await completeSignUp.json();
+    console.log(completeSignUpJson);
   };
 
   return (
@@ -38,7 +68,7 @@ const RegisterConfirm = () => {
                 <span className={classes.strava}>STRAVA</span>&nbsp; account
                 link complete
               </p>
-              <p>{emailTest}&nbsp;please complete your account setup</p>
+              <p>{currentUser.email}&nbsp;please complete your account setup</p>
               <ButtonGreen
                 contentProps={'Complete Sign Up'}
                 onClickProps={registerHandler}
