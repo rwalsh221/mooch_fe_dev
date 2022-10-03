@@ -22,12 +22,12 @@ const Dashboard = () => {
     const getUserData = async () => {
       try {
         const getUserInfo = await fetch(
-          `http://localhost/mooch_be_dev/athlete/?userId=${currentUser.uid}`
+          `${process.env.REACT_APP_MOOCH_API_URL}/athlete/?userId=${currentUser.uid}`
         );
 
         const getUserInfoJson = await getUserInfo.json();
         const getUserStats = await fetch(
-          `http://localhost/mooch_be_dev/athlete/stats/?userId=${currentUser.uid}`
+          `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/?userId=${currentUser.uid}`
         );
 
         const getUserStatsJson = await getUserStats.json();

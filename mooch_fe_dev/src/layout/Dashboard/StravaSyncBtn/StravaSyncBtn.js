@@ -9,14 +9,14 @@ const StravaSyncBtn = ({ uidProps, userInfoProps, setUserInfoProps }) => {
       // 1, Set btnContent to spinner
       // 2, send request to php file to sync with strava and set database with api call result
       const response = await fetch(
-        `http://localhost/mooch_be_dev/athlete/stats/set/?userId=${uidProps}`
+        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/set/?userId=${uidProps}`
       );
 
       if (response.ok) {
         setBtnContent('synching');
         // setSyncProps(true);
         const getUserStats = await fetch(
-          `http://localhost/mooch_be_dev/athlete/stats/?userId=${uidProps}`
+          `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/?userId=${uidProps}`
         );
 
         const getUserStatsJson = await getUserStats.json();

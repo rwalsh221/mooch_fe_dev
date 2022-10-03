@@ -25,7 +25,7 @@ const RegisterConfirm = () => {
     // const test:
     // 3, send sign up data to mooch back end
     const submitSignUp = await fetch(
-      'http://localhost/mooch_be_dev/athlete/register/registerAuth/',
+      `${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/registerAuth/`,
       {
         method: 'POST',
         body: JSON.stringify(signUpData),
@@ -42,7 +42,7 @@ const RegisterConfirm = () => {
     };
     console.log(completeSignUpBody);
     const completeSignUp = await fetch(
-      'http://localhost/mooch_be_dev/athlete/register/',
+      `${process.env.REACT_APP_MOOCH_API_URL}/mooch_be_dev/athlete/register/`,
       {
         method: 'POST',
         body: JSON.stringify(completeSignUpBody),
