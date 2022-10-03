@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import classes from './StravaSyncBtn.module.css';
 
-const StravaSyncBtn = () => {
+const StravaSyncBtn = ({ uidProps, userInfoProps, setUserInfoProps }) => {
   const [btnContent, setBtnContent] = useState('Sync MoOCH with STRAVA');
 
   const syncWithStrava = async () => {
@@ -9,15 +9,25 @@ const StravaSyncBtn = () => {
       // 1, Set btnContent to spinner
       // 2, send request to php file to sync with strava and set database with api call result
       const response = await fetch(
-        'http://localhost/mooch_be_dev/athlete/stats/set/?userId=1'
+        `http://localhost/mooch_be_dev/athlete/stats/set/?userId=${uidProps}`
       );
 
       if (response.ok) {
-        setBtnContent('success');
+        setBtnContent('synching');
+        // setSyncProps(true);
+        const getUserStats = await fetch(
+          `http://localhost/mooch_be_dev/athlete/stats/?userId=${uidProps}`
+        );
+
+        const getUserStatsJson = await getUserStats.json();
+        setUserInfoProps({
+          userProfile: { ...userInfoProps.userProfile },
+          userStats: getUserStatsJson,
+        });
       } else {
         throw new Error();
       }
-
+      setBtnContent('Sync MoOCH with STRAVA');
       // 3, set btnContent to sync complete
       // 4, settimeout 5sec to set btnContent back to init
     } catch (error) {

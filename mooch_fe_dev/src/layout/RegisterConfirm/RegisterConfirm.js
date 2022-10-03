@@ -2,6 +2,7 @@ import React from 'react';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 import Header from '../../components/Header/Header';
 import classes from './RegisterConfirm.module.css';
+import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Layout/Card/Card';
 import Footer from '../../components/Footer/Footer';
@@ -9,8 +10,8 @@ import Footer from '../../components/Footer/Footer';
 import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
-  const emailTest = 'test@test.com';
-  const { signUp, currentUser } = useAuth();
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const registerHandler = async () => {
     // 1 get code param from url
@@ -31,14 +32,13 @@ const RegisterConfirm = () => {
         // authCode,
       }
     );
-    // console.log(JSON.parse(signUpData));
-    // console.log(authCode);
-    // console.log(localStorage);
+
     const submitSignUpResponse = await submitSignUp.json();
     console.log(submitSignUpResponse);
     const completeSignUpBody = {
       ...submitSignUpResponse,
       userId: currentUser.uid,
+      ...JSON.parse(moochLocalStorage),
     };
     console.log(completeSignUpBody);
     const completeSignUp = await fetch(
@@ -49,8 +49,9 @@ const RegisterConfirm = () => {
       }
     );
 
-    const completeSignUpJson = await completeSignUp.json();
+    const completeSignUpJson = await completeSignUp.text();
     console.log(completeSignUpJson);
+    navigate('/dashboard');
   };
 
   return (

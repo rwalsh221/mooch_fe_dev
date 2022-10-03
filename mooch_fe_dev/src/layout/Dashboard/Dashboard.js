@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import classes from './Dashboard.module.css';
 import SegmentSnapshotSmall from './SegmentSnapshotSmall/SegmentSnapshotSmall';
+import { useAuth } from '../../contexts/AuthContext';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -14,23 +15,22 @@ import StravaSyncBtn from './StravaSyncBtn/StravaSyncBtn';
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState(null);
 
+  const { signUp, currentUser } = useAuth();
+
   console.log(userInfo);
   useEffect(() => {
-    console.log('GET');
     const getUserData = async () => {
       try {
         const getUserInfo = await fetch(
-          'http://localhost/mooch_be_dev/athlete/?userId=1'
+          `http://localhost/mooch_be_dev/athlete/?userId=${currentUser.uid}`
         );
 
         const getUserInfoJson = await getUserInfo.json();
-        console.log(getUserInfoJson);
         const getUserStats = await fetch(
-          'http://localhost/mooch_be_dev/athlete/stats/?userId=1'
+          `http://localhost/mooch_be_dev/athlete/stats/?userId=${currentUser.uid}`
         );
 
         const getUserStatsJson = await getUserStats.json();
-        console.log(getUserStatsJson);
 
         setUserInfo({
           userProfile: getUserInfoJson,
@@ -42,7 +42,7 @@ const Dashboard = () => {
     };
 
     getUserData();
-  }, []);
+  }, [currentUser.uid]);
 
   const userInfoContent = userInfo ? (
     <UserInfo
@@ -74,7 +74,11 @@ const Dashboard = () => {
           <section className={classes.dashboard_user}>
             {userInfoContent}
             {userStatsContent}
-            <StravaSyncBtn />
+            <StravaSyncBtn
+              uidProps={currentUser.uid}
+              userInfoProps={userInfo}
+              setUserInfoProps={setUserInfo}
+            />
           </section>
           <section className={classes.dashboard_recent}>
             <ActivityCard />
