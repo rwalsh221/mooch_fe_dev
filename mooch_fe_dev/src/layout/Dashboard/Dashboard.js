@@ -20,12 +20,16 @@ const Dashboard = () => {
   console.log(userInfo);
   useEffect(() => {
     const getUserData = async () => {
+      console.log(
+        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/?userId=${currentUser.uid}`
+      );
       try {
         const getUserInfo = await fetch(
           `${process.env.REACT_APP_MOOCH_API_URL}/athlete/?userId=${currentUser.uid}`
         );
 
         const getUserInfoJson = await getUserInfo.json();
+        console.log(getUserInfoJson);
         const getUserStats = await fetch(
           `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/?userId=${currentUser.uid}`
         );

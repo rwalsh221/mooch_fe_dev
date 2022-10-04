@@ -42,7 +42,7 @@ const SignUp = ({ formContentHandlerProps }) => {
     try {
       setError('');
       setLoading(true);
-      signUp(emailRef.current.value, passwordRef.current.value);
+      await signUp(emailRef.current.value, passwordRef.current.value);
       setSignUpLocalStorage();
       window.location
         .replace(`https://www.strava.com/oauth/authorize?client_id=${clientIdRef.current.value}&redirect_uri=${process.env.REACT_APP_MOOCH_URL}/register-confirm&response_type=code&scope=activity:read_all
