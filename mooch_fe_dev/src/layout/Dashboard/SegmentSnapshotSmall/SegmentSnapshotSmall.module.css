@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 70%;
+  width: 45%;
   margin: 0 auto var(--margin-200) auto;
   padding: var(--padding-100);
   border: 1px solid var(--primary-color-green-800);

@@ -75,7 +75,7 @@ const Dashboard = () => {
           className={classes.dashboard_container}
           data-wrapper="max-content-width"
         >
-          <section className={classes.dashboard_user}>
+          <div className={classes.dashboard_user}>
             {userInfoContent}
             {userStatsContent}
             <StravaSyncBtn
@@ -83,16 +83,18 @@ const Dashboard = () => {
               userInfoProps={userInfo}
               setUserInfoProps={setUserInfo}
             />
-          </section>
-          <section className={classes.dashboard_recent}>
-            <ActivityCard />
-            <ActivityCard />
-          </section>
-          <section className={classes.dashboard_segments}>
+          </div>
+          <div className={classes.dashboard_segment_leaderboard}>
             <SegmentSnapshotSmall />
             <SegmentSnapshotSmall />
             <SegmentSnapshotSmall />
-          </section>
+            <SegmentSnapshotSmall />
+          </div>
+          <div className={classes.dashboard_segments}>
+            <SegmentSnapshotSmall />
+            <SegmentSnapshotSmall />
+            <SegmentSnapshotSmall />
+          </div>
         </div>
       </main>
       <Footer />
