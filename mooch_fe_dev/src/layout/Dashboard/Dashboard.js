@@ -58,12 +58,12 @@ const Dashboard = () => {
 
   const userStatsContent = userInfo ? (
     <UserStats
-      rideYearProps={parseInt(userInfo.userStats[0].rideAllTimeDist)}
-      rideAllProps={parseInt(userInfo.userStats[0].rideYearDist)}
-      runYearProps={parseInt(userInfo.userStats[0].runAllTimeDist)}
-      runAllProps={parseInt(userInfo.userStats[0].runYearDist)}
-      swimYearProps={parseInt(userInfo.userStats[0].swimAllTimeDist)}
-      swimAllProps={parseInt(userInfo.userStats[0].swimYearDist)}
+      rideYearProps={parseInt(userInfo.userStats[0].rideYearDist)}
+      rideAllProps={parseInt(userInfo.userStats[0].rideAllTimeDist)}
+      runYearProps={parseInt(userInfo.userStats[0].runYearDist)}
+      runAllProps={parseInt(userInfo.userStats[0].runAllTimeDist)}
+      swimYearProps={parseInt(userInfo.userStats[0].swimYearDist)}
+      swimAllProps={parseInt(userInfo.userStats[0].swimAllTimeDist)}
     />
   ) : null;
 
