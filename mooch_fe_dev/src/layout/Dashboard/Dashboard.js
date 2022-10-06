@@ -36,9 +36,16 @@ const Dashboard = () => {
 
         const getUserStatsJson = await getUserStats.json();
 
+        const getUserSegments = await fetch(
+          `${process.env.REACT_APP_MOOCH_API_URL}/segments/?userId=${currentUser.uid}`
+        );
+
+        const getUserSegmentsJson = await getUserSegments.json();
+
         setUserInfo({
           userProfile: getUserInfoJson,
           userStats: getUserStatsJson,
+          userSegments: getUserSegmentsJson,
         });
       } catch (error) {
         console.error(error);
@@ -47,12 +54,7 @@ const Dashboard = () => {
 
     const getUserSegmentData = async () => {
       try {
-        const getUserSegments = await fetch(
-          `${process.env.REACT_APP_MOOCH_API_URL}/segments/?userId=${currentUser.uid}`
-        );
-
-        const getUserSegmentsJson = await getUserSegments.json();
-        console.log(getUserSegmentsJson);
+        // console.log(getUserSegmentsJson);
       } catch (error) {}
     };
 
@@ -79,6 +81,24 @@ const Dashboard = () => {
     />
   ) : null;
 
+  const userSegmentContentArray = [];
+  const userSegmentContent = userInfo
+    ? userInfo.userSegments.forEach((el) => {
+        console.log(el);
+        userSegmentContentArray.push(
+          <SegmentSnapshotSmall
+            segmentNameProps={el[0].name}
+            cityProps={el[0].city}
+            stateProps={el[0].state}
+            distanceProps={el[0].distance}
+            komProps={el[0].kom}
+          />
+        );
+      })
+    : null;
+
+  console.log(userSegmentContent);
+
   return (
     <>
       <Header />
@@ -97,10 +117,7 @@ const Dashboard = () => {
             />
           </div>
           <div className={classes.dashboard_segment_leaderboard}>
-            <SegmentSnapshotSmall />
-            <SegmentSnapshotSmall />
-            <SegmentSnapshotSmall />
-            <SegmentSnapshotSmall />
+            {userSegmentContentArray};
           </div>
           <div className={classes.dashboard_segments}>
             <SegmentSnapshotSmall />

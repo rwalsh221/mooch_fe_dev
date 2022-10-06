@@ -3,14 +3,25 @@ import classes from './SegmentSnapshotSmall.module.css';
 
 import userImg from '../../../assets/img/forest_bg.jpg';
 
-const SegmentSnapshotSmall = () => (
+const SegmentSnapshotSmall = ({
+  segmentNameProps,
+  activityTypeProps,
+  cityProps,
+  stateProps,
+  distanceProps,
+  elevationHighProps,
+  elevationLowProps,
+  komProps,
+}) => (
   <div className={classes.segment_snapshot_sml}>
-    <h2>segment name</h2>
-    <p>segment location</p>
+    <h2>{segmentNameProps}</h2>
+    <p>
+      {cityProps}&amp;{stateProps}
+    </p>
     <div className={classes.segment_info}>
       <div>
         <p className={classes.segment_info__title} data-card-style="title">
-          distance
+          {distanceProps}
         </p>
         <p data-card-style="total">1km</p>
       </div>
@@ -34,6 +45,7 @@ const SegmentSnapshotSmall = () => (
       <div className={classes.leaderboard_user}>
         <img src={userImg} alt="user" />
         <p>your PR 1:08</p>
+        <p>kom&amp;{komProps}</p>
       </div>
       <div className={classes.leaderboard_top}>
         <div className={classes.leaderboard_top__header}>
