@@ -8,11 +8,15 @@ const StravaSyncBtn = ({ uidProps, userInfoProps, setUserInfoProps }) => {
     try {
       // 1, Set btnContent to spinner
       // 2, send request to php file to sync with strava and set database with api call result
-      const response = await fetch(
+      const statsResponse = await fetch(
         `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/set/?userId=${uidProps}`
       );
 
-      if (response.ok) {
+      const segmentsResponse = await fetch(
+        `${process.env.REACT_APP_MOOCH_API_URL}/segments/set/?userId=${uidProps}`
+      );
+
+      if (statsResponse.ok && segmentsResponse.ok) {
         setBtnContent('synching');
         // setSyncProps(true);
         const getUserStats = await fetch(
@@ -20,6 +24,15 @@ const StravaSyncBtn = ({ uidProps, userInfoProps, setUserInfoProps }) => {
         );
 
         const getUserStatsJson = await getUserStats.json();
+
+        const getUserSegments = await fetch(
+          `${process.env.REACT_APP_MOOCH_API_URL}/segments/?userId=${uidProps}`
+        );
+
+        const getUserSegmentsJson = await getUserSegments.json();
+
+        console.log(getUserSegmentsJson);
+
         setUserInfoProps({
           userProfile: { ...userInfoProps.userProfile },
           userStats: getUserStatsJson,

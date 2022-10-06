@@ -45,7 +45,19 @@ const Dashboard = () => {
       }
     };
 
+    const getUserSegmentData = async () => {
+      try {
+        const getUserSegments = await fetch(
+          `${process.env.REACT_APP_MOOCH_API_URL}/segments/?userId=${currentUser.uid}`
+        );
+
+        const getUserSegmentsJson = await getUserSegments.json();
+        console.log(getUserSegmentsJson);
+      } catch (error) {}
+    };
+
     getUserData();
+    getUserSegmentData();
   }, [currentUser.uid]);
 
   const userInfoContent = userInfo ? (

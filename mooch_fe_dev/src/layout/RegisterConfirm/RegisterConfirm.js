@@ -11,6 +11,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
   const { currentUser } = useAuth();
+  console.log(currentUser);
   const navigate = useNavigate();
 
   const registerHandler = async () => {
@@ -42,7 +43,7 @@ const RegisterConfirm = () => {
     };
     console.log(completeSignUpBody);
     const completeSignUp = await fetch(
-      `${process.env.REACT_APP_MOOCH_API_URL}/mooch_be_dev/athlete/register/`,
+      `${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`,
       {
         method: 'POST',
         body: JSON.stringify(completeSignUpBody),

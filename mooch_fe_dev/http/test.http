@@ -17,4 +17,5 @@
 
 # GET https://www.strava.com/api/v3/activities/7909207130?access_token=e8ad7dec6ea32261b2a4544810492c0d2bb73997
 
-GET https://www.strava.com/api/v3/segments/15537000?access_token=e8ad7dec6ea32261b2a4544810492c0d2bb73997
+GET https://www.strava.com/api/v3/segments/13003909
+?access_token=23988086a31452fd06258002d908a17d22ab942a
