@@ -11,3 +11,9 @@
   padding: calc(var(--padding-100) / 2) var(--padding-100);
   margin: 0 auto 0 calc(var(--margin-100) * 20);
 }
+
+@media screen and (max-width: 1080px) {
+  .heading {
+    margin: 0 auto 0 calc(var(--margin-300));
+  }
+}

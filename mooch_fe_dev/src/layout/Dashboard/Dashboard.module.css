@@ -1,6 +1,7 @@
 .dashboard {
   background-color: var(--primary-color-green-200);
   padding: var(--padding-200) 0;
+  /* background-color: aqua; */
 }
 
 .dashboard_container {

@@ -38,4 +38,14 @@
   --padding-700: calc(var(--base-padding) * 7);
   --padding-800: calc(var(--base-padding) * 8);
   --padding-900: calc(var(--base-padding) * 9);
+
+  /* MEDIA QUERIES */
+  --ipad-landscape-1180: 1180px;
+}
+
+@media screen and (max-width: 412px) {
+  * {
+    --base-margin: 0.8rem;
+    --base-padding: 0.8rem;
+  }
 }

@@ -150,3 +150,13 @@ body {
   font-size: 2rem;
   font-weight: bold;
 }
+
+@media screen and (max-width: 412px) {
+  * {
+    /* border: 1px solid red; */
+  }
+
+  html {
+    font-size: 55%;
+  }
+}

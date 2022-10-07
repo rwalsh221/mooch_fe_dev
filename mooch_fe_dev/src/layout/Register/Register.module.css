@@ -100,3 +100,29 @@ input[name='register-client-id'] {
   cursor: pointer;
   color: var(--primary-color-green);
 }
+
+@media screen and (max-width: 1080px) {
+  .register_form__container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .register_form__img {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  [data-wrapper='max-content-width'] {
+    max-width: 412px;
+  }
+
+  .register_secondary_heading {
+    width: 80%;
+  }
+
+  .register_main {
+    align-content: center;
+  }
+}
