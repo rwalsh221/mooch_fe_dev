@@ -2,8 +2,7 @@ import React from 'react';
 import classes from './SegmentSnapshotSmall.module.css';
 
 import SegmentSnapshotLeaderboard from './SegmentSnapshotLeaderboard/SegmentSnapshotLeaderboard';
-import userImg from '../../../assets/img/forest_bg.jpg';
-
+import { metersToKilometer } from '../../../helpers/unitConversion';
 const SegmentSnapshotSmall = ({
   segmentNameProps,
   activityTypeProps,
@@ -25,9 +24,13 @@ const SegmentSnapshotSmall = ({
     <div className={classes.segment_info}>
       <div>
         <p className={classes.segment_info__title} data-card-style="title">
-          {distanceProps}
+          dist
         </p>
-        <p data-card-style="total">1km</p>
+        <p data-card-style="total">
+          {distanceProps < 1000
+            ? `${distanceProps}m`
+            : `${metersToKilometer(distanceProps, 1)}km`}
+        </p>
       </div>
       <div>
         <p className={classes.segment_info__title} data-card-style="title">
@@ -47,9 +50,15 @@ const SegmentSnapshotSmall = ({
     <div className={classes.segment_leaderboard}>
       <h3>leaderboard</h3>
       <div className={classes.leaderboard_user}>
-        <img src={userImgProps} alt="user" />
-        <p>PR {leaderboardProps[uidProps].time}</p>
-        <p>kom&nbsp;{komProps}</p>
+        <div className={classes.leaderboard_user_pr}>
+          <p>PR {leaderboardProps[uidProps].time}</p>
+        </div>
+        <div className={classes.leaderboard_user_img}>
+          <img src={userImgProps} alt="user" />
+        </div>
+        <div className={classes.leaderboard_user_kom}>
+          <p>KOM&nbsp;{komProps}</p>
+        </div>
       </div>
       <div className={classes.leaderboard_all}>
         <div className={classes.leaderboard_all__header}>
@@ -65,7 +74,7 @@ const SegmentSnapshotSmall = ({
         </div>
         <ol>
           {Object.keys(leaderboardProps).map((el) => {
-            console.log(leaderboardProps[el].time);
+            console.log(distanceProps);
             console.log(el);
             return (
               <SegmentSnapshotLeaderboard

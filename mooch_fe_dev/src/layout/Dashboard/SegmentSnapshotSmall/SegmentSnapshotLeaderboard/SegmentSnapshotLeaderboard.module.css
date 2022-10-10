@@ -9,9 +9,11 @@
 
 .leaderboard div {
   background-color: var(--primary-color-green-800);
+  background-color: var(--primary-color-green-100);
+
   width: 100%;
   text-align: center;
-  color: var(--secondary-color-white);
+  /* color: var(--secondary-color-white); */
 }
 
 .leaderboard div:not(:last-of-type) {
