@@ -2,7 +2,10 @@ import React from 'react';
 import classes from './SegmentSnapshotSmall.module.css';
 
 import SegmentSnapshotLeaderboard from './SegmentSnapshotLeaderboard/SegmentSnapshotLeaderboard';
-import { metersToKilometer } from '../../../helpers/unitConversion';
+import {
+  metersToKilometer,
+  secondsToMinutes,
+} from '../../../helpers/unitConversion';
 const SegmentSnapshotSmall = ({
   segmentNameProps,
   activityTypeProps,
@@ -51,7 +54,12 @@ const SegmentSnapshotSmall = ({
       <h3>leaderboard</h3>
       <div className={classes.leaderboard_user}>
         <div className={classes.leaderboard_user_pr}>
-          <p>PR {leaderboardProps[uidProps].time}</p>
+          <p>
+            PR&nbsp;
+            {leaderboardProps[uidProps].time <= 60
+              ? `${leaderboardProps[uidProps].time}s`
+              : secondsToMinutes(leaderboardProps[uidProps].time)}
+          </p>
         </div>
         <div className={classes.leaderboard_user_img}>
           <img src={userImgProps} alt="user" />
@@ -74,6 +82,7 @@ const SegmentSnapshotSmall = ({
         </div>
         <ol>
           {Object.keys(leaderboardProps).map((el) => {
+            secondsToMinutes(572);
             console.log(distanceProps);
             console.log(el);
             return (
