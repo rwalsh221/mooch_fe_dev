@@ -8,3 +8,9 @@
   border: 2px solid var(--primary-color-green-600);
   padding: var(--padding-100);
 }
+
+@media screen and (max-width: 412px) {
+  .card {
+    width: 90%;
+  }
+}

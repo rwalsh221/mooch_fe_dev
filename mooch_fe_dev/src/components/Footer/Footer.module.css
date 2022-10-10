@@ -78,4 +78,13 @@
   .footer_list__menu li {
     flex: 0 1 25%;
   }
+
+  .footer_logo {
+    margin-bottom: 0;
+    font-size: 3rem;
+  }
+
+  .footer_container > :first-child {
+    justify-self: flex-start;
+  }
 }

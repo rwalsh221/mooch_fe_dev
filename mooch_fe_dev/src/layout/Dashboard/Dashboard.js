@@ -83,18 +83,18 @@ const Dashboard = () => {
 
   const userSegmentContentArray = [];
   const userSegmentContent = userInfo
-    ? userInfo.userSegments.forEach((el) => {
-        console.log(el);
-        userSegmentContentArray.push(
-          <SegmentSnapshotSmall
-            segmentNameProps={el[0].name}
-            cityProps={el[0].city}
-            stateProps={el[0].state}
-            distanceProps={el[0].distance}
-            komProps={el[0].kom}
-          />
-        );
-      })
+    ? userInfo.userSegments.map((el) => (
+        <SegmentSnapshotSmall
+          segmentNameProps={el[0].name}
+          cityProps={el[0].city}
+          stateProps={el[0].state}
+          distanceProps={el[0].distance}
+          komProps={el[0].kom}
+          leaderboardProps={el.segmentTimes}
+          uidProps={currentUser.uid}
+          userImgProps={userInfo.userProfile[0].profileImgUrl}
+        />
+      ))
     : null;
 
   console.log(userSegmentContent);
@@ -117,12 +117,12 @@ const Dashboard = () => {
             />
           </div>
           <div className={classes.dashboard_segment_leaderboard}>
-            {userSegmentContentArray};
+            {userSegmentContent};
           </div>
           <div className={classes.dashboard_segments}>
+            {/* <SegmentSnapshotSmall />
             <SegmentSnapshotSmall />
-            <SegmentSnapshotSmall />
-            <SegmentSnapshotSmall />
+            <SegmentSnapshotSmall /> */}
           </div>
         </div>
       </main>

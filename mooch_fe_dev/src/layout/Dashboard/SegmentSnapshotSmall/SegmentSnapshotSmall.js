@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './SegmentSnapshotSmall.module.css';
 
+import SegmentSnapshotLeaderboard from './SegmentSnapshotLeaderboard/SegmentSnapshotLeaderboard';
 import userImg from '../../../assets/img/forest_bg.jpg';
 
 const SegmentSnapshotSmall = ({
@@ -12,6 +13,9 @@ const SegmentSnapshotSmall = ({
   elevationHighProps,
   elevationLowProps,
   komProps,
+  leaderboardProps,
+  uidProps,
+  userImgProps,
 }) => (
   <div className={classes.segment_snapshot_sml}>
     <h2>{segmentNameProps}</h2>
@@ -41,39 +45,35 @@ const SegmentSnapshotSmall = ({
       </div>
     </div>
     <div className={classes.segment_leaderboard}>
-      <h3>top 3</h3>
+      <h3>leaderboard</h3>
       <div className={classes.leaderboard_user}>
-        <img src={userImg} alt="user" />
-        <p>your PR 1:08</p>
-        <p>kom&amp;{komProps}</p>
+        <img src={userImgProps} alt="user" />
+        <p>PR {leaderboardProps[uidProps].time}</p>
+        <p>kom&nbsp;{komProps}</p>
       </div>
-      <div className={classes.leaderboard_top}>
-        <div className={classes.leaderboard_top__header}>
-          <p data-card-style="title">athlete</p>
-          <p data-card-style="title">time</p>
+      <div className={classes.leaderboard_all}>
+        <div className={classes.leaderboard_all__header}>
+          <p data-card-style="title" className={classes.title_athlete}>
+            athlete
+          </p>
+          <p data-card-style="title" className={classes.title_time}>
+            time
+          </p>
+          <p data-card-style="title" className={classes.title_speed}>
+            speed
+          </p>
         </div>
         <ol>
-          <li>
-            <div className={classes.leaderboard_top__name}>richard</div>
-            <div className={classes.leaderboard_top__time}>36s</div>
-            <div className={classes.leaderboard_top__speed}>
-              35.8<span data-font="speedUnit">km/h</span>
-            </div>
-          </li>
-          <li>
-            <div className={classes.leaderboard_top__name}>richard</div>
-            <div className={classes.leaderboard_top__time}>36s</div>
-            <div className={classes.leaderboard_top__speed}>
-              35.8<span data-font="speedUnit">km/h</span>
-            </div>
-          </li>
-          <li>
-            <div className={classes.leaderboard_top__name}>richard</div>
-            <div className={classes.leaderboard_top__time}>36s</div>
-            <div className={classes.leaderboard_top__speed}>
-              35.8<span data-font="speedUnit">km/h</span>
-            </div>
-          </li>
+          {Object.keys(leaderboardProps).map((el) => {
+            console.log(leaderboardProps[el].time);
+            console.log(el);
+            return (
+              <SegmentSnapshotLeaderboard
+                athleteNameProps={leaderboardProps[el].name}
+                athleteTimeProps={leaderboardProps[el].time}
+              />
+            );
+          })}
         </ol>
       </div>
     </div>
