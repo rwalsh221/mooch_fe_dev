@@ -1,10 +1,17 @@
 import React from 'react';
 import classes from './SegmentSnapshotLeaderboard.module.css';
 
-import { secondsToMinutes } from '../../../../helpers/unitConversion';
+import {
+  secondsToMinutes,
+  calculateSpeed,
+} from '../../../../helpers/unitConversion';
 
-const SegmentSnapshotLeaderboard = ({ athleteNameProps, athleteTimeProps }) => {
-  console.log(athleteNameProps);
+const SegmentSnapshotLeaderboard = ({
+  athleteNameProps,
+  athleteTimeProps,
+  segmentDistanceProps,
+}) => {
+  console.log(segmentDistanceProps);
   return (
     <li className={classes.leaderboard}>
       <div className={classes.leaderboard_top__name}>{athleteNameProps}</div>
@@ -14,7 +21,8 @@ const SegmentSnapshotLeaderboard = ({ athleteNameProps, athleteTimeProps }) => {
           : `${secondsToMinutes(athleteTimeProps)}`}
       </div>
       <div className={classes.leaderboard_top__speed}>
-        35.8<span data-font="speedUnit">km/h</span>
+        {calculateSpeed(segmentDistanceProps, athleteTimeProps)}
+        <span data-font="speedUnit">km/h</span>
       </div>
     </li>
   );

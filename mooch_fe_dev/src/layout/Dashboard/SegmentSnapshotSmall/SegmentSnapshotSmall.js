@@ -89,6 +89,7 @@ const SegmentSnapshotSmall = ({
               <SegmentSnapshotLeaderboard
                 athleteNameProps={leaderboardProps[el].name}
                 athleteTimeProps={leaderboardProps[el].time}
+                segmentDistanceProps={distanceProps}
               />
             );
           })}
