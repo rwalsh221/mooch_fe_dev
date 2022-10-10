@@ -117,7 +117,7 @@ const Dashboard = () => {
             />
           </div>
           <div className={classes.dashboard_segment_leaderboard}>
-            {userSegmentContent};
+            {userSegmentContent}
           </div>
           <div className={classes.dashboard_segments}>
             {/* <SegmentSnapshotSmall />

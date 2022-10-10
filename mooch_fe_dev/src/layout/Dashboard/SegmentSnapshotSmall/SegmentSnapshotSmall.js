@@ -65,7 +65,10 @@ const SegmentSnapshotSmall = ({
           <img src={userImgProps} alt="user" />
         </div>
         <div className={classes.leaderboard_user_kom}>
-          <p>KOM&nbsp;{komProps}</p>
+          <p>
+            KOM&nbsp;
+            {komProps < 60 ? `${komProps}s` : secondsToMinutes(komProps)}
+          </p>
         </div>
       </div>
       <div className={classes.leaderboard_all}>
