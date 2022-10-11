@@ -1,11 +1,10 @@
 .user_info {
   background-color: var(--primary-color-green-100);
-  margin: 0 auto var(--margin-200) auto;
+  margin-bottom: var(--margin-200);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80%;
-  /* margin: 5rem auto 0 auto; */
   padding: var(--padding-100);
   border: 1px solid var(--primary-color-green-800);
 }
@@ -30,7 +29,6 @@
 
 .user_stats div {
   width: 30%;
-  /* background-color: aquamarine; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,12 +50,10 @@
 .user_stats div p {
   width: 100%;
   text-align: center;
-  /* background-color: purple; */
 }
 
 .user_stats_title {
   font-size: 1.2rem;
-  /* color: var(--secondary-color-white); */
 }
 
 .user_stats_content {

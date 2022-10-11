@@ -1,6 +1,6 @@
 .header {
   background-color: var(--secondary-color-white);
-  padding: var(--padding-100);
+  padding: var(--padding-100) 0;
   border-bottom: 2px solid var(--primary-color-green);
 
   border-bottom: 2px solid var(--primary-color-green-600);
@@ -9,7 +9,7 @@
 .heading {
   border: 1px solid var(--primary-color-green);
   padding: calc(var(--padding-100) / 2) var(--padding-100);
-  margin: 0 auto 0 calc(var(--margin-100) * 20);
+  /* margin: 0 auto 0 calc(var(--margin-100) * 20); */
 }
 
 @media screen and (max-width: 1080px) {

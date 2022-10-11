@@ -1,7 +1,6 @@
 .dashboard {
   background-color: var(--primary-color-green-200);
   padding: var(--padding-200) 0;
-  /* background-color: aqua; */
 }
 
 .dashboard_container {
@@ -9,8 +8,8 @@
 
   grid-template-columns: 1fr 2fr 1fr;
   min-height: 70vh;
-  width: 80%;
-  margin: 0 auto;
+  width: 90%;
+  /* margin: 0 auto; */
 }
 
 .dashboard_segment_leaderboard {

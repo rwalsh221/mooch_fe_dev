@@ -137,7 +137,8 @@ body {
 [data-wrapper='max-content-width'] {
   width: 100%;
   max-width: 2048px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  padding-left: calc(var(--padding-100) * 20);
 }
 
 [data-card-style='title'] {

@@ -1,6 +1,5 @@
 .strava_sync_btn {
   display: block;
-  margin: 0 auto;
   width: 80%;
   padding: var(--padding-400) var(--padding-100);
   background-color: var(--primary-color-green-600);
@@ -11,6 +10,5 @@
 
 .strava_sync_btn:hover {
   background-color: var(--primary-color-green);
-  /* color: var(--primary-color-green-800); */
   scale: 1.01;
 }
