@@ -1,10 +1,10 @@
 * {
   /* COLOR VARIABLES */
   --primary-color-green-100: hsl(66, 40%, 90%);
-  --primary-color-green-200: hsl(66, 40%, 80%);
+  --primary-color-green-200: #dce0b8;
   --primary-color-green: hsl(66, 77%, 22%);
   --primary-color-green-600: hsl(66, 17%, 32%);
-  --primary-color-green-800: hsl(66, 77%, 12%);
+  --primary-color-green-800: #313607;
 
   --secondary-color-white: hsl(0, 0%, 100%);
   --secondary-color-black: hsl(0, 2%, 12%);

@@ -1,6 +1,12 @@
 .dashboard {
   background-color: var(--primary-color-green-200);
   padding: var(--padding-200) 0;
+  background: rgb(220, 224, 184);
+  background: linear-gradient(
+    77deg,
+    rgba(220, 224, 184, 1) 71%,
+    rgba(49, 54, 7, 1) 71%
+  );
 }
 
 .dashboard_container {
