@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import classes from './StravaSyncBtn.module.css';
 
-const StravaSyncBtn = ({ uidProps, userInfoProps, setUserInfoProps }) => {
+const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
   const [btnContent, setBtnContent] = useState('Sync MoOCH with STRAVA');
-
+  console.log(getUserDataProps);
   const syncWithStrava = async () => {
     try {
       // 1, Set btnContent to spinner
+      setBtnContent('Syncing with STRAVA');
       // 2, send request to php file to sync with strava and set database with api call result
       const statsResponse = await fetch(
         `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/set/?userId=${uidProps}`
@@ -17,30 +18,16 @@ const StravaSyncBtn = ({ uidProps, userInfoProps, setUserInfoProps }) => {
       );
 
       if (statsResponse.ok && segmentsResponse.ok) {
-        setBtnContent('synching');
-        // setSyncProps(true);
-        const getUserStats = await fetch(
-          `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/?userId=${uidProps}`
-        );
-
-        const getUserStatsJson = await getUserStats.json();
-
-        const getUserSegments = await fetch(
-          `${process.env.REACT_APP_MOOCH_API_URL}/segments/?userId=${uidProps}`
-        );
-
-        const getUserSegmentsJson = await getUserSegments.json();
-
-        console.log(getUserSegmentsJson);
-
-        setUserInfoProps({
-          userProfile: { ...userInfoProps.userProfile },
-          userStats: getUserStatsJson,
-        });
+        setBtnContent('Syncing with MoOCH');
+        await getUserDataProps();
       } else {
         throw new Error();
       }
-      setBtnContent('Sync MoOCH with STRAVA');
+      setBtnContent('MoOCH STRAVA sync complete');
+
+      setTimeout(() => {
+        setBtnContent('Sync MoOCH with STRAVA');
+      }, 5000);
       // 3, set btnContent to sync complete
       // 4, settimeout 5sec to set btnContent back to init
     } catch (error) {

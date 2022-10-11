@@ -6,8 +6,8 @@ import UserStats from '../UserStats/UserStats';
 import SegmentSnapshotSmall from '../SegmentSnapshotSmall/SegmentSnapshotSmall';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
-const MobileDashboard = ({ userInfoProps, setUserInfoProps, uidProps }) => {
-  console.log(userInfoProps);
+const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
+  console.log(getUserDataProps);
   const [mdContent, setMdContent] = useState(null);
   const yourStatsContent = userInfoProps ? (
     <>
@@ -24,21 +24,13 @@ const MobileDashboard = ({ userInfoProps, setUserInfoProps, uidProps }) => {
         swimYearProps={parseInt(userInfoProps.userStats[0].swimYearDist)}
         swimAllProps={parseInt(userInfoProps.userStats[0].swimAllTimeDist)}
       />
-      <StravaSyncBtn
-        uidProps={uidProps}
-        userInfoProps={userInfoProps}
-        setUserInfoProps={setUserInfoProps}
-      />
+      <StravaSyncBtn uidProps={uidProps} getUserDataProps={getUserDataProps} />
     </>
   ) : null;
 
   const yourSegmentsContent = userInfoProps ? (
     <>
-      <StravaSyncBtn
-        uidProps={uidProps}
-        userInfoProps={userInfoProps}
-        setUserInfoProps={setUserInfoProps}
-      />
+      <StravaSyncBtn uidProps={uidProps} getUserDataProps={getUserDataProps} />
       <div className={classes.md_content_grid}>
         {userInfoProps.userSegments.map((el, index) => (
           <SegmentSnapshotSmall
@@ -46,6 +38,9 @@ const MobileDashboard = ({ userInfoProps, setUserInfoProps, uidProps }) => {
             cityProps={el[0].city}
             stateProps={el[0].state}
             distanceProps={el[0].distance}
+            elevationHighProps={el[0].elevationHigh}
+            elevationLowProps={el[0].elevationLow}
+            avgGradeProps={el[0].avgGrade}
             komProps={el[0].kom}
             leaderboardProps={el.segmentTimes}
             uidProps={uidProps}

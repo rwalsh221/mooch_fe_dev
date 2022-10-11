@@ -1,28 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classes from './Dashboard.module.css';
-import SegmentSnapshotSmall from './SegmentSnapshotSmall/SegmentSnapshotSmall';
 import { useAuth } from '../../contexts/AuthContext';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import DesktopDashboard from './DesktopDashboard/DesktopDashboard';
 import MobileDashboard from './MobileDashboard/MobileDashboard';
-import UserInfo from './UserInfo/UserInfo';
-import UserStats from './UserStats/UserStats';
-import ActivityCard from './ActivityCard/ActivityCard';
-import StravaSyncBtn from './StravaSyncBtn/StravaSyncBtn';
 
 // add mobile nav and make responsive *done*
 
-// add logout btn to header
+// add logout btn to header *done*
 
-// need elev gain on segment card
+// need elev gain on segment card *done*
 
 // add sport switch func for icon on segment card
 
-// refactor sync mooch starva func and add get segment cards
+// refactor sync mooch starva func and add get segment cards *done*
 
-// add loading info to sync with strava button
+// add loading info to sync with strava button *done*
 
 // adjust layout so all inline on left side. *done*
 
@@ -31,41 +26,39 @@ const Dashboard = () => {
 
   const { currentUser } = useAuth();
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const getUserInfo = await fetch(
-          `${process.env.REACT_APP_MOOCH_API_URL}/athlete/?userId=${currentUser.uid}`
-        );
+  const getUserData = useCallback(async () => {
+    try {
+      const getUserInfo = await fetch(
+        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/?userId=${currentUser.uid}`
+      );
 
-        const getUserInfoJson = await getUserInfo.json();
+      const getUserInfoJson = await getUserInfo.json();
 
-        const getUserStats = await fetch(
-          `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/?userId=${currentUser.uid}`
-        );
+      const getUserStats = await fetch(
+        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/?userId=${currentUser.uid}`
+      );
 
-        const getUserStatsJson = await getUserStats.json();
+      const getUserStatsJson = await getUserStats.json();
 
-        const getUserSegments = await fetch(
-          `${process.env.REACT_APP_MOOCH_API_URL}/segments/?userId=${currentUser.uid}`
-        );
+      const getUserSegments = await fetch(
+        `${process.env.REACT_APP_MOOCH_API_URL}/segments/?userId=${currentUser.uid}`
+      );
 
-        const getUserSegmentsJson = await getUserSegments.json();
+      const getUserSegmentsJson = await getUserSegments.json();
 
-        setUserInfo({
-          userProfile: getUserInfoJson,
-          userStats: getUserStatsJson,
-          userSegments: getUserSegmentsJson,
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getUserData();
+      setUserInfo({
+        userProfile: getUserInfoJson,
+        userStats: getUserStatsJson,
+        userSegments: getUserSegmentsJson,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }, [currentUser.uid]);
-  console.log('render');
-  console.log(userInfo);
+
+  useEffect(() => {
+    getUserData();
+  }, [getUserData]);
 
   return (
     <>
@@ -74,14 +67,14 @@ const Dashboard = () => {
         {window.screen.width > 820 ? (
           <DesktopDashboard
             userInfoProps={userInfo}
-            setUserInfoProps={setUserInfo}
             uidProps={currentUser.uid}
+            getUserDataProps={getUserData}
           />
         ) : (
           <MobileDashboard
             userInfoProps={userInfo}
-            setUserInfoProps={setUserInfo}
             uidProps={currentUser.uid}
+            getUserDataProps={getUserData}
           />
         )}
       </main>
