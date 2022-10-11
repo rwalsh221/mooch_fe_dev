@@ -27,8 +27,9 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
     />
   ) : null;
 
-  const userSegmentContent = userInfoProps
-    ? userInfoProps.userSegments.map((el, index) => (
+  const userSegmentContent = userInfoProps ? (
+    userInfoProps.userSegments.length !== 0 ? (
+      userInfoProps.userSegments.map((el, index) => (
         <SegmentSnapshotSmall
           segmentNameProps={el[0].name}
           cityProps={el[0].city}
@@ -44,7 +45,10 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
           key={index}
         />
       ))
-    : null;
+    ) : (
+      <SegmentSnapshotSmall newUserProps={true} />
+    )
+  ) : null;
 
   return (
     <section className={classes.dashboard}>
