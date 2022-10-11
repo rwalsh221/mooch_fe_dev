@@ -63,7 +63,13 @@
   margin-right: var(--margin-100);
 }
 
-@media screen and (max-width: 412px) {
+@media screen and (max-width: 820px) {
+  .footer {
+    padding-left: var(--padding-500);
+  }
+}
+
+@media screen and (max-width: 600px) {
   .footer_container {
     grid-template-columns: 1fr;
   }

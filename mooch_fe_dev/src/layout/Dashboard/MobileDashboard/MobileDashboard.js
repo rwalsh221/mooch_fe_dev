@@ -32,21 +32,30 @@ const MobileDashboard = ({ userInfoProps, setUserInfoProps, uidProps }) => {
     </>
   ) : null;
 
-  const yourSegmentsContent = userInfoProps
-    ? userInfoProps.userSegments.map((el, index) => (
-        <SegmentSnapshotSmall
-          segmentNameProps={el[0].name}
-          cityProps={el[0].city}
-          stateProps={el[0].state}
-          distanceProps={el[0].distance}
-          komProps={el[0].kom}
-          leaderboardProps={el.segmentTimes}
-          uidProps={uidProps}
-          userImgProps={userInfoProps.userProfile[0].profileImgUrl}
-          key={index}
-        />
-      ))
-    : null;
+  const yourSegmentsContent = userInfoProps ? (
+    <>
+      <StravaSyncBtn
+        uidProps={uidProps}
+        userInfoProps={userInfoProps}
+        setUserInfoProps={setUserInfoProps}
+      />
+      <div className={classes.md_content_grid}>
+        {userInfoProps.userSegments.map((el, index) => (
+          <SegmentSnapshotSmall
+            segmentNameProps={el[0].name}
+            cityProps={el[0].city}
+            stateProps={el[0].state}
+            distanceProps={el[0].distance}
+            komProps={el[0].kom}
+            leaderboardProps={el.segmentTimes}
+            uidProps={uidProps}
+            userImgProps={userInfoProps.userProfile[0].profileImgUrl}
+            key={index}
+          />
+        ))}
+      </div>
+    </>
+  ) : null;
 
   console.log(mdContent);
   const setMdContentHandler = (content) => {

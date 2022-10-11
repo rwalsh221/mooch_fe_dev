@@ -18,10 +18,16 @@
 @media screen and (max-width: 820px) {
   .strava_sync_btn {
     margin: 0 auto;
+    position: sticky;
+    top: 10rem;
+    z-index: 2000;
   }
 
   /* .strava_sync_btn:hover {
     background-color: var(--primary-color-green-600);
     scale: 1.01;
   } */
+}
+
+@media screen and (max-width: 5px) {
 }

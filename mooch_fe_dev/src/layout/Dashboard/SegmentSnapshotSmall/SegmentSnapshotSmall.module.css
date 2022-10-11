@@ -159,3 +159,9 @@
     font-size: 1.8rem;
   }
 }
+
+@media screen and (max-width: 820px) {
+  .segment_snapshot_sml {
+    width: 90%;
+  }
+}
