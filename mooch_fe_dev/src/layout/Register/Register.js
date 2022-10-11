@@ -6,6 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
+import SignUpHelp from './SignUpHelp/SignUpHelp';
 // ASSETS
 import forestBackground from '../../assets/img/forest_bg.jpg';
 
@@ -14,6 +15,8 @@ const Register = () => {
     signIn: false,
     signUp: true,
   });
+
+  const [needHelp, setNeedHelp] = useState(false);
 
   const formContentHandler = () => {
     const stateCopy = { ...registerFormContent };
@@ -29,6 +32,11 @@ const Register = () => {
     setRegisterFormContent({ ...stateCopy });
   };
 
+  const needHelpHandler = () => {
+    const needHelpStatus = needHelp;
+    setNeedHelp(!needHelpStatus);
+  };
+
   return (
     <div className={classes.register_grid}>
       <Header />
@@ -36,6 +44,7 @@ const Register = () => {
         <h2 className={classes.register_secondary_heading}>
           The #1 app for mooching about
         </h2>
+        {needHelp && <SignUpHelp needHelpHandlerProps={needHelpHandler} />}
         <div className={classes.register_form__container}>
           <div
             className={`${classes.sign_up_card} ${classes.register_form__content}`}
@@ -50,7 +59,10 @@ const Register = () => {
               <SignIn formContentHandlerProps={formContentHandler} />
             )}
             {registerFormContent.signUp && (
-              <SignUp formContentHandlerProps={formContentHandler} />
+              <SignUp
+                formContentHandlerProps={formContentHandler}
+                needHelpHandlerProps={needHelpHandler}
+              />
             )}
           </div>
           <div className={classes.register_form__img}>

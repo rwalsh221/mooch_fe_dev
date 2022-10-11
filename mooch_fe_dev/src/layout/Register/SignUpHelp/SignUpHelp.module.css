@@ -1,0 +1,27 @@
+.help {
+  background-color: var(--primary-color-green-200);
+  border: 2px solid black;
+
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  padding: var(--margin-400);
+}
+
+.help div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: var(--margin-200);
+}
+
+.help ol {
+  list-style: none;
+}
+
+.alert {
+  color: red;
+}

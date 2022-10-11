@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import { useAuth } from '../../../contexts/AuthContext';
 
-const SignUp = ({ formContentHandlerProps }) => {
+const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -128,6 +128,9 @@ const SignUp = ({ formContentHandlerProps }) => {
           here
         </span>
       </p>
+      <button className={classes.help_btn} onClick={needHelpHandlerProps}>
+        Need Help Signing Up?
+      </button>
     </>
   );
 };
