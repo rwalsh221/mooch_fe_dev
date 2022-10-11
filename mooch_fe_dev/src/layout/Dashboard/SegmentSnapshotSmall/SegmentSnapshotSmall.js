@@ -30,7 +30,7 @@ const SegmentSnapshotSmall = ({
     );
   } else {
     const elevationGain =
-      avgGradeProps.indexOf('-') === -1
+      avgGradeProps.toString().indexOf('-') === -1 //avggradeprops is number
         ? elevationHighProps - elevationLowProps
         : elevationLowProps - elevationHighProps;
 
