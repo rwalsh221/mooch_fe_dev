@@ -38,3 +38,9 @@
 .stat_container {
   text-align: center;
 }
+
+@media screen and (max-width: 820px) {
+  .user_stats {
+    margin: var(--margin-100) auto var(--margin-100) auto;
+  }
+}

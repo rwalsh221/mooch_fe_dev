@@ -45,26 +45,24 @@ const DesktopDashboard = ({ userInfoProps, uidProps, setUserInfoProps }) => {
     : null;
 
   return (
-    <>
-      <section className={classes.dashboard}>
-        <div data-wrapper="max-content-width">
-          <div className={classes.dashboard_container}>
-            <div className={classes.dashboard_user}>
-              {userInfoContent}
-              {userStatsContent}
-              <StravaSyncBtn
-                uidProps={uidProps}
-                userInfoProps={userInfoProps}
-                setUserInfoProps={setUserInfoProps}
-              />
-            </div>
-            <div className={classes.dashboard_segment_leaderboard}>
-              {userSegmentContent}
-            </div>
+    <section className={classes.dashboard}>
+      <div data-wrapper="max-content-width">
+        <div className={classes.dashboard_container}>
+          <div className={classes.dashboard_user}>
+            {userInfoContent}
+            {userStatsContent}
+            <StravaSyncBtn
+              uidProps={uidProps}
+              userInfoProps={userInfoProps}
+              setUserInfoProps={setUserInfoProps}
+            />
+          </div>
+          <div className={classes.dashboard_segment_leaderboard}>
+            {userSegmentContent}
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

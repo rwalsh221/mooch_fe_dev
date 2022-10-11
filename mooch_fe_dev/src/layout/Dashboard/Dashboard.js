@@ -6,6 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import DesktopDashboard from './DesktopDashboard/DesktopDashboard';
+import MobileDashboard from './MobileDashboard/MobileDashboard';
 import UserInfo from './UserInfo/UserInfo';
 import UserStats from './UserStats/UserStats';
 import ActivityCard from './ActivityCard/ActivityCard';
@@ -25,7 +26,7 @@ import StravaSyncBtn from './StravaSyncBtn/StravaSyncBtn';
 
 // add loading info to sync with strava button
 
-// adjust layout so all inline on left side
+// adjust layout so all inline on left side. *done*
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -65,16 +66,26 @@ const Dashboard = () => {
 
     getUserData();
   }, [currentUser.uid]);
+  console.log('render');
+  console.log(userInfo);
 
   return (
     <>
       <Header />
       <main className={classes.dashboard}>
-        <DesktopDashboard
-          userInfoProps={userInfo}
-          setUserInfoProps={setUserInfo}
-          uidProps={currentUser.uid}
-        />
+        {window.screen.width > 820 ? (
+          <DesktopDashboard
+            userInfoProps={userInfo}
+            setUserInfoProps={setUserInfo}
+            uidProps={currentUser.uid}
+          />
+        ) : (
+          <MobileDashboard
+            userInfoProps={userInfo}
+            setUserInfoProps={setUserInfo}
+            uidProps={currentUser.uid}
+          />
+        )}
       </main>
       <Footer />
     </>

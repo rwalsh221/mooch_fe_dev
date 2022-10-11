@@ -59,3 +59,15 @@
 .user_stats_content {
   font-size: 1.8rem;
 }
+
+@media screen and (max-width: 820px) {
+  .user_info {
+    background-color: var(--primary-color-green-100);
+    margin: var(--margin-100) auto var(--margin-100) auto;
+    width: 80%;
+  }
+
+  .user_stats {
+    margin: var(--margin-100) auto var(--margin-100) auto;
+  }
+}

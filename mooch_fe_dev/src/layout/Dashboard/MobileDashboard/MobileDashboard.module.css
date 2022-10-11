@@ -1,0 +1,34 @@
+.md_dashboard {
+  background-color: var(--primary-color-green-200);
+  padding: var(--padding-200) 0;
+}
+
+.md_container {
+  min-height: 70vh;
+  width: 90%;
+  margin: 0 auto;
+  padding-right: calc(var(--padding-100) * 6);
+}
+
+.md_nav {
+  width: 30rem;
+
+  margin: 0 auto var(--margin-300) auto;
+}
+
+.md_btn {
+  background-color: var(--primary-color-green-100);
+  border: 2px solid var(--primary-color-green-800);
+  width: 50%;
+  padding: 2rem 0;
+  font-weight: bold;
+}
+
+.md_btn:first-of-type {
+  /* background-color: hotpink; */
+  border-top-left-radius: 2rem;
+}
+
+.md_btn:last-of-type {
+  border-bottom-right-radius: 2rem;
+}
