@@ -12,9 +12,7 @@ import UserStats from './UserStats/UserStats';
 import ActivityCard from './ActivityCard/ActivityCard';
 import StravaSyncBtn from './StravaSyncBtn/StravaSyncBtn';
 
-// import http from '../../../http/response/';
-
-// add mobile nav and make responsive
+// add mobile nav and make responsive *done*
 
 // add logout btn to header
 
