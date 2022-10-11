@@ -9,11 +9,17 @@
   grid-template-columns: 1fr 2fr 1fr;
   min-height: 70vh;
   width: 90%;
-  /* margin: 0 auto; */
+  margin-right: auto;
 }
 
 .dashboard_segment_leaderboard {
   display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1700px) {
+  .dashboard_container {
+    width: 95%;
+  }
 }

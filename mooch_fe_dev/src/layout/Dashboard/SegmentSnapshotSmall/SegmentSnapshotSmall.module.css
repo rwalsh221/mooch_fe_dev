@@ -147,3 +147,15 @@
 .leaderboard_all__time {
   margin-right: calc(var(--margin-100) * 2.5);
 }
+
+@media screen and (max-width: 1650px) {
+  .segment_snapshot_sml h2 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .segment_snapshot_sml h2 {
+    font-size: 1.8rem;
+  }
+}
