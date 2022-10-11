@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import DesktopDashboard from './DesktopDashboard/DesktopDashboard';
 import UserInfo from './UserInfo/UserInfo';
 import UserStats from './UserStats/UserStats';
 import ActivityCard from './ActivityCard/ActivityCard';
@@ -12,24 +13,34 @@ import StravaSyncBtn from './StravaSyncBtn/StravaSyncBtn';
 
 // import http from '../../../http/response/';
 
+// add mobile nav and make responsive
+
+// add logout btn to header
+
+// need elev gain on segment card
+
+// add sport switch func for icon on segment card
+
+// refactor sync mooch starva func and add get segment cards
+
+// add loading info to sync with strava button
+
+// adjust layout so all inline on left side
+
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState(null);
 
-  const { signUp, currentUser } = useAuth();
+  const { currentUser } = useAuth();
 
-  console.log(userInfo);
   useEffect(() => {
     const getUserData = async () => {
-      console.log(
-        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/?userId=${currentUser.uid}`
-      );
       try {
         const getUserInfo = await fetch(
           `${process.env.REACT_APP_MOOCH_API_URL}/athlete/?userId=${currentUser.uid}`
         );
 
         const getUserInfoJson = await getUserInfo.json();
-        console.log(getUserInfoJson);
+
         const getUserStats = await fetch(
           `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/?userId=${currentUser.uid}`
         );
@@ -52,79 +63,18 @@ const Dashboard = () => {
       }
     };
 
-    const getUserSegmentData = async () => {
-      try {
-        // console.log(getUserSegmentsJson);
-      } catch (error) {}
-    };
-
     getUserData();
-    getUserSegmentData();
   }, [currentUser.uid]);
-
-  const userInfoContent = userInfo ? (
-    <UserInfo
-      userImgProps={userInfo.userProfile[0].profileImgUrl}
-      firstnameProps={userInfo.userProfile[0].firstName}
-      lastnameProps={userInfo.userProfile[0].lastName}
-    />
-  ) : null;
-
-  const userStatsContent = userInfo ? (
-    <UserStats
-      rideYearProps={parseInt(userInfo.userStats[0].rideYearDist)}
-      rideAllProps={parseInt(userInfo.userStats[0].rideAllTimeDist)}
-      runYearProps={parseInt(userInfo.userStats[0].runYearDist)}
-      runAllProps={parseInt(userInfo.userStats[0].runAllTimeDist)}
-      swimYearProps={parseInt(userInfo.userStats[0].swimYearDist)}
-      swimAllProps={parseInt(userInfo.userStats[0].swimAllTimeDist)}
-    />
-  ) : null;
-
-  const userSegmentContentArray = [];
-  const userSegmentContent = userInfo
-    ? userInfo.userSegments.map((el) => (
-        <SegmentSnapshotSmall
-          segmentNameProps={el[0].name}
-          cityProps={el[0].city}
-          stateProps={el[0].state}
-          distanceProps={el[0].distance}
-          komProps={el[0].kom}
-          leaderboardProps={el.segmentTimes}
-          uidProps={currentUser.uid}
-          userImgProps={userInfo.userProfile[0].profileImgUrl}
-        />
-      ))
-    : null;
-
-  console.log(userSegmentContent);
 
   return (
     <>
       <Header />
       <main className={classes.dashboard}>
-        <div
-          className={classes.dashboard_container}
-          data-wrapper="max-content-width"
-        >
-          <div className={classes.dashboard_user}>
-            {userInfoContent}
-            {userStatsContent}
-            <StravaSyncBtn
-              uidProps={currentUser.uid}
-              userInfoProps={userInfo}
-              setUserInfoProps={setUserInfo}
-            />
-          </div>
-          <div className={classes.dashboard_segment_leaderboard}>
-            {userSegmentContent}
-          </div>
-          <div className={classes.dashboard_segments}>
-            {/* <SegmentSnapshotSmall />
-            <SegmentSnapshotSmall />
-            <SegmentSnapshotSmall /> */}
-          </div>
-        </div>
+        <DesktopDashboard
+          userInfoProps={userInfo}
+          setUserInfoProps={setUserInfo}
+          uidProps={currentUser.uid}
+        />
       </main>
       <Footer />
     </>

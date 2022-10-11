@@ -22,7 +22,7 @@ const SegmentSnapshotSmall = ({
   <div className={classes.segment_snapshot_sml}>
     <h2>{segmentNameProps}</h2>
     <p>
-      {cityProps}&amp;{stateProps}
+      {cityProps},&nbsp;{stateProps}
     </p>
     <div className={classes.segment_info}>
       <div>
@@ -84,15 +84,13 @@ const SegmentSnapshotSmall = ({
           </p>
         </div>
         <ol>
-          {Object.keys(leaderboardProps).map((el) => {
-            secondsToMinutes(572);
-            console.log(distanceProps);
-            console.log(el);
+          {Object.keys(leaderboardProps).map((el, index) => {
             return (
               <SegmentSnapshotLeaderboard
                 athleteNameProps={leaderboardProps[el].name}
                 athleteTimeProps={leaderboardProps[el].time}
                 segmentDistanceProps={distanceProps}
+                key={index}
               />
             );
           })}
