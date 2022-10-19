@@ -5,7 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 
-const Header = () => {
+const Header = ({ signOutProps }) => {
   const navigate = useNavigate();
   const { signOut } = useAuth();
   const handleSignOut = async () => {
@@ -23,7 +23,12 @@ const Header = () => {
           <h1 className={classes.heading} data-heading={'logo'}>
             MoOCH
           </h1>
-          <ButtonGreen contentProps={'Sign Out'} onClickProps={handleSignOut} />
+          {signOutProps && (
+            <ButtonGreen
+              contentProps={'Sign Out'}
+              onClickProps={handleSignOut}
+            />
+          )}
         </div>
       </div>
     </header>

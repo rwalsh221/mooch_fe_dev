@@ -34,6 +34,8 @@ const SegmentSnapshotSmall = ({
         ? elevationHighProps - elevationLowProps
         : elevationLowProps - elevationHighProps;
 
+    console.log(leaderboardProps);
+
     return (
       <div className={classes.segment_snapshot_sml}>
         <h2>{segmentNameProps}</h2>
@@ -101,11 +103,13 @@ const SegmentSnapshotSmall = ({
             </div>
             <ol>
               {Object.keys(leaderboardProps).map((el, index) => {
+                console.log(el);
                 return (
                   <SegmentSnapshotLeaderboard
                     athleteNameProps={leaderboardProps[el].name}
                     athleteTimeProps={leaderboardProps[el].time}
                     segmentDistanceProps={distanceProps}
+                    leaderboardPositionProps={index + 1}
                     key={index}
                   />
                 );

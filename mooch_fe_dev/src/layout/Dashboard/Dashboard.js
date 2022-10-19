@@ -21,6 +21,9 @@ import MobileDashboard from './MobileDashboard/MobileDashboard';
 
 // adjust layout so all inline on left side. *done*
 
+// TODO: look at error when sign in failed.
+// TODO: add fastest user img to segment card. need to get from backend
+
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState(null);
 
@@ -62,7 +65,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Header />
+      <Header signOutProps={true} />
       <main className={classes.dashboard}>
         {window.screen.width > 820 ? (
           <DesktopDashboard

@@ -1,6 +1,6 @@
 .leaderboard {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr repeat(3, 2fr);
   justify-items: center;
   column-gap: 5px;
   margin-bottom: 5px;
