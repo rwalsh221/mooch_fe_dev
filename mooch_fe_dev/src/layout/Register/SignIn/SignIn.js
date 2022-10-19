@@ -9,7 +9,7 @@ const SignIn = ({ formContentHandlerProps }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { signIn } = useAuth();
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -25,15 +25,20 @@ const SignIn = ({ formContentHandlerProps }) => {
     } catch (error) {
       setError('failed to sign in');
       console.error(error.message);
+      setTimeout(() => {
+        setLoading(false);
+        setError('');
+      }, 5000);
     }
   };
+
+  const errorMessage = <p>{error}</p>;
 
   return (
     <>
       <h3 className={classes.register_card__heading}>
-        Login to Your MoOch Accout
+        Login to Your MoOch Account
       </h3>
-      <p>{error}</p>
       <form data-margin-bottom={'300'} onSubmit={handleSubmit}>
         <input
           type="email"
@@ -57,7 +62,10 @@ const SignIn = ({ formContentHandlerProps }) => {
           ref={passwordRef}
         />
         <br />
-        <ButtonGreen contentProps={'login'} disabledProps={loading} />
+        <div className={classes.login_btn_container}>
+          <ButtonGreen contentProps={'login'} disabledProps={loading} />
+          {error && errorMessage}
+        </div>
       </form>
       <p>
         Need an account? Sign Up&nbsp;
@@ -65,8 +73,10 @@ const SignIn = ({ formContentHandlerProps }) => {
           here
         </span>
       </p>
-      <p>Forgot your password? reset your password</p>{' '}
-      <Link to="/forgot-password">here</Link>
+      <p>
+        Forgot your password? reset your password&nbsp;
+        <Link to="/forgot-password">here</Link>
+      </p>
     </>
   );
 };
