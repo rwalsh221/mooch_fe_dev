@@ -6,11 +6,6 @@ import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import { useAuth } from '../../../contexts/AuthContext';
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
-  // TODO: replace localstorage with session storage
-  // TODO: redirect to link wit starva after succedsfull firbase sign up
-  // TODO: add error component from sign in. need to make a new error component
-  // TODO: create input componet
-  // TODO: test
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -27,6 +22,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const setSignUpLocalStorage = () => {
     const data = {
       email: emailRef.current.value,
+      password: passwordRef.current.value,
       clientId: clientIdRef.current.value,
       clientSecret: clientSecretRef.current.value,
       accessToken: accessTokenRef.current.value,
@@ -48,7 +44,9 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
       setLoading(true);
       await signUp(emailRef.current.value, passwordRef.current.value);
       setSignUpLocalStorage();
-      navigate('/register-confirm');
+      window.location
+        .replace(`https://www.strava.com/oauth/authorize?client_id=${clientIdRef.current.value}&redirect_uri=${process.env.REACT_APP_MOOCH_URL}/register-confirm&response_type=code&scope=activity:read_all
+    `);
     } catch (error) {
       setError('Failed to create an account');
       console.error(error.message);

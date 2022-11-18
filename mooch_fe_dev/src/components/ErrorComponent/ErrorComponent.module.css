@@ -1,0 +1,9 @@
+.error_component {
+  margin-left: 5rem;
+  background-color: red;
+  padding: var(--padding-100);
+  border-radius: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--secondary-color-white);
+}

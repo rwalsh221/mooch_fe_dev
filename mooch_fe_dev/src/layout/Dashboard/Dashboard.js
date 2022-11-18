@@ -21,8 +21,13 @@ import MobileDashboard from './MobileDashboard/MobileDashboard';
 
 // adjust layout so all inline on left side. *done*
 
-// TODO: look at error when sign in failed.
+// TODO: look at error when sign in failed. *done*
 // TODO: add fastest user img to segment card. need to get from backend
+// TODO: look at backend headers
+// TODO: ADD ERROR COMPONENT
+// TODO: ADD PRIVATE ROUTES
+
+// TODO: DELETE USER FROM FIREBASE IF CANCEL ON MO ST SYNC OR FAILED SIGNUP firebase.auth().currentUser.delete()
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState(null);

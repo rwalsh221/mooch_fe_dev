@@ -4,6 +4,7 @@ import classes from '../Register.module.css';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
+import ErrorComponent from '../../../components/ErrorComponent/ErrorComponet';
 
 const SignIn = ({ formContentHandlerProps }) => {
   const emailRef = useRef();
@@ -31,8 +32,6 @@ const SignIn = ({ formContentHandlerProps }) => {
       }, 5000);
     }
   };
-
-  const errorMessage = <p>{error}</p>;
 
   return (
     <>
@@ -64,7 +63,7 @@ const SignIn = ({ formContentHandlerProps }) => {
         <br />
         <div className={classes.login_btn_container}>
           <ButtonGreen contentProps={'login'} disabledProps={loading} />
-          {error && errorMessage}
+          {error && <ErrorComponent errorMessageProps={error} />}
         </div>
       </form>
       <p>

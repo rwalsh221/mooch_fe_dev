@@ -1,9 +1,22 @@
 # TEST ROUTE RETURNS IPSUM JSON
 # GET http://localhost/mooch_be_dev/test/
 
+#receive  user UID, client secret, client id, access token, refresh token and email from front end. = $signUpData
+
+POST  http://localhost/mooch_be_dev/test/register/ HTTP/1.1
+content-type: application/json
+
+{
+    "uid": "uid",
+    "clientId":"94702",
+    "clientSecret": "cc7de5dea65e248c912898647081be8a10bc2291",
+    "accessToken":"00e51adab59e1abbd42e5268ed8da009e0609b12",
+    "refreshToken": "a7db2e02eb8937e226988d6f8b9ce9b3553bcb29",
+    "email":"kirbyRestClient@email.com"
+}
 
 # GET LOGGED IN ATHLETE
-# GET http://localhost/mooch_be_dev/athlete/
+# GET http://localhost/mooch_be_dev/athlete?access_token=1da75f8673be643e45fae77eebe26cc142729df2
 
 #GET LOGGED IN ATHLETE STATS
 # GET http://localhost/mooch_be_dev/athlete/stats
@@ -11,11 +24,23 @@
 # https://www.strava.com/oauth/authorize?client_id=94702&redirect_uri=http://localhost&response_type=code&scope=activity:read_all
 # POST https://www.strava.com/oauth/token?client_id=94702&client_secret=cc7de5dea65e248c912898647081be8a10bc2291&code=6a623e237e00995b9199c9980bace6bd7fcd206e&grant_type=authorization_code
 
-# GET https://www.strava.com/api/v3/athlete/activities?access_token=880f74323a602f806ea196e7a84dc3a4b4c11514 HTTP/1.1
+# GET https://www.strava.com/api/v3/athlete/activities?access_token=5afab1230d183b55231bf3a8c36a0a107e3fd835 HTTP/1.1
 
-# GET https://www.strava.com/api/v3/athlete/activities?access_token=e8ad7dec6ea32261b2a4544810492c0d2bb73997
+# GET https://www.strava.com/api/v3/athlete/activities?access_token=b4cfde92da59a7e511091ccd114e4e592102e491
 
 # GET https://www.strava.com/api/v3/activities/7909207130?access_token=e8ad7dec6ea32261b2a4544810492c0d2bb73997
 
-GET https://www.strava.com/api/v3/segments/16114367
-?access_token=73d5b61e2a0a9ace0f38cc781754c571b7f03015
+# GET https://www.strava.com/api/v3/segments/16114367?access_token=49c0612ebd05d23394f6a3b1f9c2f97f8949a526
+
+# GET "https://www.strava.com/api/v3/athlete" "Authorization: Bearer 1da75f8673be643e45fae77eebe26cc142729df2"
+
+# GET https://www.strava.com/api/v3/athletes/108854991/stats?access_token=49c0612ebd05d23394f6a3b1f9c2f97f8949a526
+# GET https://www.strava.com/api/v3/athlete?access_token=49c0612ebd05d23394f6a3b1f9c2f97f8949a526
+
+
+# POST REQUEST FOR GETTING REFRESH TOKEN ALOS RETURNS TOKEN EXIPIRY TIME FOR SIGNUP
+# POST https://www.strava.com/api/v3/oauth/token?client_id=94702&client_secret=cc7de5dea65e248c912898647081be8a10bc2291&grant_type=refresh_token&refresh_token=a7db2e02eb8937e226988d6f8b9ce9b3553bcb29
+
+
+
+# 49c0612ebd05d23394f6a3b1f9c2f97f8949a526 auth token
