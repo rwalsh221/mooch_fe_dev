@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import classes from '../Register.module.css';
 
+import { useAuth } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
-import { useAuth } from '../../../contexts/AuthContext';
+import ErrorComponent from '../../../components/ErrorComponent/ErrorComponet';
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage
@@ -11,6 +12,8 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: add error component from sign in. need to make a new error component
   // TODO: create input componet
   // TODO: test
+  // TODO: ADD FORM VALIDATION
+  // TODO: FORM REF OR STATE
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -36,22 +39,34 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
     console.log(localStorage);
   };
 
+  const clearForm = (...refs) => {
+    refs.forEach((el) => {
+      el.current.value = '';
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Passwords do not match');
-    }
-
     try {
+      if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+        clearForm(passwordRef, passwordConfirmRef);
+        throw new Error('Passwords do not match');
+      }
+
       setError('');
       setLoading(true);
       await signUp(emailRef.current.value, passwordRef.current.value);
       setSignUpLocalStorage();
       navigate('/register-confirm');
     } catch (error) {
-      setError('Failed to create an account');
-      console.error(error.message);
+      if (error.name === 'FirebaseError') {
+        setError('Failed to create an account');
+      }
+      setError(error.message);
+
+      setTimeout(() => {
+        setError('');
+      }, 5000);
     }
     setLoading(false);
   };
@@ -66,7 +81,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
       <h3 className={classes.register_card__heading}>
         Create your MoOCH Account
       </h3>
-      <p>{error}</p>
+
       <form onSubmit={handleSubmit}>
         <h4>User Account Information</h4>
         <input
@@ -121,8 +136,10 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           required
           ref={accessTokenRef}
         />
-        <br />
-        <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
+        <div className={classes.form_btn_container}>
+          <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
+          {error && <ErrorComponent errorMessageProps={error} />}
+        </div>
       </form>
       <p>
         Have an account? Sign In&nbsp;

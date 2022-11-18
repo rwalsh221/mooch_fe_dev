@@ -112,12 +112,11 @@ input[name='register-client-id'] {
   border-radius: 1rem;
 }
 
-.login_btn_container {
+.form_btn_container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-
 
 @media screen and (max-width: 1080px) {
   .register_form__container {
