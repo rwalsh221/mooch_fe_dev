@@ -8,12 +8,17 @@ import ErrorComponent from '../../../components/ErrorComponent/ErrorComponet';
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage
-  // TODO: redirect to link wit starva after succedsfull firbase sign up
-  // TODO: add error component from sign in. need to make a new error component
-  // TODO: create input componet
+  // TODO: 1, set session storage with strava data, 2, signup to firebase, 3, redirect reg confirm to set mooch db with starva data,FAIL rdiect to error compnent
+
+  // TODO: add error component from sign in to signup.
+  // TODO:  need to make a new error component - for dashboard access when not signed in
+
+  // TODO: Add github link to footer
+  // TODO: create input componet for form
   // TODO: test
   // TODO: ADD FORM VALIDATION
   // TODO: FORM REF OR STATE
+  // TODO: style form like google - look at autocomplete
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();

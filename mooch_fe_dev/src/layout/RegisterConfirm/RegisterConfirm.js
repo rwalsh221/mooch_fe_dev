@@ -1,15 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 import Header from '../../components/Header/Header';
 import classes from './RegisterConfirm.module.css';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Layout/Card/Card';
+import ErrorComponent from '../../components/ErrorComponent/ErrorComponet';
 import Footer from '../../components/Footer/Footer';
 
 import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
+  const [userPreviewState, setUserPreviewAState] = useState({
+    error: false,
+    loading: true,
+  });
+  console.log(userPreviewState);
+  // let profileCardContent = 'LOADING SPINNER';
+  const getUserPreview = useCallback(async () => {
+    let moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
+    console.log(moochLocalStorage);
+
+    try {
+      if (moochLocalStorage === null) {
+        throw new Error('Error');
+      }
+
+      const getUser = await fetch(
+        'https://www.strava.com/api/v3/athlete?access_token=a5605fb3b41265dfcc5af099553f7880f59f627a'
+      );
+      const getUserResponse = await getUser.json();
+      console.log(getUserResponse);
+      const userPreviewStateCopy = {};
+
+      userPreviewStateCopy.img = getUserResponse.profile_medium;
+      userPreviewStateCopy.firstName = getUserResponse.firstname;
+      userPreviewStateCopy.lastName = getUserResponse.lastname;
+      userPreviewStateCopy.loading = false;
+
+      setUserPreviewAState({ ...userPreviewStateCopy });
+    } catch (error) {
+      const userPreviewStateCopy = {};
+      userPreviewStateCopy.error = true;
+      userPreviewStateCopy.loading = false;
+
+      setUserPreviewAState({ ...userPreviewStateCopy });
+      console.error(error);
+    }
+  }, []);
+
+  // getUserPreview();
+
+  useEffect(() => {
+    getUserPreview();
+  }, [getUserPreview]);
+
   const { currentUser } = useAuth();
   console.log(currentUser);
   const navigate = useNavigate();
@@ -55,6 +100,39 @@ const RegisterConfirm = () => {
     navigate('/dashboard');
   };
 
+  const setProfileCardContent = (state) => {
+    if (state.loading) {
+      return 'LOADING SPINNER';
+    } else if (state.error) {
+      return <ErrorComponent errorMessageProps={'SIGNUP ERROR'} />;
+    } else {
+      return (
+        <>
+          <div className={classes.profile_img_container}>
+            <img src={userPreviewState.img} alt="user profile"></img>
+          </div>
+          <div className={classes.confirm_card_container}>
+            <p>
+              Ready to link&nbsp;
+              <span data-heading={'logo-small'}>MoOCH</span>&nbsp;&amp;&nbsp;
+              <span className={classes.strava}>STRAVA</span>
+            </p>
+            <p>
+              {userPreviewState.firstName} {userPreviewState.lastName} please
+              complete your account setup
+            </p>
+            <ButtonGreen
+              contentProps={'Complete Sign Up'}
+              onClickProps={registerHandler}
+            />
+          </div>
+        </>
+      );
+    }
+  };
+
+  const profileCardContent = setProfileCardContent(userPreviewState);
+
   return (
     <>
       <Header />
@@ -63,20 +141,14 @@ const RegisterConfirm = () => {
         data-wrapper="max-content-width"
       >
         <div className={classes.register_confirm_container}>
-          <Card>
-            <div className={classes.confirm_card_container}>
-              <p>
-                <span data-heading={'logo-small'}>MoOCH</span>&nbsp;&amp;&nbsp;
-                <span className={classes.strava}>STRAVA</span>&nbsp; account
-                link complete
-              </p>
-              <p>{currentUser.email}&nbsp;please complete your account setup</p>
-              <ButtonGreen
-                contentProps={'Complete Sign Up'}
-                onClickProps={registerHandler}
-              />
-            </div>
-          </Card>
+          {/* <Card
+            widthProps={'25%'}
+            marginProps={'var(--margin-100) 0'}
+            className={classes.user_preview_card}
+          >
+            {profileCardContent}
+          </Card> */}
+          <Card>{profileCardContent}</Card>
         </div>
       </main>
       <Footer />

@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   display: flex;
   background-color: var(--primary-color-green-100);
   margin: var(--margin-200) auto;
