@@ -28,7 +28,7 @@ const RegisterConfirm = () => {
       }
 
       const getUser = await fetch(
-        'https://www.strava.com/api/v3/athlete?access_token=a5605fb3b41265dfcc5af099553f7880f59f627a'
+        'https://www.strava.com/api/v3/athlete?access_token=40e7cb156a0def644050943a75fae70bd3a10bc6'
       );
 
       if (getUser.status !== 200) {
@@ -120,18 +120,27 @@ const RegisterConfirm = () => {
           </div>
           <div className={classes.confirm_card_container}>
             <p>
+              <span>{userPreviewState.firstName}</span>&nbsp;
+              <span>{userPreviewState.lastName}</span>
+            </p>
+            <p>
               Ready to link&nbsp;
               <span data-heading={'logo-small'}>MoOCH</span>&nbsp;&amp;&nbsp;
               <span className={classes.strava}>STRAVA</span>
             </p>
-            <p>
-              {userPreviewState.firstName} {userPreviewState.lastName} please
-              complete your account setup
-            </p>
-            <ButtonGreen
-              contentProps={'Complete Sign Up'}
-              onClickProps={registerHandler}
-            />
+            <p>please complete your account setup</p>
+            <div className={classes.confirm_card_btn_container}>
+              <ButtonGreen
+                contentProps={'Complete'}
+                onClickProps={registerHandler}
+              />
+              <ButtonGreen
+                contentProps={'Cancel'}
+                onClickProps={() => {
+                  navigate('/');
+                }}
+              />
+            </div>
           </div>
         </Card>
       );
