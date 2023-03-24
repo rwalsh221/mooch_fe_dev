@@ -23,12 +23,18 @@ const RegisterConfirm = () => {
 
     try {
       if (moochLocalStorage === null) {
+        console.log('mooch locoal storage null');
         throw new Error('Error');
       }
 
       const getUser = await fetch(
         'https://www.strava.com/api/v3/athlete?access_token=a5605fb3b41265dfcc5af099553f7880f59f627a'
       );
+
+      if (getUser.status !== 200) {
+        throw new Error('Error');
+      }
+
       const getUserResponse = await getUser.json();
       console.log(getUserResponse);
       const userPreviewStateCopy = {};
@@ -101,13 +107,14 @@ const RegisterConfirm = () => {
   };
 
   const setProfileCardContent = (state) => {
+    console.log(state);
     if (state.loading) {
-      return 'LOADING SPINNER';
+      return <Card>'LOADING SPINNER'</Card>;
     } else if (state.error) {
       return <ErrorComponent errorMessageProps={'SIGNUP ERROR'} />;
     } else {
       return (
-        <>
+        <Card>
           <div className={classes.profile_img_container}>
             <img src={userPreviewState.img} alt="user profile"></img>
           </div>
@@ -126,7 +133,7 @@ const RegisterConfirm = () => {
               onClickProps={registerHandler}
             />
           </div>
-        </>
+        </Card>
       );
     }
   };
@@ -148,7 +155,7 @@ const RegisterConfirm = () => {
           >
             {profileCardContent}
           </Card> */}
-          <Card>{profileCardContent}</Card>
+          {profileCardContent}
         </div>
       </main>
       <Footer />
