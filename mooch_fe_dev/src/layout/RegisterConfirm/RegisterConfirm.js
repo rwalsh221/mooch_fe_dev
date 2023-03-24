@@ -135,7 +135,7 @@ const RegisterConfirm = () => {
                 onClickProps={registerHandler}
               />
               <ButtonGreen
-                contentProps={'Cancel'}
+                contentProps={'Cancelll'}
                 onClickProps={() => {
                   navigate('/');
                 }}
