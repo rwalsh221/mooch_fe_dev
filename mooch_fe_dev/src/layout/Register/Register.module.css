@@ -10,12 +10,10 @@
   position: relative;
   display: grid;
   grid-template-rows: repeat(2, max-content) auto;
-  /* background-color: var(--secondary-color-white); */
 }
 
 .register_bg_container {
   position: relative;
-  /* z-index: -1; */
 }
 
 .register_secondary_heading {
@@ -116,6 +114,69 @@ input[name='register-client-id'] {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.sign_up_form {
+  position: relative;
+}
+
+.sign_up_form input {
+  padding: calc(var(--padding-100) / 2);
+}
+
+.sign_up_form__input::placeholder {
+  transition: transform 0.3s, color 0.3s;
+  position: absolute;
+}
+
+.sign_up_form input:focus {
+  border: 2px solid #ff4500;
+  outline: 2px solid #ff4500;
+}
+
+[data-form-heading='email'] {
+  --input-heading-small-init-pos-top: 15.3%;
+  --input-heading-small-init-pos-left: 5%;
+  --input-heading-small-end-pos-top: 12.3%;
+  --input-heading-small-end-pos-left: 2%;
+}
+
+[data-form-heading='password'] {
+  --input-heading-small-init-pos-top: 30.3%;
+  --input-heading-small-init-pos-left: 5%;
+  --input-heading-small-end-pos-top: 26%;
+  --input-heading-small-end-pos-left: 2%;
+}
+.input_heading_small {
+  position: absolute;
+  font-size: 1rem;
+
+  top: var(--input-heading-small-init-pos-top);
+  left: var(--input-heading-small-init-pos-left);
+  text-transform: capitalize;
+  background-color: var(--primary-color-green-100);
+  padding: 0 2px;
+  opacity: 0;
+
+  transition: all 0.3s;
+  pointer-events: none;
+  background-color: #ff4500;
+}
+
+.sign_up_form__input:focus + .input_heading_small {
+  opacity: 1;
+  top: var(--input-heading-small-end-pos-top);
+  left: var(--input-heading-small-end-pos-left);
+}
+
+.sign_up_form__input:focus::placeholder {
+  transform: translateY(-15px);
+  color: transparent;
+  content: 'jkjllkj';
+}
+
+.sign_up_form__input::placeholder .sign_up_form__input:active::placeholder {
+  opacity: 0;
 }
 
 @media screen and (max-width: 1080px) {

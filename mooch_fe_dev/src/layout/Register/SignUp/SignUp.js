@@ -87,9 +87,11 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
         Create your MoOCH Account
       </h3>
 
-      <form onSubmit={handleSubmit}>
+      <form className={classes.sign_up_form} onSubmit={handleSubmit}>
         <h4>User Account Information</h4>
+
         <input
+          className={classes.sign_up_form__input}
           type="email"
           id="register-email"
           aria-label="register email"
@@ -98,8 +100,12 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           required
           ref={emailRef}
         />
+        <span className={classes.input_heading_small} data-form-heading="email">
+          email
+        </span>
         <br />
         <input
+          className={classes.sign_up_form__input}
           type="password"
           id="register-password"
           aria-label="password"
@@ -109,6 +115,12 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           required
           ref={passwordRef}
         />
+        <span
+          className={classes.input_heading_small}
+          data-form-heading="password"
+        >
+          password
+        </span>
         <input
           type="password"
           id="register-password-confirm"
