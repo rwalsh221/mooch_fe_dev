@@ -63,12 +63,17 @@
 }
 
 .register_form__content input:last-of-type {
-  margin-bottom: var(--margin-200);
+  /* margin-bottom: var(--margin-200); */
+}
+
+[data-input='register-email'] {
+  width: 100%;
 }
 
 input[name='register-email'],
 input[name='register-access-token'] {
   width: 100%;
+  background-color: #ff4500;
 }
 
 input[name='register-password'],
@@ -78,7 +83,8 @@ input[name='register-client-id'] {
 
 input[name='register-password'],
 input[name='register-password-confirm'] {
-  width: calc(50% - (var(--margin-100) / 2));
+  /* width: calc(50% - (var(--margin-100) / 2)); */
+  width: 50%;
 }
 input[name='register-client-secret'] {
   width: calc(70% - var(--margin-100));

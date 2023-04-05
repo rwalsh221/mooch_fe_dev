@@ -3,6 +3,7 @@ import classes from '../Register.module.css';
 
 import { useAuth } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import ErrorComponent from '../../../components/ErrorComponent/ErrorComponet';
 
@@ -27,6 +28,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const accessTokenRef = useRef();
   const { signUp, currentUser } = useAuth();
   const [error, setError] = useState('');
+  const [emailState, setEmailState] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const emailTest = 'test@test.com';
@@ -48,6 +50,10 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
     refs.forEach((el) => {
       el.current.value = '';
     });
+  };
+
+  const clictest = () => {
+    console.log(emailRef.current.value);
   };
 
   const handleSubmit = async (e) => {
@@ -89,8 +95,17 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
 
       <form className={classes.sign_up_form} onSubmit={handleSubmit}>
         <h4>User Account Information</h4>
-
-        <input
+        <Input
+          inputTypeProps={'email'}
+          inputIdProps={'register-email'}
+          inputAriaLabelProps={'register-email'}
+          inputNameProps={'register-email'}
+          inputPlaceholderProps={'email'}
+          inputRefProps={emailRef}
+          inputStateProps={emailState}
+          updateStateProps={setEmailState}
+        />
+        {/* <input
           className={classes.sign_up_form__input}
           type="email"
           id="register-email"
@@ -103,8 +118,17 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
         <span className={classes.input_heading_small} data-form-heading="email">
           email
         </span>
-        <br />
-        <input
+        <br /> */}
+        {/* <br /> */}
+        <Input
+          inputTypeProps={'password'}
+          inputIdProps={'register-password'}
+          inputAriaLabelProps={'register-password'}
+          inputNameProps={'register-password'}
+          inputPlaceholderProps={'password'}
+          inputRefProps={passwordRef}
+        />
+        {/* <input
           className={classes.sign_up_form__input}
           type="password"
           id="register-password"
@@ -120,8 +144,17 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           data-form-heading="password"
         >
           password
-        </span>
-        <input
+        </span> */}
+        <Input
+          inputTypeProps={'password'}
+          inputIdProps={'register-password-confirm'}
+          inputAriaLabelProps={'confirm password'}
+          inputNameProps={'register-password-confirm'}
+          inputPlaceholderProps={'confirm'}
+          inputRefProps={passwordConfirmRef}
+        />
+        {/* <br /> */}
+        {/* <input
           type="password"
           id="register-password-confirm"
           aria-label="confirm password"
@@ -129,7 +162,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           placeholder="Confirm"
           required
           ref={passwordConfirmRef}
-        />
+        /> */}
         <h4>Strava Api Application Keys</h4>
         <input
           placeholder="Client ID"
