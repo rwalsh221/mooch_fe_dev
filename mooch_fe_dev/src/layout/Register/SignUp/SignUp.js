@@ -92,9 +92,9 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
       <h3 className={classes.register_card__heading}>
         Create your MoOCH Account
       </h3>
-
       <form className={classes.sign_up_form} onSubmit={handleSubmit}>
         <h4>User Account Information</h4>
+        {/* EMAIL */}
         <Input
           inputTypeProps={'email'}
           inputIdProps={'register-email'}
@@ -105,21 +105,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputStateProps={emailState}
           updateStateProps={setEmailState}
         />
-        {/* <input
-          className={classes.sign_up_form__input}
-          type="email"
-          id="register-email"
-          aria-label="register email"
-          name="register-email"
-          placeholder="Email"
-          required
-          ref={emailRef}
-        />
-        <span className={classes.input_heading_small} data-form-heading="email">
-          email
-        </span>
-        <br /> */}
-        {/* <br /> */}
+        {/* PASSWORD */}
         <Input
           inputTypeProps={'password'}
           inputIdProps={'register-password'}
@@ -128,23 +114,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputPlaceholderProps={'password'}
           inputRefProps={passwordRef}
         />
-        {/* <input
-          className={classes.sign_up_form__input}
-          type="password"
-          id="register-password"
-          aria-label="password"
-          name="register-password"
-          placeholder="Password"
-          autoComplete="new-password"
-          required
-          ref={passwordRef}
-        />
-        <span
-          className={classes.input_heading_small}
-          data-form-heading="password"
-        >
-          password
-        </span> */}
+        {/* PASSWORD-CONFIRM */}
         <Input
           inputTypeProps={'password'}
           inputIdProps={'register-password-confirm'}
@@ -153,25 +123,39 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputPlaceholderProps={'confirm'}
           inputRefProps={passwordConfirmRef}
         />
-        {/* <br /> */}
-        {/* <input
-          type="password"
-          id="register-password-confirm"
-          aria-label="confirm password"
-          name="register-password-confirm"
-          placeholder="Confirm"
-          required
-          ref={passwordConfirmRef}
-        /> */}
         <h4>Strava Api Application Keys</h4>
-        <input
+        <Input
+          inputTypeProps={'text'}
+          inputIdProps={'register-client-id'}
+          inputAriaLabelProps={'client id'}
+          inputNameProps={'register-client-id'}
+          inputPlaceholderProps={'client ID'}
+          inputRefProps={clientIdRef}
+        />
+        {/* <input
           placeholder="Client ID"
           aria-label="Client id"
           name="register-client-id"
           required
           ref={clientIdRef}
+        /> */}
+        <Input
+          inputTypeProps={'text'}
+          inputIdProps={'register-client-secret'}
+          inputAriaLabelProps={'client secret'}
+          inputNameProps={'register-client-secret'}
+          inputPlaceholderProps={'client secret'}
+          inputRefProps={clientSecretRef}
         />
-        <input
+        <Input
+          inputTypeProps={'text'}
+          inputIdProps={'register-access-token'}
+          inputAriaLabelProps={'your access token'}
+          inputNameProps={'register-access-token'}
+          inputPlaceholderProps={'your access token'}
+          inputRefProps={accessTokenRef}
+        />
+        {/* <input
           placeholder="Client Secret"
           aria-label="Client Secret"
           name="register-client-secret"
@@ -185,7 +169,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           name="register-access-token"
           required
           ref={accessTokenRef}
-        />
+        /> */}
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
           {error && <ErrorComponent errorMessageProps={error} />}

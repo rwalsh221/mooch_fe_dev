@@ -10,7 +10,7 @@ const Input = ({
   inputPlaceholderProps,
 }) => {
   const [inputState, setInputState] = useState('');
-  console.log(inputState);
+
   return (
     <div className={classes.inputContainer} data-input={inputNameProps}>
       <input

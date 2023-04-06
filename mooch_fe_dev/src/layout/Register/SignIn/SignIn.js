@@ -3,12 +3,13 @@ import classes from '../Register.module.css';
 
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
+import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import ErrorComponent from '../../../components/ErrorComponent/ErrorComponet';
 
 const SignIn = ({ formContentHandlerProps }) => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const signInEmailRef = useRef();
+  const signInPasswordRef = useRef();
   const { signIn } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,10 @@ const SignIn = ({ formContentHandlerProps }) => {
     try {
       setError('');
       setLoading(true);
-      await signIn(emailRef.current.value, passwordRef.current.value);
+      await signIn(
+        signInEmailRef.current.value,
+        signInPasswordRef.current.value
+      );
       navigate('/dashboard');
     } catch (error) {
       setError('failed to sign in');
@@ -38,8 +42,20 @@ const SignIn = ({ formContentHandlerProps }) => {
       <h3 className={classes.register_card__heading}>
         Login to Your MoOch Account
       </h3>
-      <form data-margin-bottom={'300'} onSubmit={handleSubmit}>
-        <input
+      <form
+        className={classes.sign_in_form}
+        data-margin-bottom={'300'}
+        onSubmit={handleSubmit}
+      >
+        <Input
+          inputTypeProps={'email'}
+          inputIdProps={'signin-email'}
+          inputAriaLabelProps={'sign in email'}
+          inputNameProps={'signin-email'}
+          inputPlaceholderProps={'email'}
+          inputRefProps={signInEmailRef}
+        />
+        {/* <input
           type="email"
           id="register-email"
           aria-label="register email"
@@ -48,9 +64,17 @@ const SignIn = ({ formContentHandlerProps }) => {
           required
           ref={emailRef}
           // autoComplete="new-password"
-        />
+        /> */}
         <br />
-        <input
+        <Input
+          inputTypeProps={'password'}
+          inputIdProps={'signin-password'}
+          inputAriaLabelProps={'sign in password'}
+          inputNameProps={'signin-password'}
+          inputPlaceholderProps={'password'}
+          inputRefProps={signInPasswordRef}
+        />
+        {/* <input
           type="password"
           id="register-password"
           aria-label="password"
@@ -59,7 +83,7 @@ const SignIn = ({ formContentHandlerProps }) => {
           autoComplete="new-password"
           required
           ref={passwordRef}
-        />
+        /> */}
         <br />
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'login'} disabledProps={loading} />

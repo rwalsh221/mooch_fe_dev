@@ -46,9 +46,7 @@ const Register = () => {
         </h2>
         {needHelp && <SignUpHelp needHelpHandlerProps={needHelpHandler} />}
         <div className={classes.register_form__container}>
-          <div
-            className={`${classes.sign_up_card} ${classes.register_form__content}`}
-          >
+          <div className={classes.register_form__content}>
             <h2
               className={classes.register_card__logo}
               data-heading={'logo-small'}
