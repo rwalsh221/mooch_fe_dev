@@ -5,7 +5,7 @@ import classes from './RegisterConfirm.module.css';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Layout/Card/Card';
-import ErrorComponent from '../../components/ErrorComponent/ErrorComponet';
+import ErrorComponent from '../../components/ErrorComponents/ErrorComponent/ErrorComponent';
 import Footer from '../../components/Footer/Footer';
 
 import { useAuth } from '../../contexts/AuthContext';

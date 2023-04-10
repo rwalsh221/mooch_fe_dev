@@ -5,7 +5,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
-import ErrorComponent from '../../../components/ErrorComponent/ErrorComponet';
+import ErrorComponent from '../../../components/ErrorComponents/ErrorComponent/ErrorComponent';
+import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponentSml/ErrorComponentSml';
 
 const SignIn = ({ formContentHandlerProps }) => {
   const signInEmailRef = useRef();
@@ -55,16 +56,6 @@ const SignIn = ({ formContentHandlerProps }) => {
           inputPlaceholderProps={'email'}
           inputRefProps={signInEmailRef}
         />
-        {/* <input
-          type="email"
-          id="register-email"
-          aria-label="register email"
-          name="register-email"
-          placeholder="Email"
-          required
-          ref={emailRef}
-          // autoComplete="new-password"
-        /> */}
         <br />
         <Input
           inputTypeProps={'password'}
@@ -74,20 +65,9 @@ const SignIn = ({ formContentHandlerProps }) => {
           inputPlaceholderProps={'password'}
           inputRefProps={signInPasswordRef}
         />
-        {/* <input
-          type="password"
-          id="register-password"
-          aria-label="password"
-          name="register-password"
-          placeholder="Password"
-          autoComplete="new-password"
-          required
-          ref={passwordRef}
-        /> */}
-        <br />
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'login'} disabledProps={loading} />
-          {error && <ErrorComponent errorMessageProps={error} />}
+          {error && <ErrorComponentSml errorMessageProps={error} />}
         </div>
       </form>
       <p>

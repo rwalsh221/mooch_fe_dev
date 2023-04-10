@@ -1,0 +1,17 @@
+.error_component {
+  background-color: var(--primary-color-green);
+  font-size: 2rem;
+  padding: var(--padding-100);
+  margin: 0 auto;
+  color: red;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 1rem;
+
+  width: max-content;
+  text-align: center;
+  /* flex: 0 1 80%; */
+}
+
+.error_component p {
+}

@@ -111,6 +111,12 @@
   margin: var(--margin-200) 0;
 }
 
+@media screen and (max-width: 1400px) {
+  .register_form__container {
+    width: 70%;
+  }
+}
+
 @media screen and (max-width: 1080px) {
   .register_form__container {
     width: 90%;

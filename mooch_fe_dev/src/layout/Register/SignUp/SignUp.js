@@ -5,7 +5,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
-import ErrorComponent from '../../../components/ErrorComponent/ErrorComponet';
+import ErrorComponent from '../../../components/ErrorComponents/ErrorComponent/ErrorComponent';
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage
