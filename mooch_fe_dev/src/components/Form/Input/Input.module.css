@@ -4,16 +4,24 @@
   margin-bottom: var(--margin-100);
 }
 
-.inputContainer_input {
+.inputContainer_input,
+.inputContainer_input__error {
   width: 100%;
   padding: calc(var(--padding-100) / 2);
+}
+
+.inputContainer_input {
   border: 2px solid var(--primary-color-green-600);
 }
 .inputContainer_input:focus {
   border: 2px solid var(--primary-color-green-800);
   outline: 2px solid var(--primary-color-green-800);
 }
-
+.inputContainer_input__error,
+.inputContainer_input__error:focus {
+  border: 2px solid red;
+  outline: 2px solid red;
+}
 .inputContainer_input[value]:not([value=''])
   ~ .inputContainer_placeholder__small {
   transform: translateY(-100%);

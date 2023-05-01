@@ -3,23 +3,25 @@ import classes from '../Register.module.css';
 
 import { useAuth } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { SignUpValidation } from '../../../helpers/validation';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import ErrorComponent from '../../../components/ErrorComponents/ErrorComponent/ErrorComponent';
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
-  // TODO: replace localstorage with session storage
+  // TODO: replace localstorage with session storage last thing
   // TODO: 1, set session storage with strava data, 2, signup to firebase, 3, redirect reg confirm to set mooch db with starva data,FAIL rdiect to error compnent
 
-  // TODO: add error component from sign in to signup.
-  // TODO:  need to make a new error component - for dashboard access when not signed in
+  // TODO:  need to make a new error component - for dashboard access when not signed in. error boundray WDS
 
   // TODO: Add github link to footer
-  // TODO: create input componet for form
+
   // TODO: test
-  // TODO: ADD FORM VALIDATION
+  // TODO: ADD FORM VALIDATION and add error component from sign in to signup.
   // TODO: FORM REF OR STATE
-  // TODO: style form like google - look at autocomplete
+
+  // TODO: eslint
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -33,6 +35,8 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const navigate = useNavigate();
   const emailTest = 'test@test.com';
   sessionStorage.setItem('email', emailTest);
+
+  const validate = new SignUpValidation();
 
   const setSignUpLocalStorage = () => {
     const data = {
@@ -52,12 +56,27 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
     });
   };
 
-  const clictest = () => {
-    console.log(emailRef.current.value);
+  const errorHandler = (state, stateContent) => {
+    state(stateContent);
+
+    setTimeout(() => {
+      setLoading(false);
+      setError('');
+    }, 5000);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validateInput = validate.validateInputHandler(
+      emailRef,
+      passwordRef,
+      passwordConfirmRef,
+      clientIdRef,
+      clientSecretRef,
+      accessTokenRef
+    );
+
     try {
       if (passwordRef.current.value !== passwordConfirmRef.current.value) {
         clearForm(passwordRef, passwordConfirmRef);
@@ -132,13 +151,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputPlaceholderProps={'client ID'}
           inputRefProps={clientIdRef}
         />
-        {/* <input
-          placeholder="Client ID"
-          aria-label="Client id"
-          name="register-client-id"
-          required
-          ref={clientIdRef}
-        /> */}
         <Input
           inputTypeProps={'text'}
           inputIdProps={'register-client-secret'}
@@ -155,21 +167,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputPlaceholderProps={'your access token'}
           inputRefProps={accessTokenRef}
         />
-        {/* <input
-          placeholder="Client Secret"
-          aria-label="Client Secret"
-          name="register-client-secret"
-          required
-          ref={clientSecretRef}
-        />
-        <br />
-        <input
-          placeholder="Your Access Token"
-          aria-label="Your Access Token"
-          name="register-access-token"
-          required
-          ref={accessTokenRef}
-        /> */}
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
           {error && <ErrorComponent errorMessageProps={error} />}

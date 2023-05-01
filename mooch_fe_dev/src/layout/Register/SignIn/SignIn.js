@@ -3,9 +3,9 @@ import classes from '../Register.module.css';
 
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
+import { SignInValidation } from '../../../helpers/validation';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
-import ErrorComponent from '../../../components/ErrorComponents/ErrorComponent/ErrorComponent';
 import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponentSml/ErrorComponentSml';
 
 const SignIn = ({ formContentHandlerProps }) => {
@@ -16,25 +16,42 @@ const SignIn = ({ formContentHandlerProps }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const validate = new SignInValidation();
+
+  const errorHandler = (state, stateContent) => {
+    state(stateContent);
+
+    setTimeout(() => {
+      setLoading(false);
+      setError('');
+    }, 5000);
+  };
+
   const handleSubmit = async (e) => {
-    console.log(e);
     e.preventDefault();
 
-    try {
-      setError('');
-      setLoading(true);
-      await signIn(
-        signInEmailRef.current.value,
-        signInPasswordRef.current.value
-      );
-      navigate('/dashboard');
-    } catch (error) {
-      setError('failed to sign in');
-      console.error(error.message);
-      setTimeout(() => {
-        setLoading(false);
+    const validateInput = validate.validateInputHandler(
+      signInEmailRef,
+      signInPasswordRef
+    );
+    console.log(validateInput);
+
+    if (validateInput.validateInputs) {
+      try {
         setError('');
-      }, 5000);
+        setLoading(true);
+        await signIn(
+          signInEmailRef.current.value,
+          signInPasswordRef.current.value
+        );
+        navigate('/dashboard');
+      } catch (error) {
+        errorHandler(setError, 'failed to sign in');
+        console.error(error.message);
+      }
+    } else {
+      errorHandler(setError, validateInput.errorObj);
+      console.log('ERROR');
     }
   };
 
@@ -55,6 +72,7 @@ const SignIn = ({ formContentHandlerProps }) => {
           inputNameProps={'signin-email'}
           inputPlaceholderProps={'email'}
           inputRefProps={signInEmailRef}
+          validationErrorProps={error}
         />
         <br />
         <Input
@@ -64,10 +82,13 @@ const SignIn = ({ formContentHandlerProps }) => {
           inputNameProps={'signin-password'}
           inputPlaceholderProps={'password'}
           inputRefProps={signInPasswordRef}
+          validationErrorProps={error}
         />
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'login'} disabledProps={loading} />
-          {error && <ErrorComponentSml errorMessageProps={error} />}
+          {error && (
+            <ErrorComponentSml errorMessageProps={error.errorMessage} />
+          )}
         </div>
       </form>
       <p>

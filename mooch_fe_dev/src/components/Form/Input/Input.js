@@ -8,13 +8,20 @@ const Input = ({
   inputNameProps,
   inputRefProps,
   inputPlaceholderProps,
+  validationErrorProps,
 }) => {
   const [inputState, setInputState] = useState('');
+  console.log(validationErrorProps);
+  const classNameInputContainer =
+    validationErrorProps?.errorMessage &&
+    validationErrorProps?.inputName === inputNameProps
+      ? classes.inputContainer_input__error
+      : classes.inputContainer_input;
 
   return (
     <div className={classes.inputContainer} data-input={inputNameProps}>
       <input
-        className={classes.inputContainer_input}
+        className={classNameInputContainer}
         type={inputTypeProps}
         id={inputIdProps}
         aria-label={inputAriaLabelProps}
