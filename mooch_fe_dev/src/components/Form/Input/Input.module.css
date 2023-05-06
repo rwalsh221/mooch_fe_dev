@@ -22,18 +22,26 @@
   border: 2px solid red;
   outline: 2px solid red;
 }
+
+/* STYLE APPLIES IF INPUT VALUE IS NOT EMPTY */
 .inputContainer_input[value]:not([value=''])
+  ~ .inputContainer_placeholder__small,
+.inputContainer_input__error[value]:not([value=''])
   ~ .inputContainer_placeholder__small {
   transform: translateY(-100%);
   opacity: 1;
 }
 
-.inputContainer_input:focus + .inputContainer_placeholder {
+.inputContainer_input:focus
+  + .inputContainer_placeholder
+  .inputContainer_input__error:focus
+  + .inputContainer_placeholder {
   transform: translateY(-50%);
   opacity: 0;
 }
 
-.inputContainer_input:focus ~ .inputContainer_placeholder__small {
+.inputContainer_input:focus ~ .inputContainer_placeholder__small,
+.inputContainer_input__error:focus ~ .inputContainer_placeholder__small {
   transform: translateY(-100%);
   opacity: 1;
 }
@@ -52,9 +60,16 @@
   text-transform: capitalize;
 }
 
+.inputContainer_input ~ .inputContainer_placeholder__small {
+  background-color: var(--primary-color-green-800);
+}
+.inputContainer_input__error ~ .inputContainer_placeholder__small {
+  background-color: red;
+  transition: all 0s;
+}
+
 .inputContainer_placeholder__small {
   font-size: 1rem;
-  background-color: var(--primary-color-green-800);
   padding: 0 2px;
   left: 10px;
   color: var(--primary-color-green-100);

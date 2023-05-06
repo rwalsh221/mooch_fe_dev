@@ -11,12 +11,18 @@ const Input = ({
   validationErrorProps,
 }) => {
   const [inputState, setInputState] = useState('');
-  console.log(validationErrorProps);
+
   const classNameInputContainer =
     validationErrorProps?.errorMessage &&
     validationErrorProps?.inputName === inputNameProps
       ? classes.inputContainer_input__error
       : classes.inputContainer_input;
+
+  const placeHolderSmallContent =
+    validationErrorProps?.errorMessage &&
+    validationErrorProps?.inputName === inputNameProps
+      ? 'error please confirm'
+      : inputPlaceholderProps;
 
   return (
     <div className={classes.inputContainer} data-input={inputNameProps}>
@@ -36,7 +42,7 @@ const Input = ({
         {inputState ? '' : inputPlaceholderProps}
       </div>
       <div className={classes.inputContainer_placeholder__small}>
-        {inputPlaceholderProps}
+        {placeHolderSmallContent}
       </div>
     </div>
   );

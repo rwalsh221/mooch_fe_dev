@@ -86,9 +86,9 @@ const SignIn = ({ formContentHandlerProps }) => {
         />
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'login'} disabledProps={loading} />
-          {error && (
+          {/* {error && (
             <ErrorComponentSml errorMessageProps={error.errorMessage} />
-          )}
+          )} */}
         </div>
       </form>
       <p>

@@ -7,6 +7,7 @@ import { SignUpValidation } from '../../../helpers/validation';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import ErrorComponent from '../../../components/ErrorComponents/ErrorComponent/ErrorComponent';
+import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponentSml/ErrorComponentSml';
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage last thing
@@ -72,46 +73,47 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
       emailRef,
       passwordRef,
       passwordConfirmRef,
-      clientIdRef,
       clientSecretRef,
+      clientIdRef,
       accessTokenRef
     );
 
-    try {
-      if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-        clearForm(passwordRef, passwordConfirmRef);
-        throw new Error('Passwords do not match');
-      }
+    if (validateInput.validateInputs) {
+      try {
+        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+          clearForm(passwordRef, passwordConfirmRef);
+          throw new Error('Passwords do not match');
+        }
 
-      setError('');
-      setLoading(true);
-      await signUp(emailRef.current.value, passwordRef.current.value);
-      setSignUpLocalStorage();
-      navigate('/register-confirm');
-    } catch (error) {
-      if (error.name === 'FirebaseError') {
-        setError('Failed to create an account');
-      }
-      setError(error.message);
-
-      setTimeout(() => {
         setError('');
-      }, 5000);
+        setLoading(true);
+        await signUp(emailRef.current.value, passwordRef.current.value);
+        setSignUpLocalStorage();
+        navigate('/register-confirm');
+      } catch (error) {
+        if (error.name === 'FirebaseError') {
+          errorHandler(setError, 'Failed to create an account');
+        } else {
+          errorHandler(setError, error.message);
+        }
+      }
+      setLoading(false);
+    } else {
+      errorHandler(setError, validateInput.errorObj);
+      console.log('ERROR');
     }
-    setLoading(false);
   };
 
   // SIGN UP CODE ABOVE NEEDS TO MOVE TO REGISTER CONFIRM
 
   // handleSubmit2();
 
-  console.log(error);
   return (
     <>
       <h3 className={classes.register_card__heading}>
         Create your MoOCH Account
       </h3>
-      <form className={classes.sign_up_form} onSubmit={handleSubmit}>
+      <form className={classes.sign_up_form} onSubmit={handleSubmit} noValidate>
         <h4>User Account Information</h4>
         {/* EMAIL */}
         <Input
@@ -121,8 +123,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-email'}
           inputPlaceholderProps={'email'}
           inputRefProps={emailRef}
-          inputStateProps={emailState}
-          updateStateProps={setEmailState}
+          validationErrorProps={error}
         />
         {/* PASSWORD */}
         <Input
@@ -132,6 +133,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-password'}
           inputPlaceholderProps={'password'}
           inputRefProps={passwordRef}
+          validationErrorProps={error}
         />
         {/* PASSWORD-CONFIRM */}
         <Input
@@ -141,6 +143,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-password-confirm'}
           inputPlaceholderProps={'confirm'}
           inputRefProps={passwordConfirmRef}
+          validationErrorProps={error}
         />
         <h4>Strava Api Application Keys</h4>
         <Input
@@ -150,6 +153,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-client-id'}
           inputPlaceholderProps={'client ID'}
           inputRefProps={clientIdRef}
+          validationErrorProps={error}
         />
         <Input
           inputTypeProps={'text'}
@@ -158,6 +162,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-client-secret'}
           inputPlaceholderProps={'client secret'}
           inputRefProps={clientSecretRef}
+          validationErrorProps={error}
         />
         <Input
           inputTypeProps={'text'}
@@ -166,10 +171,13 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-access-token'}
           inputPlaceholderProps={'your access token'}
           inputRefProps={accessTokenRef}
+          validationErrorProps={error}
         />
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
-          {error && <ErrorComponent errorMessageProps={error} />}
+          {/* {error && (
+            <ErrorComponentSml errorMessageProps={error.errorMessage} />
+          )} */}
         </div>
       </form>
       <p>

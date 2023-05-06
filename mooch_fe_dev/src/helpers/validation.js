@@ -15,12 +15,14 @@ class Validation {
   }
 
   validateEmail(input) {
-    console.log('EMAIL', input);
+    console.log('EMAILsssss', input);
     const emailFormat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     if (input.match(emailFormat)) {
+      console.log('matches');
       return true;
     } else {
+      console.log('dont match');
       return false;
     }
   }
@@ -47,13 +49,12 @@ class SignInValidation extends Validation {
     for (let i = 0; i < inputs.length; i++) {
       const currentInputId = inputs[i].current.id;
       const currentInputValue = inputs[i].current.value;
-      console.log(this.validated.validatedInputs);
+
       switch (currentInputId) {
         case this.inputs.signInEmail:
           this.validated.validatedInputs =
             this.validateEmail(currentInputValue);
-          console.log(this.validated.validatedInputs);
-          console.log(inputs[i].current.value);
+
           break;
 
         case this.inputs.signInPassword:
@@ -114,6 +115,7 @@ class SignUpValidation extends Validation {
   }
 
   validateInputHandler(...inputs) {
+    console.log(inputs);
     let passwordRef = null;
     for (let i = 0; i < inputs.length; i++) {
       if (
@@ -124,32 +126,39 @@ class SignUpValidation extends Validation {
       }
       const currentInputId = inputs[i].current.id;
       const currentInputValue = inputs[i].current.value;
+
       switch (currentInputId) {
         case this.inputs.registerEmail:
-          this.validateEmail(currentInputValue);
+          this.validated.validatedInputs =
+            this.validateEmail(currentInputValue);
           break;
         case this.inputs.registerPassword:
-          this.validatePassword(currentInputValue);
+          this.validated.validatedInputs =
+            this.validatePassword(currentInputValue);
           break;
         case this.inputs.registerPasswordConfirm:
-          this.validatePasswordConfirm(
+          this.validated.validatedInputs = this.validatePasswordConfirm(
             passwordRef.current.value,
             currentInputValue
           );
           break;
-        case this.inputs.registerClientId:
-          console.log('CLIENT ID');
-          this.validateStravaClientId(currentInputValue);
-          break;
+
         case this.inputs.registerClientSecret ||
           this.inputs.registerAccessToken:
-          this.validateStravaAppKeys(currentInputValue);
+          console.log('STRAVA APP KEU');
+          this.validated.validatedInputs =
+            this.validateStravaAppKeys(currentInputValue);
+          break;
+        case this.inputs.registerClientId:
+          this.validated.validatedInputs =
+            this.validateStravaClientId(currentInputValue);
           break;
         default:
           this.validated.validatedInputs = false;
       }
 
       if (this.validated.validatedInputs === false) {
+        console.log(this.validated.validatedInputs);
         this._setValidationError(inputs[i].current.name);
         break;
       }
