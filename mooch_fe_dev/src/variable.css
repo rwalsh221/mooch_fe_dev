@@ -9,6 +9,7 @@
   --secondary-color-white: hsl(0, 0%, 100%);
   --secondary-color-black: hsl(0, 2%, 12%);
   --secondary-color-orange: #ff4500;
+  --secondary-color-red: #d0342c;
 
   /* FONT VARIABLES */
   --logo-font: 'Alfa Slab One', cursive;

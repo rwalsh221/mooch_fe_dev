@@ -13,16 +13,34 @@ const Input = ({
   const [inputState, setInputState] = useState('');
 
   const classNameInputContainer =
-    validationErrorProps?.errorMessage &&
+    validationErrorProps?.error &&
     validationErrorProps?.inputName === inputNameProps
       ? classes.inputContainer_input__error
       : classes.inputContainer_input;
 
-  const placeHolderSmallContent =
-    validationErrorProps?.errorMessage &&
-    validationErrorProps?.inputName === inputNameProps
-      ? 'error please confirm'
-      : inputPlaceholderProps;
+  // const placeHolderSmallContent =
+  //   validationErrorProps?.error &&
+  //   validationErrorProps?.inputName === inputNameProps
+  //     ? 'at least 7 - letters & numbers'
+  //     : inputPlaceholderProps;
+
+  const placeHolderSmallContent = () => {
+    if (
+      validationErrorProps?.error &&
+      validationErrorProps?.inputName === inputNameProps
+    ) {
+      let content;
+      switch (inputNameProps) {
+        case 'register-password':
+          content = 'at least 7 - letters & numbers';
+          break;
+        default:
+          content = 'error please confirm';
+      }
+      return content;
+    }
+    return inputPlaceholderProps;
+  };
 
   return (
     <div className={classes.inputContainer} data-input={inputNameProps}>
@@ -42,7 +60,7 @@ const Input = ({
         {inputState ? '' : inputPlaceholderProps}
       </div>
       <div className={classes.inputContainer_placeholder__small}>
-        {placeHolderSmallContent}
+        {placeHolderSmallContent()}
       </div>
     </div>
   );

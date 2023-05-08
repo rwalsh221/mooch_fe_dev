@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { SignUpValidation } from '../../../helpers/validation';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
-import ErrorComponent from '../../../components/ErrorComponents/ErrorComponent/ErrorComponent';
+
 import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponentSml/ErrorComponentSml';
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
@@ -31,7 +31,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const accessTokenRef = useRef();
   const { signUp, currentUser } = useAuth();
   const [error, setError] = useState('');
-  const [emailState, setEmailState] = useState('');
+
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const emailTest = 'test@test.com';
@@ -78,7 +78,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
       accessTokenRef
     );
 
-    if (validateInput.validateInputs) {
+    if (validateInput.validatedInputs) {
       try {
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
           clearForm(passwordRef, passwordConfirmRef);
@@ -105,8 +105,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   };
 
   // SIGN UP CODE ABOVE NEEDS TO MOVE TO REGISTER CONFIRM
-
-  // handleSubmit2();
 
   return (
     <>

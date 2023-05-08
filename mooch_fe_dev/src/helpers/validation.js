@@ -3,38 +3,43 @@ class Validation {
     validatedInputs: false,
     errorObj: {
       inputName: null,
-      errorMessage: null,
+      error: false,
     },
   };
 
   _setValidationError(input) {
-    const errorName = input.slice(input.indexOf('-') + 1);
-
     this.validated.errorObj.inputName = input;
-    this.validated.errorObj.errorMessage = `${errorName} error`;
+    this.validated.errorObj.error = true;
   }
 
   validateEmail(input) {
-    console.log('EMAILsssss', input);
     const emailFormat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     if (input.match(emailFormat)) {
-      console.log('matches');
       return true;
     } else {
-      console.log('dont match');
       return false;
     }
   }
 
   validatePassword(input) {
-    const passwordFormat = /^[A-Za-z0-9]*$/;
+    const passwordCorrectFormat = /^[A-Za-z0-9]*$/;
+    const passwordHasNum = /\d/;
+    const passwordHasAlpha = /[A-Z]/i;
 
-    if (input.length >= 7 && input.match(passwordFormat)) {
-      return true;
-    } else {
-      return false;
+    let passwordValid = true;
+
+    if (passwordValid && input.length < 7) {
+      passwordValid = false;
+    } else if (passwordValid && !input.match(passwordCorrectFormat)) {
+      passwordValid = false;
+    } else if (passwordValid && !input.match(passwordHasNum)) {
+      passwordValid = false;
+    } else if (passwordValid && !input.match(passwordHasAlpha)) {
+      passwordValid = false;
     }
+
+    return passwordValid;
   }
 }
 
@@ -45,7 +50,6 @@ class SignInValidation extends Validation {
   };
 
   validateInputHandler(...inputs) {
-    console.log(inputs);
     for (let i = 0; i < inputs.length; i++) {
       const currentInputId = inputs[i].current.id;
       const currentInputValue = inputs[i].current.value;
@@ -54,14 +58,11 @@ class SignInValidation extends Validation {
         case this.inputs.signInEmail:
           this.validated.validatedInputs =
             this.validateEmail(currentInputValue);
-
           break;
-
         case this.inputs.signInPassword:
           this.validated.validatedInputs =
             this.validatePassword(currentInputValue);
           break;
-
         default:
           this.validated.validatedInputs = false;
       }
@@ -115,7 +116,6 @@ class SignUpValidation extends Validation {
   }
 
   validateInputHandler(...inputs) {
-    console.log(inputs);
     let passwordRef = null;
     for (let i = 0; i < inputs.length; i++) {
       if (
@@ -142,10 +142,8 @@ class SignUpValidation extends Validation {
             currentInputValue
           );
           break;
-
         case this.inputs.registerClientSecret ||
           this.inputs.registerAccessToken:
-          console.log('STRAVA APP KEU');
           this.validated.validatedInputs =
             this.validateStravaAppKeys(currentInputValue);
           break;
@@ -158,7 +156,6 @@ class SignUpValidation extends Validation {
       }
 
       if (this.validated.validatedInputs === false) {
-        console.log(this.validated.validatedInputs);
         this._setValidationError(inputs[i].current.name);
         break;
       }

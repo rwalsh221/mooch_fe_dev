@@ -19,8 +19,8 @@
 }
 .inputContainer_input__error,
 .inputContainer_input__error:focus {
-  border: 2px solid red;
-  outline: 2px solid red;
+  border: 2px solid var(--secondary-color-red);
+  outline: 2px solid var(--secondary-color-red);
 }
 
 /* STYLE APPLIES IF INPUT VALUE IS NOT EMPTY */
@@ -64,7 +64,7 @@
   background-color: var(--primary-color-green-800);
 }
 .inputContainer_input__error ~ .inputContainer_placeholder__small {
-  background-color: red;
+  background-color: var(--secondary-color-red);
   transition: all 0s;
 }
 

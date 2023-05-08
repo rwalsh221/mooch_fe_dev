@@ -20,5 +20,5 @@
 }
 
 .button_green:disabled {
-  background-color: red;
+  background-color: var(--secondary-color-red);
 }

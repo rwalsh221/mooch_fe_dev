@@ -3,7 +3,7 @@
   font-size: 2rem;
   padding: var(--padding-100);
   margin: 0 auto;
-  color: red;
+  color: var(--secondary-color-red);
   font-weight: 700;
   text-transform: uppercase;
   border-radius: 1rem;
