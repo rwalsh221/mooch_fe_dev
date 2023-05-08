@@ -20,17 +20,9 @@ const SignIn = ({ formContentHandlerProps }) => {
 
   const validate = new SignInValidation();
 
-  // const errorHandler = (state, stateContent) => {
-  //   state(stateContent);
-
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //     setError('');
-  //   }, 5000);
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const validateInput = validate.validateInputHandler(
       signInEmailRef,
@@ -40,8 +32,6 @@ const SignIn = ({ formContentHandlerProps }) => {
 
     if (validateInput.validatedInputs) {
       try {
-        setError('');
-        setLoading(true);
         await signIn(
           signInEmailRef.current.value,
           signInPasswordRef.current.value

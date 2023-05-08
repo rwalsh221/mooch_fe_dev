@@ -4,6 +4,7 @@ import classes from '../Register.module.css';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { SignUpValidation } from '../../../helpers/validation';
+import { errorHandler } from '../../../helpers/helpers';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 
@@ -30,6 +31,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const clientSecretRef = useRef();
   const accessTokenRef = useRef();
   const { signUp, currentUser } = useAuth();
+  const [validationError, setValidationError] = useState(null);
   const [error, setError] = useState('');
 
   const [loading, setLoading] = useState(false);
@@ -57,17 +59,9 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
     });
   };
 
-  const errorHandler = (state, stateContent) => {
-    state(stateContent);
-
-    setTimeout(() => {
-      setLoading(false);
-      setError('');
-    }, 5000);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const validateInput = validate.validateInputHandler(
       emailRef,
@@ -85,21 +79,18 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           throw new Error('Passwords do not match');
         }
 
-        setError('');
-        setLoading(true);
         await signUp(emailRef.current.value, passwordRef.current.value);
         setSignUpLocalStorage();
         navigate('/register-confirm');
       } catch (error) {
         if (error.name === 'FirebaseError') {
-          errorHandler(setError, 'Failed to create an account');
+          errorHandler(setError, setLoading, 'Failed to create an account');
         } else {
-          errorHandler(setError, error.message);
+          errorHandler(setError, setLoading, error.message);
         }
       }
-      setLoading(false);
     } else {
-      errorHandler(setError, validateInput.errorObj);
+      errorHandler(setValidationError, setLoading, validateInput.errorObj);
       console.log('ERROR');
     }
   };
@@ -121,7 +112,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-email'}
           inputPlaceholderProps={'email'}
           inputRefProps={emailRef}
-          validationErrorProps={error}
+          validationErrorProps={validationError}
         />
         {/* PASSWORD */}
         <Input
@@ -131,7 +122,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-password'}
           inputPlaceholderProps={'password'}
           inputRefProps={passwordRef}
-          validationErrorProps={error}
+          validationErrorProps={validationError}
         />
         {/* PASSWORD-CONFIRM */}
         <Input
@@ -141,7 +132,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-password-confirm'}
           inputPlaceholderProps={'confirm'}
           inputRefProps={passwordConfirmRef}
-          validationErrorProps={error}
+          validationErrorProps={validationError}
         />
         <h4>Strava Api Application Keys</h4>
         <Input
@@ -151,7 +142,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-client-id'}
           inputPlaceholderProps={'client ID'}
           inputRefProps={clientIdRef}
-          validationErrorProps={error}
+          validationErrorProps={validationError}
         />
         <Input
           inputTypeProps={'text'}
@@ -160,7 +151,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-client-secret'}
           inputPlaceholderProps={'client secret'}
           inputRefProps={clientSecretRef}
-          validationErrorProps={error}
+          validationErrorProps={validationError}
         />
         <Input
           inputTypeProps={'text'}
@@ -169,7 +160,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps={'register-access-token'}
           inputPlaceholderProps={'your access token'}
           inputRefProps={accessTokenRef}
-          validationErrorProps={error}
+          validationErrorProps={validationError}
         />
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
