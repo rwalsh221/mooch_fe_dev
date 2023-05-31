@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import classes from './ErrorComponent.module.css';
 
-import { useNavigate } from 'react-router-dom';
 import Card from '../../Layout/Card/Card';
 import ButtonGreen from '../../Button/ButtonGreen/ButtonGreen';
 
@@ -13,12 +14,16 @@ const ErrorComponent = ({ errorMessageProps }) => {
       <div className={classes.error_component}>
         <p>{errorMessageProps}</p>
         <ButtonGreen
-          contentProps={'Return Home'}
+          contentProps="Return Home"
           onClickProps={() => navigate('/')}
-        ></ButtonGreen>
+        />
       </div>
     </Card>
   );
+};
+
+ErrorComponent.propTypes = {
+  errorMessageProps: PropTypes.string.isRequired,
 };
 
 export default ErrorComponent;

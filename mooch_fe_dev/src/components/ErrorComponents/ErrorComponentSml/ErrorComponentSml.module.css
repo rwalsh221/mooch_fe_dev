@@ -7,11 +7,6 @@
   font-weight: 700;
   text-transform: uppercase;
   border-radius: 1rem;
-
   width: max-content;
   text-align: center;
-  /* flex: 0 1 80%; */
-}
-
-.error_component p {
 }
