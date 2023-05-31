@@ -15,8 +15,6 @@
 .button_green:hover {
   background-color: inherit;
   color: var(--primary-color-green);
-
-  /* border: 2px solid var(--primary-color-green); */
 }
 
 .button_green:disabled {

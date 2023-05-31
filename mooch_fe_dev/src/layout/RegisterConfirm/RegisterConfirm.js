@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 import Header from '../../components/Header/Header';
 import classes from './RegisterConfirm.module.css';
-import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Layout/Card/Card';
 import ErrorComponent from '../../components/ErrorComponents/ErrorComponent/ErrorComponent';

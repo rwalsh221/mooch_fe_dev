@@ -1,0 +1,45 @@
+{
+  "extends": ["react-app", "airbnb", "plugin:jsx-a11y/recommended", "prettier"],
+  "plugins": ["jsx-a11y", "prettier"],
+  "rules": {
+    // "semi": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": true,
+        "singleQuote": true
+      }
+    ],
+    "quotes": [2, "single", { "allowTemplateLiterals": true }],
+    "consistent-return": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "no-return-assign": "warn",
+    "no-param-reassign": "warn",
+    "no-shadow": "warn",
+    // "jsx-ally/no-onchange": "warn",
+    "jsx-a11y/no-onchange": "off",
+    "react/function-component-definition": "off",
+    "react/prop-types": "warn",
+    "react/jsx-no-constructed-context-values": "warn",
+    "react/jsx-props-no-spreading": "warn",
+    "no-return-await": "warn",
+    "react/no-array-index-key": "warn",
+    "no-console": ["warn", { "allow": ["error"] }]
+  }
+}
