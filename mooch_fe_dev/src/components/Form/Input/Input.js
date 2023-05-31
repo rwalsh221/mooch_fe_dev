@@ -18,12 +18,6 @@ const Input = ({
       ? classes.inputContainer_input__error
       : classes.inputContainer_input;
 
-  // const placeHolderSmallContent =
-  //   validationErrorProps?.error &&
-  //   validationErrorProps?.inputName === inputNameProps
-  //     ? 'at least 7 - letters & numbers'
-  //     : inputPlaceholderProps;
-
   const placeHolderSmallContent = () => {
     if (
       validationErrorProps?.error &&

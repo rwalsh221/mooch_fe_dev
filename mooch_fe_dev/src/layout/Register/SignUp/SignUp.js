@@ -12,15 +12,15 @@ import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponen
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage last thing
-  // TODO: 1, set session storage with strava data, 2, signup to firebase, 3, redirect reg confirm to set mooch db with starva data,FAIL rdiect to error compnent
+  // TODO: 1, set session storage with strava data, 1b, redirect to reg cofirm 2, signup to firebase, 3,  set mooch db with starva data,FAIL rdiect to error compnent
 
   // TODO:  need to make a new error component - for dashboard access when not signed in. error boundray WDS
 
   // TODO: Add github link to footer
 
   // TODO: test
-  // TODO: ADD FORM VALIDATION and add error component from sign in to signup.
-  // TODO: FORM REF OR STATE
+  // TODO: ADD FORM VALIDATION and add error component from sign in to signup. done
+  // TODO: FORM REF OR STATE. done
 
   // TODO: eslint
 
@@ -30,7 +30,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const clientIdRef = useRef();
   const clientSecretRef = useRef();
   const accessTokenRef = useRef();
-  const { signUp, currentUser } = useAuth();
+  const { signUp, currentUser, checkEmail } = useAuth();
   const [validationError, setValidationError] = useState(null);
   const [error, setError] = useState('');
 
@@ -44,6 +44,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const setSignUpLocalStorage = () => {
     const data = {
       email: emailRef.current.value,
+      password: passwordRef.current.value,
       clientId: clientIdRef.current.value,
       clientSecret: clientSecretRef.current.value,
       accessToken: accessTokenRef.current.value,
@@ -62,30 +63,38 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     const validateInput = validate.validateInputHandler(
       emailRef,
       passwordRef,
       passwordConfirmRef,
+      accessTokenRef,
       clientSecretRef,
-      clientIdRef,
-      accessTokenRef
+      clientIdRef
     );
 
     if (validateInput.validatedInputs) {
       try {
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-          clearForm(passwordRef, passwordConfirmRef);
-          throw new Error('Passwords do not match');
-        }
+        // await signUp(emailRef.current.value, passwordRef.current.value);
+        const emailIsAvaliable = await checkEmail(emailRef.current.value);
 
-        await signUp(emailRef.current.value, passwordRef.current.value);
+        if (emailIsAvaliable.length > 0) {
+          const unavailableEmailErr = new Error('email unavailable');
+          unavailableEmailErr.name = 'emailUnavailable';
+          throw unavailableEmailErr;
+        }
         setSignUpLocalStorage();
         navigate('/register-confirm');
       } catch (error) {
-        if (error.name === 'FirebaseError') {
-          errorHandler(setError, setLoading, 'Failed to create an account');
+        if (error.name === 'emailUnavailable') {
+          // manually add validateInput.errorObj for email unavailable error
+          errorHandler(setValidationError, setLoading, {
+            inputName: 'register-email',
+            error: true,
+          });
+          errorHandler(setError, setLoading, error.message);
         } else {
+          console.error(error.name);
+          console.error(error.message);
           errorHandler(setError, setLoading, error.message);
         }
       }
@@ -134,6 +143,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputRefProps={passwordConfirmRef}
           validationErrorProps={validationError}
         />
+        {/* STRAVA KEYS */}
         <h4>Strava Api Application Keys</h4>
         <Input
           inputTypeProps={'text'}
@@ -164,9 +174,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
         />
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
-          {/* {error && (
-            <ErrorComponentSml errorMessageProps={error.errorMessage} />
-          )} */}
+          {error && <ErrorComponentSml errorMessageProps={error} />}
         </div>
       </form>
       <p>

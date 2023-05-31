@@ -99,8 +99,10 @@ class SignUpValidation extends Validation {
     const stravaAppKeyFormat = /^[a-z0-9]*$/;
 
     if (input.match(stravaAppKeyFormat)) {
+      console.log('KEY MATCH');
       return true;
     } else {
+      console.log('key DONT MATC');
       return false;
     }
   }
@@ -126,7 +128,7 @@ class SignUpValidation extends Validation {
       }
       const currentInputId = inputs[i].current.id;
       const currentInputValue = inputs[i].current.value;
-
+      console.log(currentInputId);
       switch (currentInputId) {
         case this.inputs.registerEmail:
           this.validated.validatedInputs =
@@ -142,8 +144,8 @@ class SignUpValidation extends Validation {
             currentInputValue
           );
           break;
-        case this.inputs.registerClientSecret ||
-          this.inputs.registerAccessToken:
+        case this.inputs.registerClientSecret:
+        case this.inputs.registerAccessToken:
           this.validated.validatedInputs =
             this.validateStravaAppKeys(currentInputValue);
           break;

@@ -28,6 +28,10 @@ const AuthProvider = ({ children }) => {
     return auth.sendPasswordResetEmail(email);
   };
 
+  const checkEmail = (email) => {
+    return auth.fetchSignInMethodsForEmail(email);
+  };
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       console.log(user);
@@ -44,6 +48,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     signOut,
     resetPassword,
+    checkEmail,
   };
 
   return (

@@ -11,12 +11,20 @@ import Footer from '../../components/Footer/Footer';
 import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
+  //TODO: remove error from user preview state
+  //TODO: bring in firebase sign up from signup
+  //TODO: maybe error handler func
+
+  console.log('RENDERREGCONFIRM');
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [userPreviewState, setUserPreviewAState] = useState({
-    error: false,
     loading: true,
   });
-  console.log(userPreviewState);
-  // let profileCardContent = 'LOADING SPINNER';
+
+  const { signUp, currentUser, checkEmail } = useAuth();
+  const navigate = useNavigate();
+
   const getUserPreview = useCallback(async () => {
     let moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
     console.log(moochLocalStorage);
@@ -28,7 +36,7 @@ const RegisterConfirm = () => {
       }
 
       const getUser = await fetch(
-        'https://www.strava.com/api/v3/athlete?access_token=40e7cb156a0def644050943a75fae70bd3a10bc6'
+        'https://www.strava.com/api/v3/athlete?access_token=f5ea5be9623d6f84364ed7f5b183cdc55eb182c1'
       );
 
       if (getUser.status !== 200) {
@@ -36,35 +44,98 @@ const RegisterConfirm = () => {
       }
 
       const getUserResponse = await getUser.json();
-      console.log(getUserResponse);
-      const userPreviewStateCopy = {};
 
-      userPreviewStateCopy.img = getUserResponse.profile_medium;
-      userPreviewStateCopy.firstName = getUserResponse.firstname;
-      userPreviewStateCopy.lastName = getUserResponse.lastname;
-      userPreviewStateCopy.loading = false;
+      const userImg = getUserResponse.profile_medium;
+      const userFirstName = getUserResponse.firstname;
+      const userLastName = getUserResponse.lastname;
 
-      setUserPreviewAState({ ...userPreviewStateCopy });
+      const userPreview = { userImg, userFirstName, userLastName };
+      setLoading(false);
+      setUserPreviewAState({ ...userPreview });
     } catch (error) {
-      const userPreviewStateCopy = {};
-      userPreviewStateCopy.error = true;
-      userPreviewStateCopy.loading = false;
-
-      setUserPreviewAState({ ...userPreviewStateCopy });
+      setError(true);
+      setLoading(false);
       console.error(error);
     }
   }, []);
-
-  // getUserPreview();
 
   useEffect(() => {
     getUserPreview();
   }, [getUserPreview]);
 
-  const { currentUser } = useAuth();
-  console.log(currentUser);
-  const navigate = useNavigate();
+  const fireBaseSignUp = async (e) => {
+    // setLoading(true);
 
+    try {
+      // await signUp(emailRef.current.value, passwordRef.current.value); get from local storage
+      return true;
+    } catch (error) {
+      if (error.name === 'FirebaseError') {
+        // errorHandler(setError, setLoading, 'Failed to create an account');
+        setError(true);
+      } else {
+        // errorHandler(setError, setLoading, error.message);
+        setError(true);
+      }
+    }
+  };
+
+  const moochAPISignUP = async (uid) => {
+    try {
+      let moochLocalStorage = localStorage.getItem('moochSignUP');
+      const completeSignUpBody = {
+        userId: currentUser.uid,
+        ...JSON.parse(moochLocalStorage),
+      };
+
+      // const completeMoochApiAthleteReg = await fetch(
+      //   `${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`,
+      //   {
+      //     method: 'POST',
+      //     body: JSON.stringify(completeSignUpBody),
+      //   }
+      // );
+
+      const completeMoochApiAthleteReg = await fetch(
+        `${process.env.REACT_APP_MOOCH_API_URL}/test/register/`,
+        {
+          method: 'POST',
+          body: JSON.stringify(completeSignUpBody),
+        }
+      );
+
+      // const completeSignUpJson = await completeSignUp.text();
+      // console.log(completeSignUpJson);
+      console.log(completeMoochApiAthleteReg.status);
+      // navigate('/dashboard');
+    } catch (error) {}
+  };
+
+  // moochAPISignUP();
+
+  const nRegisterHandler = async () => {
+    try {
+      const completeFirebaseSignUp = await fireBaseSignUp();
+      const completeMoochApiSignUp = await moochAPISignUP();
+
+      if (!completeFirebaseSignUp && !completeMoochApiSignUp) {
+        throw new Error('signup error');
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+
+    // const completeFirebaseSignup = await fireBaseSignUp();
+
+    // if (completeFirebaseSignup) {
+    // } else {
+    //   throw new Error('sign up error');
+    // }
+  };
+
+  nRegisterHandler();
+
+  // NEED TO CHMAGE AD NO LONGER SEND REQUEST TO STRAVA FOR NEW ACCESS CODE
   const registerHandler = async () => {
     // 1 get code param from url
     const queryString = window.location.search;
@@ -73,8 +144,6 @@ const RegisterConfirm = () => {
     // 2, get local stored sign up data
     let moochLocalStorage = localStorage.getItem('moochSignUP');
     const signUpData = { ...JSON.parse(moochLocalStorage), authCode };
-    console.log(signUpData);
-    // const test:
     // 3, send sign up data to mooch back end
     const submitSignUp = await fetch(
       `${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/registerAuth/`,
@@ -86,13 +155,14 @@ const RegisterConfirm = () => {
     );
 
     const submitSignUpResponse = await submitSignUp.json();
-    console.log(submitSignUpResponse);
+
+    // ABOVE NO LONGER NEEDED AS WAS USED TO EXCHANGE STRAVA AUTH TOKEN FOR READ_ALL
     const completeSignUpBody = {
       ...submitSignUpResponse,
       userId: currentUser.uid,
       ...JSON.parse(moochLocalStorage),
     };
-    console.log(completeSignUpBody);
+
     const completeSignUp = await fetch(
       `${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`,
       {
@@ -106,22 +176,21 @@ const RegisterConfirm = () => {
     navigate('/dashboard');
   };
 
-  const setProfileCardContent = (state) => {
-    console.log(state);
-    if (state.loading) {
+  const setProfileCardContent = (userState, loadingState, errorState) => {
+    if (loadingState) {
       return <Card>'LOADING SPINNER'</Card>;
-    } else if (state.error) {
+    } else if (errorState) {
       return <ErrorComponent errorMessageProps={'SIGNUP ERROR'} />;
     } else {
       return (
         <Card>
           <div className={classes.profile_img_container}>
-            <img src={userPreviewState.img} alt="user profile"></img>
+            <img src={userState.userImg} alt="user profile"></img>
           </div>
           <div className={classes.confirm_card_container}>
             <p>
-              <span>{userPreviewState.firstName}</span>&nbsp;
-              <span>{userPreviewState.lastName}</span>
+              <span>{userState.userFirstName}</span>&nbsp;
+              <span>{userState.userLastName}</span>
             </p>
             <p>
               Ready to link&nbsp;
@@ -135,7 +204,7 @@ const RegisterConfirm = () => {
                 onClickProps={registerHandler}
               />
               <ButtonGreen
-                contentProps={'Cancelll'}
+                contentProps={'Cancel'}
                 onClickProps={() => {
                   navigate('/');
                 }}
@@ -147,7 +216,7 @@ const RegisterConfirm = () => {
     }
   };
 
-  const profileCardContent = setProfileCardContent(userPreviewState);
+  // const profileCardContent = setProfileCardContent(userPreviewState);
 
   return (
     <>
@@ -157,14 +226,7 @@ const RegisterConfirm = () => {
         data-wrapper="max-content-width"
       >
         <div className={classes.register_confirm_container}>
-          {/* <Card
-            widthProps={'25%'}
-            marginProps={'var(--margin-100) 0'}
-            className={classes.user_preview_card}
-          >
-            {profileCardContent}
-          </Card> */}
-          {profileCardContent}
+          {setProfileCardContent(userPreviewState, loading, error)}
         </div>
       </main>
       <Footer />
