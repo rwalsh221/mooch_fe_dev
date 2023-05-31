@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes, { bool, string } from 'prop-types';
 import classes from './Input.module.css';
 
 const Input = ({
@@ -58,6 +59,17 @@ const Input = ({
       </div>
     </div>
   );
+};
+
+Input.propTypes = {
+  inputTypeProps: PropTypes.string.isRequired,
+  inputIdProps: PropTypes.string.isRequired,
+  inputAriaLabelProps: PropTypes.string.isRequired,
+  inputNameProps: PropTypes.string.isRequired,
+  inputRefProps: PropTypes.string.isRequired,
+  inputPlaceholderProps: PropTypes.string.isRequired,
+  validationErrorProps: PropTypes.shape({ error: bool, inputName: string })
+    .isRequired,
 };
 
 export default Input;
