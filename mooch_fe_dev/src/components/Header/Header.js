@@ -33,8 +33,12 @@ const Header = ({ signOutProps }) => {
   );
 };
 
+Header.defaultProps = {
+  signOutProps: false,
+};
+
 Header.propTypes = {
-  signOutProps: PropTypes.bool.isRequired,
+  signOutProps: PropTypes.bool,
 };
 
 export default Header;

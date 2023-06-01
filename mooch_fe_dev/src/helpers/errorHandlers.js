@@ -7,4 +7,4 @@ const errorHandler = (errorState, loadingState, errorStateContent) => {
   }, 5000);
 };
 
-export { errorHandler };
+export default errorHandler;

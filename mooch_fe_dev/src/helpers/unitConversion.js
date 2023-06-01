@@ -7,12 +7,11 @@ export const secondsToMinutes = (seconds) => {
 
   if (minutesString.indexOf('.') === -1) {
     return `${minutes}:00`;
-  } else {
-    const splitMinutesString = minutesString.split('.');
-    const secondsDecimal = `0.${splitMinutesString[1]}`;
-    const seconds = (secondsDecimal * 60).toFixed();
-    return `${splitMinutesString[0]}:${seconds}`;
   }
+  const splitMinutesString = minutesString.split('.');
+  const secondsDecimal = `0.${splitMinutesString[1]}`;
+  const convertedSeconds = (secondsDecimal * 60).toFixed();
+  return `${splitMinutesString[0]}:${convertedSeconds}`;
 };
 
 export const calculateSpeed = (distance, time) => {
