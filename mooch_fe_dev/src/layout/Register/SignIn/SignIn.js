@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate, Link } from 'react-router-dom';
 import classes from '../Register.module.css';
 
-import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import { SignInValidation } from '../../../helpers/validation';
-import { errorHandler } from '../../../helpers/helpers';
+import errorHandler from '../../../helpers/errorHandlers';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponentSml/ErrorComponentSml';
@@ -28,7 +29,6 @@ const SignIn = ({ formContentHandlerProps }) => {
       signInEmailRef,
       signInPasswordRef
     );
-    console.log(validateInput);
 
     if (validateInput.validatedInputs) {
       try {
@@ -53,37 +53,41 @@ const SignIn = ({ formContentHandlerProps }) => {
       </h3>
       <form
         className={classes.sign_in_form}
-        data-margin-bottom={'300'}
+        data-margin-bottom="300"
         onSubmit={handleSubmit}
         noValidate
       >
         <Input
-          inputTypeProps={'email'}
-          inputIdProps={'signin-email'}
-          inputAriaLabelProps={'sign in email'}
-          inputNameProps={'signin-email'}
-          inputPlaceholderProps={'email'}
+          inputTypeProps="email"
+          inputIdProps="signin-email"
+          inputAriaLabelProps="sign in email"
+          inputNameProps="signin-email"
+          inputPlaceholderProps="email"
           inputRefProps={signInEmailRef}
           validationErrorProps={validationError}
         />
         <br />
         <Input
-          inputTypeProps={'password'}
-          inputIdProps={'signin-password'}
-          inputAriaLabelProps={'sign in password'}
-          inputNameProps={'signin-password'}
-          inputPlaceholderProps={'password'}
+          inputTypeProps="password"
+          inputIdProps="signin-password"
+          inputAriaLabelProps="sign in password"
+          inputNameProps="signin-password"
+          inputPlaceholderProps="password"
           inputRefProps={signInPasswordRef}
           validationErrorProps={validationError}
         />
         <div className={classes.form_btn_container}>
-          <ButtonGreen contentProps={'login'} disabledProps={loading} />
+          <ButtonGreen contentProps="login" disabledProps={loading} />
           {error && <ErrorComponentSml errorMessageProps={error} />}
         </div>
       </form>
       <p>
         Need an account? Sign Up&nbsp;
-        <span onClick={formContentHandlerProps} className={classes.form_change}>
+        <span
+          onClick={formContentHandlerProps}
+          className={classes.form_change}
+          aria-hidden
+        >
           here
         </span>
       </p>
@@ -93,6 +97,10 @@ const SignIn = ({ formContentHandlerProps }) => {
       </p>
     </>
   );
+};
+
+SignIn.propTypes = {
+  formContentHandlerProps: PropTypes.func.isRequired,
 };
 
 export default SignIn;

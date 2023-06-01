@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 import classes from './SignUpHelp.module.css';
 
@@ -6,7 +7,7 @@ const SignUpHelp = ({ needHelpHandlerProps }) => (
   <div className={classes.help}>
     <div>
       <h2>Sign Up Guide</h2>
-      <ButtonGreen onClickProps={needHelpHandlerProps} contentProps={'close'} />
+      <ButtonGreen onClickProps={needHelpHandlerProps} contentProps="close" />
     </div>
 
     <ol>
@@ -45,5 +46,9 @@ const SignUpHelp = ({ needHelpHandlerProps }) => (
     </ol>
   </div>
 );
+
+SignUpHelp.propTypes = {
+  needHelpHandlerProps: PropTypes.func.isRequired,
+};
 
 export default SignUpHelp;

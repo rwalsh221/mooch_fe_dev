@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import classes from '../Register.module.css';
 
 import { useAuth } from '../../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+
 import { SignUpValidation } from '../../../helpers/validation';
-import { errorHandler } from '../../../helpers/helpers';
+import errorHandler from '../../../helpers/errorHandlers';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 
@@ -30,7 +32,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const clientIdRef = useRef();
   const clientSecretRef = useRef();
   const accessTokenRef = useRef();
-  const { signUp, currentUser, checkEmail } = useAuth();
+  const { checkEmail } = useAuth();
   const [validationError, setValidationError] = useState(null);
   const [error, setError] = useState('');
 
@@ -51,14 +53,13 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
     };
 
     localStorage.setItem('moochSignUP', JSON.stringify(data));
-    console.log(localStorage);
   };
 
-  const clearForm = (...refs) => {
-    refs.forEach((el) => {
-      el.current.value = '';
-    });
-  };
+  // const clearForm = (...refs) => {
+  //   refs.forEach((el) => {
+  //     el.current.value = '';
+  //   });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,7 +101,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
       }
     } else {
       errorHandler(setValidationError, setLoading, validateInput.errorObj);
-      console.log('ERROR');
     }
   };
 
@@ -115,78 +115,91 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
         <h4>User Account Information</h4>
         {/* EMAIL */}
         <Input
-          inputTypeProps={'email'}
-          inputIdProps={'register-email'}
-          inputAriaLabelProps={'register-email'}
-          inputNameProps={'register-email'}
-          inputPlaceholderProps={'email'}
+          inputTypeProps="email"
+          inputIdProps="register-email"
+          inputAriaLabelProps="register-email"
+          inputNameProps="register-email"
+          inputPlaceholderProps="email"
           inputRefProps={emailRef}
           validationErrorProps={validationError}
         />
         {/* PASSWORD */}
         <Input
-          inputTypeProps={'password'}
-          inputIdProps={'register-password'}
-          inputAriaLabelProps={'register-password'}
-          inputNameProps={'register-password'}
-          inputPlaceholderProps={'password'}
+          inputTypeProps="password"
+          inputIdProps="register-password"
+          inputAriaLabelProps="register-password"
+          inputNameProps="register-password"
+          inputPlaceholderProps="password"
           inputRefProps={passwordRef}
           validationErrorProps={validationError}
         />
         {/* PASSWORD-CONFIRM */}
         <Input
-          inputTypeProps={'password'}
-          inputIdProps={'register-password-confirm'}
-          inputAriaLabelProps={'confirm password'}
-          inputNameProps={'register-password-confirm'}
-          inputPlaceholderProps={'confirm'}
+          inputTypeProps="password"
+          inputIdProps="register-password-confirm"
+          inputAriaLabelProps="confirm password"
+          inputNameProps="register-password-confirm"
+          inputPlaceholderProps="confirm"
           inputRefProps={passwordConfirmRef}
           validationErrorProps={validationError}
         />
         {/* STRAVA KEYS */}
         <h4>Strava Api Application Keys</h4>
         <Input
-          inputTypeProps={'text'}
-          inputIdProps={'register-client-id'}
-          inputAriaLabelProps={'client id'}
-          inputNameProps={'register-client-id'}
-          inputPlaceholderProps={'client ID'}
+          inputTypeProps="text"
+          inputIdProps="register-client-id"
+          inputAriaLabelProps="client id"
+          inputNameProps="register-client-id"
+          inputPlaceholderProps="client ID"
           inputRefProps={clientIdRef}
           validationErrorProps={validationError}
         />
         <Input
-          inputTypeProps={'text'}
-          inputIdProps={'register-client-secret'}
-          inputAriaLabelProps={'client secret'}
-          inputNameProps={'register-client-secret'}
-          inputPlaceholderProps={'client secret'}
+          inputTypeProps="text"
+          inputIdProps="register-client-secret"
+          inputAriaLabelProps="client secret"
+          inputNameProps="register-client-secret"
+          inputPlaceholderProps="client secret"
           inputRefProps={clientSecretRef}
           validationErrorProps={validationError}
         />
         <Input
-          inputTypeProps={'text'}
-          inputIdProps={'register-access-token'}
-          inputAriaLabelProps={'your access token'}
-          inputNameProps={'register-access-token'}
-          inputPlaceholderProps={'your access token'}
+          inputTypeProps="text"
+          inputIdProps="register-access-token"
+          inputAriaLabelProps="your access token"
+          inputNameProps="register-access-token"
+          inputPlaceholderProps="your access token"
           inputRefProps={accessTokenRef}
           validationErrorProps={validationError}
         />
         <div className={classes.form_btn_container}>
-          <ButtonGreen contentProps={'sign up'} disabledProps={loading} />
+          <ButtonGreen contentProps="sign up" disabledProps={loading} />
           {error && <ErrorComponentSml errorMessageProps={error} />}
         </div>
       </form>
       <p>
         Have an account? Sign In&nbsp;
-        <span onClick={formContentHandlerProps} className={classes.form_change}>
+        <span
+          onClick={formContentHandlerProps}
+          className={classes.form_change}
+          aria-hidden
+        >
           here
         </span>
       </p>
-      <button className={classes.help_btn} onClick={needHelpHandlerProps}>
+      <button
+        className={classes.help_btn}
+        onClick={needHelpHandlerProps}
+        type="button"
+      >
         Need Help Signing Up?
       </button>
     </>
   );
+};
+
+SignUp.propTypes = {
+  formContentHandlerProps: PropTypes.func.isRequired,
+  needHelpHandlerProps: PropTypes.func.isRequired,
 };
 export default SignUp;
