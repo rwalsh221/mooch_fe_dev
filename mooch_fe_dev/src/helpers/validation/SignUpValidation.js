@@ -16,6 +16,7 @@ class SignUpValidation extends Validation {
     };
 
     this.regExp = {
+      ...this.regExp,
       stravaAppKeyFormat: /^[a-z0-9]*$/,
       stravaClientIdFormat: /^[0-9]*$/,
     };

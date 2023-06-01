@@ -38,6 +38,7 @@
     "react/prop-types": "warn",
     "react/jsx-no-constructed-context-values": "warn",
     "react/jsx-props-no-spreading": "warn",
+    "react/button-has-type": "warn",
     "no-return-await": "warn",
     "react/no-array-index-key": "warn",
     "no-console": ["warn", { "allow": ["error"] }]

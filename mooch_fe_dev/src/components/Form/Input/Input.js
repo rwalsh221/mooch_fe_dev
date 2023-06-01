@@ -61,15 +61,18 @@ const Input = ({
   );
 };
 
+Input.defaultProps = {
+  validationErrorProps: null,
+};
+
 Input.propTypes = {
   inputTypeProps: PropTypes.string.isRequired,
   inputIdProps: PropTypes.string.isRequired,
   inputAriaLabelProps: PropTypes.string.isRequired,
   inputNameProps: PropTypes.string.isRequired,
-  inputRefProps: PropTypes.string.isRequired,
+  inputRefProps: PropTypes.shape({}).isRequired,
   inputPlaceholderProps: PropTypes.string.isRequired,
-  validationErrorProps: PropTypes.shape({ error: bool, inputName: string })
-    .isRequired,
+  validationErrorProps: PropTypes.shape({ error: bool, inputName: string }),
 };
 
 export default Input;

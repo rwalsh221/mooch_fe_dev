@@ -1,0 +1,25 @@
+.spinner {
+  background-color: var(--primary-color-green);
+  font-size: 5rem;
+  font-family: var(--logo-font);
+  color: var(--secondary-color-orange);
+  height: 15rem;
+  width: 15rem;
+  border-radius: 50%;
+  animation: linear forwards 1s rotate infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid var(--secondary-color-orange);
+  margin: 2rem auto;
+}
+
+@keyframes rotate {
+  0% {
+    rotate: 0deg;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
+}

@@ -5,7 +5,7 @@ import classes from '../Register.module.css';
 
 import { useAuth } from '../../../contexts/AuthContext';
 
-import { SignUpValidation } from '../../../helpers/validation';
+import SignUpValidation from '../../../helpers/validation/SignUpValidation';
 import errorHandler from '../../../helpers/errorHandlers';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';

@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import classes from '../Register.module.css';
 
 import { useAuth } from '../../../contexts/AuthContext';
-import { SignInValidation } from '../../../helpers/validation';
+import SignInValidation from '../../../helpers/validation/SignInValidation';
 import errorHandler from '../../../helpers/errorHandlers';
 import Input from '../../../components/Form/Input/Input';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';

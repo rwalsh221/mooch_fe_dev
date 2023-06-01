@@ -5,6 +5,7 @@ import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 import Header from '../../components/Header/Header';
 import classes from './RegisterConfirm.module.css';
 
+import Spinner from '../../components/Spinner/Spinner';
 import Card from '../../components/Layout/Card/Card';
 import ErrorComponent from '../../components/ErrorComponents/ErrorComponent/ErrorComponent';
 import Footer from '../../components/Footer/Footer';
@@ -176,7 +177,11 @@ const RegisterConfirm = () => {
 
   const setProfileCardContent = (userState, loadingState, errorState) => {
     if (loadingState) {
-      return <Card>'LOADING SPINNER'</Card>;
+      return (
+        <Card>
+          <Spinner />
+        </Card>
+      );
     } else if (errorState) {
       return <ErrorComponent errorMessageProps={'SIGNUP ERROR'} />;
     } else {

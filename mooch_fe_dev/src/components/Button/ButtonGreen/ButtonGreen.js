@@ -7,7 +7,7 @@ const ButtonGreen = ({ contentProps, disabledProps, onClickProps }) => (
     className={classes.button_green}
     disabled={disabledProps}
     onClick={onClickProps}
-    type="button"
+    // type={typeProps ? typeProps : 'button'}
   >
     {contentProps}
   </button>
@@ -15,12 +15,15 @@ const ButtonGreen = ({ contentProps, disabledProps, onClickProps }) => (
 
 ButtonGreen.defaultProps = {
   disabledProps: false,
+  // typeProps: 'button',
+  onClickProps: null,
 };
 
 ButtonGreen.propTypes = {
   contentProps: PropTypes.string.isRequired,
   disabledProps: PropTypes.bool,
-  onClickProps: PropTypes.func.isRequired,
+  onClickProps: PropTypes.func,
+  // typeProps: PropTypes.string,
 };
 
 export default ButtonGreen;
