@@ -70,7 +70,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Header signOutProps={true} />
+      <Header signOutProps />
       <main className={classes.dashboard}>
         {window.screen.width > 820 ? (
           <DesktopDashboard

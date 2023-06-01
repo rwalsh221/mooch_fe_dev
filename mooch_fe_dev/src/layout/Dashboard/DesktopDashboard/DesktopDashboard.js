@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './DesktopDashboard.module.css';
 
 import UserInfo from '../UserInfo/UserInfo';
@@ -7,7 +8,7 @@ import SegmentSnapshotSmall from '../SegmentSnapshotSmall/SegmentSnapshotSmall';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
 const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
-  console.log(userInfoProps);
+  // TODO: USERSEGMENTS PROPTYPES
   const userInfoContent = userInfoProps ? (
     <UserInfo
       userImgProps={userInfoProps.userProfile[0].profileImgUrl}
@@ -18,18 +19,21 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
 
   const userStatsContent = userInfoProps ? (
     <UserStats
-      rideYearProps={parseInt(userInfoProps.userStats[0].rideYearDist)}
-      rideAllProps={parseInt(userInfoProps.userStats[0].rideAllTimeDist)}
-      runYearProps={parseInt(userInfoProps.userStats[0].runYearDist)}
-      runAllProps={parseInt(userInfoProps.userStats[0].runAllTimeDist)}
-      swimYearProps={parseInt(userInfoProps.userStats[0].swimYearDist)}
-      swimAllProps={parseInt(userInfoProps.userStats[0].swimAllTimeDist)}
+      rideYearProps={parseInt(userInfoProps.userStats[0].rideYearDist, 10)}
+      rideAllProps={parseInt(userInfoProps.userStats[0].rideAllTimeDist, 10)}
+      runYearProps={parseInt(userInfoProps.userStats[0].runYearDist, 10)}
+      runAllProps={parseInt(userInfoProps.userStats[0].runAllTimeDist, 10)}
+      swimYearProps={parseInt(userInfoProps.userStats[0].swimYearDist, 10)}
+      swimAllProps={parseInt(userInfoProps.userStats[0].swimAllTimeDist, 10)}
     />
   ) : null;
 
-  const userSegmentContent = userInfoProps ? (
-    userInfoProps.userSegments.length !== 0 ? (
-      userInfoProps.userSegments.map((el, index) => (
+  const userSegmentContent = () => {
+    if (!userInfoProps) {
+      return null;
+    }
+    if (userInfoProps.userSegments.length !== 0) {
+      return userInfoProps.userSegments.map((el, index) => (
         <SegmentSnapshotSmall
           segmentNameProps={el[0].name}
           cityProps={el[0].city}
@@ -44,11 +48,33 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
           userImgProps={userInfoProps.userProfile[0].profileImgUrl}
           key={index}
         />
-      ))
-    ) : (
-      <SegmentSnapshotSmall newUserProps={true} />
-    )
-  ) : null;
+      ));
+    }
+    return <SegmentSnapshotSmall newUserProps />;
+  };
+
+  // const userSegmentContent = userInfoProps ? (
+  //   userInfoProps.userSegments.length !== 0 ? (
+  //     userInfoProps.userSegments.map((el, index) => (
+  //       <SegmentSnapshotSmall
+  //         segmentNameProps={el[0].name}
+  //         cityProps={el[0].city}
+  //         stateProps={el[0].state}
+  //         distanceProps={el[0].distance}
+  //         elevationHighProps={el[0].elevationHigh}
+  //         elevationLowProps={el[0].elevationLow}
+  //         avgGradeProps={el[0].avgGrade}
+  //         komProps={el[0].kom}
+  //         leaderboardProps={el.segmentTimes}
+  //         uidProps={uidProps}
+  //         userImgProps={userInfoProps.userProfile[0].profileImgUrl}
+  //         key={index}
+  //       />
+  //     ))
+  //   ) : (
+  //     <SegmentSnapshotSmall newUserProps={true} />
+  //   )
+  // ) : null;
 
   return (
     <section className={classes.dashboard}>
@@ -69,6 +95,34 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
       </div>
     </section>
   );
+};
+
+DesktopDashboard.propTypes = {
+  userInfoProps: PropTypes.shape({
+    userProfile: PropTypes.arrayOf(
+      PropTypes.shape({
+        profileImgUrl: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+      })
+    ),
+
+    userStats: PropTypes.arrayOf(
+      PropTypes.shape({
+        rideYearDist: PropTypes.number.isRequired,
+        rideAllTimeDist: PropTypes.number.isRequired,
+        runYearDist: PropTypes.number.isRequired,
+        runAllTimeDist: PropTypes.number.isRequired,
+        swimYearDist: PropTypes.number.isRequired,
+        swimAllTimeDist: PropTypes.number.isRequired,
+      })
+    ),
+
+    // userSegments: PropTypes
+  }).isRequired,
+
+  uidProps: PropTypes.string.isRequired,
+  getUserDataProps: PropTypes.func.isRequired,
 };
 
 export default DesktopDashboard;

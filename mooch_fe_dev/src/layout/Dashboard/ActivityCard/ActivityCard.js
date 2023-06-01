@@ -7,7 +7,7 @@ const ActivityCard = () => (
   <div className={classes.activity_card}>
     <div className={classes.activity_card__user}>
       <div className={classes.user_img}>
-        <img src={userImg} alt={'user'} />
+        <img src={userImg} alt="user" />
       </div>
       <div className={classes.user_name}>
         <p>Richard</p>

@@ -1,17 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './UserInfo.module.css';
 
-import userImg from '../../../assets/img/forest_bg.jpg';
-
-const UserInfo = ({
-  userImgProps,
-  firstnameProps,
-  lastnameProps,
-  countryProps,
-  followingProps,
-  followsProps,
-  totalActivitiesProps,
-}) => (
+const UserInfo = ({ userImgProps, firstnameProps, lastnameProps }) => (
   <div className={classes.user_info}>
     <img src={userImgProps} alt="user" className={classes.user_img} />
     <h2>
@@ -45,5 +36,11 @@ const UserInfo = ({
     </div>
   </div>
 );
+
+UserInfo.propTypes = {
+  userImgProps: PropTypes.string.isRequired,
+  firstnameProps: PropTypes.string.isRequired,
+  lastnameProps: PropTypes.string.isRequired,
+};
 
 export default UserInfo;

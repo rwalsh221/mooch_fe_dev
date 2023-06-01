@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import classes from './StravaSyncBtn.module.css';
 
 const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
   const [btnContent, setBtnContent] = useState('Sync MoOCH with STRAVA');
-  console.log(getUserDataProps);
+
   const syncWithStrava = async () => {
     try {
       // 1, Set btnContent to spinner
@@ -37,10 +38,18 @@ const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
   };
 
   return (
-    <button onClick={syncWithStrava} className={classes.strava_sync_btn}>
+    <button
+      type="button"
+      onClick={syncWithStrava}
+      className={classes.strava_sync_btn}
+    >
       {btnContent}
     </button>
   );
 };
 
+StravaSyncBtn.propTypes = {
+  uidProps: PropTypes.number.isRequired,
+  getUserDataProps: PropTypes.func.isRequired,
+};
 export default StravaSyncBtn;

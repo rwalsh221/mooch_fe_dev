@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import classes from './MobileDashboard.module.css';
 
 import UserInfo from '../UserInfo/UserInfo';
@@ -6,8 +7,8 @@ import UserStats from '../UserStats/UserStats';
 import SegmentSnapshotSmall from '../SegmentSnapshotSmall/SegmentSnapshotSmall';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
+// TODO: REFACTOR WITH DESKTOP DASHBOARD
 const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
-  console.log(getUserDataProps);
   const [mdContent, setMdContent] = useState(null);
   const yourStatsContent = userInfoProps ? (
     <>
@@ -17,12 +18,12 @@ const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
         lastnameProps={userInfoProps.userProfile[0].lastName}
       />
       <UserStats
-        rideYearProps={parseInt(userInfoProps.userStats[0].rideYearDist)}
-        rideAllProps={parseInt(userInfoProps.userStats[0].rideAllTimeDist)}
-        runYearProps={parseInt(userInfoProps.userStats[0].runYearDist)}
-        runAllProps={parseInt(userInfoProps.userStats[0].runAllTimeDist)}
-        swimYearProps={parseInt(userInfoProps.userStats[0].swimYearDist)}
-        swimAllProps={parseInt(userInfoProps.userStats[0].swimAllTimeDist)}
+        rideYearProps={parseInt(userInfoProps.userStats[0].rideYearDist, 10)}
+        rideAllProps={parseInt(userInfoProps.userStats[0].rideAllTimeDist, 10)}
+        runYearProps={parseInt(userInfoProps.userStats[0].runYearDist, 10)}
+        runAllProps={parseInt(userInfoProps.userStats[0].runAllTimeDist, 10)}
+        swimYearProps={parseInt(userInfoProps.userStats[0].swimYearDist, 10)}
+        swimAllProps={parseInt(userInfoProps.userStats[0].swimAllTimeDist, 10)}
       />
       <StravaSyncBtn uidProps={uidProps} getUserDataProps={getUserDataProps} />
     </>
@@ -52,7 +53,6 @@ const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
     </>
   ) : null;
 
-  console.log(mdContent);
   const setMdContentHandler = (content) => {
     if (content === 'stats') {
       setMdContent(yourStatsContent);
@@ -66,12 +66,14 @@ const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
         <div className={classes.md_container}>
           <nav className={classes.md_nav}>
             <button
+              type="button"
               className={classes.md_btn}
               onClick={() => setMdContentHandler('stats')}
             >
               Your Stats
             </button>
             <button
+              type="button"
               className={classes.md_btn}
               onClick={() => setMdContentHandler('segments')}
             >
@@ -79,12 +81,41 @@ const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
             </button>
           </nav>
           <div className={classes.md_content}>
-            {mdContent ? mdContent : yourStatsContent}
+            {/* {mdContent ? mdContent : yourStatsContent} */}
+            {mdContent || yourStatsContent}
           </div>
         </div>
       </div>
     </section>
   );
+};
+
+MobileDashboard.propTypes = {
+  userInfoProps: PropTypes.shape({
+    userProfile: PropTypes.arrayOf(
+      PropTypes.shape({
+        profileImgUrl: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+      })
+    ),
+
+    userStats: PropTypes.arrayOf(
+      PropTypes.shape({
+        rideYearDist: PropTypes.number.isRequired,
+        rideAllTimeDist: PropTypes.number.isRequired,
+        runYearDist: PropTypes.number.isRequired,
+        runAllTimeDist: PropTypes.number.isRequired,
+        swimYearDist: PropTypes.number.isRequired,
+        swimAllTimeDist: PropTypes.number.isRequired,
+      })
+    ),
+
+    // userSegments: PropTypes
+  }).isRequired,
+
+  uidProps: PropTypes.string.isRequired,
+  getUserDataProps: PropTypes.func.isRequired,
 };
 
 export default MobileDashboard;

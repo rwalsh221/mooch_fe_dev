@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import classes from './UserStats.module.css';
 
 import { metersToKilometer } from '../../../helpers/unitConversion';
@@ -32,8 +33,9 @@ const UserStats = ({
     },
   };
 
-  const statsDisplayHandler = (activity, ref) => {
+  const statsDisplayHandler = (activity, currentRef) => {
     const statDisplayCopy = { ...statDisplay };
+    const ref = currentRef;
 
     statDisplayCopy.prevRef = ref;
     statDisplayCopy.activity = activity;
@@ -49,12 +51,11 @@ const UserStats = ({
     setStatDisplay({ ...statDisplayCopy });
   };
 
-  console.log(stats);
-
   return (
     <div className={classes.user_stats}>
       <div className={classes.stat_btn_container}>
         <button
+          type="button"
           ref={allActivitiesBtnRef}
           onClick={() =>
             statsDisplayHandler('allActivities', allActivitiesBtnRef)
@@ -63,18 +64,21 @@ const UserStats = ({
           <span className="material-icons">assignment</span>
         </button>
         <button
+          type="button"
           ref={rideBtnRef}
           onClick={() => statsDisplayHandler('ride', rideBtnRef)}
         >
           <span className="material-icons">directions_bike</span>
         </button>
         <button
+          type="button"
           ref={runBtnRef}
           onClick={() => statsDisplayHandler('run', runBtnRef)}
         >
           <span className="material-icons">run_circle</span>
         </button>
         <button
+          type="button"
           ref={swimBtnRef}
           onClick={() => statsDisplayHandler('swim', swimBtnRef)}
         >
@@ -99,6 +103,15 @@ const UserStats = ({
       </div>
     </div>
   );
+};
+
+UserStats.propTypes = {
+  rideYearProps: PropTypes.number.isRequired,
+  rideAllProps: PropTypes.number.isRequired,
+  runYearProps: PropTypes.number.isRequired,
+  runAllProps: PropTypes.number.isRequired,
+  swimYearProps: PropTypes.number.isRequired,
+  swimAllProps: PropTypes.number.isRequired,
 };
 
 export default UserStats;
