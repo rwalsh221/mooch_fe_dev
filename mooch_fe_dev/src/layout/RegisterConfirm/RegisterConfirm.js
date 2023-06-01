@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
@@ -11,27 +12,24 @@ import Footer from '../../components/Footer/Footer';
 import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
-  //TODO: remove error from user preview state
-  //TODO: bring in firebase sign up from signup
-  //TODO: maybe error handler func
+  // TODO: remove error from user preview state
+  // TODO: bring in firebase sign up from signup
+  // TODO: maybe error handler func
 
-  console.log('RENDERREGCONFIRM');
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userPreviewState, setUserPreviewAState] = useState({
     loading: true,
   });
 
-  const { signUp, currentUser, checkEmail } = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   const getUserPreview = useCallback(async () => {
-    let moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
-    console.log(moochLocalStorage);
+    const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
 
     try {
       if (moochLocalStorage === null) {
-        console.log('mooch locoal storage null');
         throw new Error('Error');
       }
 

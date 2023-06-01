@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import classes from './UserAccount.module.css';
-
 import { Link, useNavigate } from 'react-router-dom';
+// import classes from './UserAccount.module.css';
+
 import { useAuth } from '../../contexts/AuthContext';
 
 const UserSettings = () => {
@@ -26,7 +26,9 @@ const UserSettings = () => {
       <h2 data-heading="secondary">My Account</h2>
       {error}
       <strong>Email:</strong>&nbsp;{currentUser.email}
-      <button onClick={handleSignOut}>log out</button>
+      <button onClick={handleSignOut} type="button">
+        log out
+      </button>
       <Link to="/update-account">Update Profile</Link>
     </div>
   );
