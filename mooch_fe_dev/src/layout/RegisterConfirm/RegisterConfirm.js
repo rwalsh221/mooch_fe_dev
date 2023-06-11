@@ -16,52 +16,20 @@ const RegisterConfirm = () => {
   // TODO: remove error from user preview state
   // TODO: bring in firebase sign up from signup
   // TODO: maybe error handler func
-  // TODO: ********************************* ADD INPUT FOR REFRESH TOKEN **************************************************
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userPreviewState, setUserPreviewAState] = useState({
-    loading: true,
-  });
+  const [userPreviewState, setUserPreviewAState] = useState(null);
+  const [signUpComplete, setSignUpComplete] = useState(false);
 
   const { currentUser, signUp } = useAuth();
   const navigate = useNavigate();
 
-  // const getUserPreview = async () => {
-  //   const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
-
-  //   try {
-  //     if (moochLocalStorage === null) {
-  //       throw new Error('Error');
-  //     }
-  //     console.log(moochLocalStorage);
-  //     const getUser = await fetch(
-  //       'https://www.strava.com/api/v3/athlete?access_token=f5ea5be9623d6f84364ed7f5b183cdc55eb182c1'
-  //     );
-
-  //     if (getUser.status !== 200) {
-  //       throw new Error('Error');
-  //     }
-
-  //     const getUserResponse = await getUser.json();
-
-  //     const userImg = getUserResponse.profile_medium;
-  //     const userFirstName = getUserResponse.firstname;
-  //     const userLastName = getUserResponse.lastname;
-
-  //     const userPreview = { userImg, userFirstName, userLastName };
-  //     setLoading(false);
-  //     setUserPreviewAState({ ...userPreview });
-  //   } catch (error) {
-  //     setError(true);
-  //     setLoading(false);
-  //     console.error(error);
-  //   }
-  // };
-  const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
+  // const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
   useEffect(() => {
     const getUserPreview = async () => {
       console.log('USE EFFECT');
+      const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
 
       try {
         if (moochLocalStorage === null) {
@@ -95,15 +63,12 @@ const RegisterConfirm = () => {
     getUserPreview();
   }, []);
 
-  const fireBaseSignUp = async () => {
+  const fireBaseSignUp = async (localStorage) => {
     // setLoading(true);
 
     try {
       // setLoading(true);
-      const newUser = await signUp(
-        moochLocalStorage.email,
-        moochLocalStorage.password
-      ); // get from local storage
+      const newUser = await signUp(localStorage.email, localStorage.password); // get from local storage
       console.log(currentUser);
       console.log('FIREBASE');
       // setLoading(false);
@@ -115,13 +80,15 @@ const RegisterConfirm = () => {
     }
   };
 
-  const moochAPISignUP = async (uid) => {
+  const moochAPISignUP = async (uid, localStorage) => {
     console.log('MOOCH');
+    // const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
+
     try {
       // let moochLocalStorage = localStorage.getItem('moochSignUP');
       const completeSignUpBody = {
-        uid: uid,
-        ...moochLocalStorage,
+        uid,
+        ...localStorage,
       };
 
       // const completeMoochApiAthleteReg = await fetch(
@@ -132,59 +99,30 @@ const RegisterConfirm = () => {
       //   }
       // );
 
-      const completeMoochApiAthleteReg = await fetch(
-        `${process.env.REACT_APP_MOOCH_API_URL}/test/register/`,
-        {
-          method: 'POST',
-          body: JSON.stringify(completeSignUpBody),
-        }
-      );
-
-      // const completeSignUpJson = await completeSignUp.text();
-      // console.log(completeSignUpJson);
-      console.log(completeMoochApiAthleteReg.status);
-      // navigate('/dashboard');
+      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/test/register/`, {
+        method: 'POST',
+        body: JSON.stringify(completeSignUpBody),
+      });
     } catch (error) {
       console.error(error);
     }
   };
 
-  // moochAPISignUP();
-  // console.log(currentUser.uid);
   const nRegisterHandler = async () => {
+    const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
+
     try {
-      // console.log(currentUser);
-      const completeFirebaseSignUp = await fireBaseSignUp();
-      // console.log(currentUser.uid);
-      console.log('BEFOE MOOCH');
-      console.log(completeFirebaseSignUp);
-      if (loading === false) {
-        const completeMoochApiSignUp = await moochAPISignUP(
-          completeFirebaseSignUp
-        );
-      }
-      // console.log(completeFirebaseSignUp);
-      // console.log(completeMoochApiSignUp);
-      if (!completeFirebaseSignUp) {
-        throw new Error('signup error');
-      }
+      const firebaseUid = await fireBaseSignUp(moochLocalStorage);
+
+      await moochAPISignUP(firebaseUid, moochLocalStorage);
+
+      setSignUpComplete(true);
+      // on complete set signupcomplete = true
     } catch (error) {
       console.log('CATCH ERROR');
       console.error(error.message);
     }
-
-    console.log('SIGNUP COMPLETE');
-    console.log(currentUser);
-
-    // const completeFirebaseSignup = await fireBaseSignUp();
-
-    // if (completeFirebaseSignup) {
-    // } else {
-    //   throw new Error('sign up error');
-    // }
   };
-
-  // nRegisterHandler();
 
   // NEED TO CHMAGE AD NO LONGER SEND REQUEST TO STRAVA FOR NEW ACCESS CODE
   const registerHandler = async () => {
@@ -227,12 +165,6 @@ const RegisterConfirm = () => {
     navigate('/dashboard');
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      console.log('HELLLOEEEE');
-    }
-  }, [currentUser]);
-
   const setProfileCardContent = (userState, loadingState, errorState) => {
     if (loadingState) {
       return (
@@ -246,6 +178,41 @@ const RegisterConfirm = () => {
       return <ErrorComponent errorMessageProps="SIGNUP ERROR" />;
     }
 
+    if (signUpComplete === false) {
+      return (
+        <Card>
+          <div className={classes.profile_img_container}>
+            <img src={userState.userImg} alt="user profile" />
+          </div>
+          <div className={classes.confirm_card_container}>
+            <p>
+              <span>{userState.userFirstName}</span>&nbsp;
+              <span>{userState.userLastName}</span>
+            </p>
+            <p>
+              Ready to link&nbsp;
+              <span data-heading="logo-small">MoOCH</span>&nbsp;&amp;&nbsp;
+              <span className={classes.strava}>STRAVA</span>
+            </p>
+            <p>please complete your account setup</p>
+            <div className={classes.confirm_card_btn_container}>
+              <ButtonGreen
+                contentProps="Complete"
+                onClickProps={async () => {
+                  await nRegisterHandler();
+                }}
+              />
+              <ButtonGreen
+                contentProps="Cancel"
+                onClickProps={() => {
+                  navigate('/');
+                }}
+              />
+            </div>
+          </div>
+        </Card>
+      );
+    }
     return (
       <Card>
         <div className={classes.profile_img_container}>
@@ -257,37 +224,22 @@ const RegisterConfirm = () => {
             <span>{userState.userLastName}</span>
           </p>
           <p>
-            Ready to link&nbsp;
             <span data-heading="logo-small">MoOCH</span>&nbsp;&amp;&nbsp;
-            <span className={classes.strava}>STRAVA</span>
+            <span className={classes.strava}>STRAVA</span>&nbsp; link Complete
           </p>
-          <p>please complete your account setup</p>
+          <p>please continue to your dashboard</p>
           <div className={classes.confirm_card_btn_container}>
             <ButtonGreen
               contentProps="Complete"
-              onClickProps={async () => {
-                await nRegisterHandler();
+              onClickProps={() => {
+                navigate('/dashboard');
               }}
             />
-            <ButtonGreen
-              contentProps="Cancel"
-              onClickProps={() => {
-                navigate('/');
-              }}
-            />
-            <ButtonGreen
-              contentProps="current"
-              onClickProps={() => {
-                console.log(currentUser);
-              }}
-            ></ButtonGreen>
           </div>
         </div>
       </Card>
     );
   };
-
-  // const profileCardContent = setProfileCardContent(userPreviewState);
 
   return (
     <>
