@@ -9,8 +9,10 @@ const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  const signUp = (email, password) =>
-    auth.createUserWithEmailAndPassword(email, password);
+  const signUp = async (email, password) => {
+    const newUser = await auth.createUserWithEmailAndPassword(email, password);
+    return newUser.user;
+  };
 
   const signIn = (email, password) =>
     auth.signInWithEmailAndPassword(email, password);
@@ -38,6 +40,8 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     checkEmail,
   };
+
+  console.log(value);
 
   return (
     <AuthContext.Provider value={value}>

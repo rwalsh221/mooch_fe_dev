@@ -84,6 +84,8 @@ select {
   }
 }
 
+/* CSS RESET END */
+
 html {
   background-color: white;
   font-size: 62.5%;
@@ -93,6 +95,13 @@ body {
   /* max-width: 2256px; */
   margin: 0 auto;
   font-family: 'Roboto', sans-serif;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
 }
 
 [data-heading='logo'],

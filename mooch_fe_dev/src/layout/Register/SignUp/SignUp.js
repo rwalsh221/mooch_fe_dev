@@ -32,6 +32,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   const clientIdRef = useRef();
   const clientSecretRef = useRef();
   const accessTokenRef = useRef();
+  const refreshTokenRef = useRef();
   const { checkEmail } = useAuth();
   const [validationError, setValidationError] = useState(null);
   const [error, setError] = useState('');
@@ -50,6 +51,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
       clientId: clientIdRef.current.value,
       clientSecret: clientSecretRef.current.value,
       accessToken: accessTokenRef.current.value,
+      refreshToken: refreshTokenRef.current.value,
     };
 
     localStorage.setItem('moochSignUP', JSON.stringify(data));
@@ -70,7 +72,8 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
       passwordConfirmRef,
       accessTokenRef,
       clientSecretRef,
-      clientIdRef
+      clientIdRef,
+      refreshTokenRef
     );
 
     if (validateInput.validatedInputs) {
@@ -170,6 +173,15 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputNameProps="register-access-token"
           inputPlaceholderProps="your access token"
           inputRefProps={accessTokenRef}
+          validationErrorProps={validationError}
+        />
+        <Input
+          inputTypeProps="text"
+          inputIdProps="register-refresh-token"
+          inputAriaLabelProps="your refresh token"
+          inputNameProps="register-refresh-token"
+          inputPlaceholderProps="your refresh token"
+          inputRefProps={refreshTokenRef}
           validationErrorProps={validationError}
         />
         <div className={classes.form_btn_container}>

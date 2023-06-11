@@ -13,6 +13,7 @@ class SignUpValidation extends Validation {
       registerClientId: 'register-client-id',
       registerClientSecret: 'register-client-secret',
       registerAccessToken: 'register-access-token',
+      registerRefreshToken: 'register-refresh-token',
     };
 
     this.regExp = {
@@ -59,7 +60,7 @@ class SignUpValidation extends Validation {
       }
       const currentInputId = inputs[i].current.id;
       const currentInputValue = inputs[i].current.value;
-
+      console.log(currentInputId);
       switch (currentInputId) {
         case this.inputs.registerEmail:
           this.validated.validatedInputs =
@@ -77,6 +78,7 @@ class SignUpValidation extends Validation {
           break;
         case this.inputs.registerClientSecret:
         case this.inputs.registerAccessToken:
+        case this.inputs.registerRefreshToken:
           this.validated.validatedInputs =
             this.validateStravaAppKeys(currentInputValue);
           break;

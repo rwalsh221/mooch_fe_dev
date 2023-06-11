@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import classes from './Header.module.css';
 
 import { useAuth } from '../../contexts/AuthContext';
@@ -22,7 +22,7 @@ const Header = ({ signOutProps }) => {
       <div data-wrapper="max-content-width">
         <div className={classes.header_content}>
           <h1 className={classes.heading} data-heading="logo">
-            MoOCH
+            <Link to="/">MoOCH</Link>
           </h1>
           {signOutProps && (
             <ButtonGreen contentProps="Sign Out" onClickProps={handleSignOut} />

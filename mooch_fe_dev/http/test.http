@@ -3,17 +3,17 @@
 
 #receive  user UID, client secret, client id, access token, refresh token and email from front end. = $signUpData
 
-# POST  http://localhost/mooch_be_dev/test/register/ HTTP/1.1
-# content-type: application/json
+POST  http://localhost/mooch_be_dev/test/register/ HTTP/1.1
+content-type: application/json
 
-# {
-#     "uid": "uid223434234",
-#     "clientId": "94702",
-#     "clientSecret": "cc7de5dea65e248c912898647081be8a10bc2291",
-#     "accessToken": "503df75975def393a899f5af6367fd4a97650e41",
-#     "refreshToken": "a7db2e02eb8937e226988d6f8b9ce9b3553bcb29",
-#     "email": "TESTkirbyRestClientTEST@email.com"
-# }
+{
+    "uid": "uid23323434234",
+    "clientId": "94702",
+    "clientSecret": "a9146f57456db6cfbb01729c74779c286777b5b0",
+    "accessToken": "8a0ac6be2d14f658b23e22c0425db0b107cc0d84",
+    "refreshToken": "a7db2e02eb8937e226988d6f8b9ce9b3553bcb29",
+    "email": "TESTnewnewkirbyRestClientTEST@email.com"
+}
 
 
 # GET LOGGED IN ATHLETE
@@ -36,7 +36,7 @@
 # GET "https://www.strava.com/api/v3/athlete" "Authorization: Bearer 1da75f8673be643e45fae77eebe26cc142729df2"
 
 # GET https://www.strava.com/api/v3/athletes/108854991/stats?access_token=49c0612ebd05d23394f6a3b1f9c2f97f8949a526
-GET https://www.strava.com/api/v3/athlete?access_token=127033e093f210a9388804a7253dbd50ceac015c
+# GET https://www.strava.com/api/v3/athlete?access_token=127033e093f210a9388804a7253dbd50ceac015c
 
 
 # POST REQUEST FOR GETTING REFRESH TOKEN ALOS RETURNS TOKEN EXIPIRY TIME FOR SIGNUP

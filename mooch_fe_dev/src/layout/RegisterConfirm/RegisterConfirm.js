@@ -16,6 +16,7 @@ const RegisterConfirm = () => {
   // TODO: remove error from user preview state
   // TODO: bring in firebase sign up from signup
   // TODO: maybe error handler func
+  // TODO: ********************************* ADD INPUT FOR REFRESH TOKEN **************************************************
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -23,68 +24,104 @@ const RegisterConfirm = () => {
     loading: true,
   });
 
-  const { currentUser } = useAuth();
+  const { currentUser, signUp } = useAuth();
   const navigate = useNavigate();
 
-  const getUserPreview = useCallback(async () => {
-    const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
+  // const getUserPreview = async () => {
+  //   const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
 
-    try {
-      if (moochLocalStorage === null) {
-        throw new Error('Error');
+  //   try {
+  //     if (moochLocalStorage === null) {
+  //       throw new Error('Error');
+  //     }
+  //     console.log(moochLocalStorage);
+  //     const getUser = await fetch(
+  //       'https://www.strava.com/api/v3/athlete?access_token=f5ea5be9623d6f84364ed7f5b183cdc55eb182c1'
+  //     );
+
+  //     if (getUser.status !== 200) {
+  //       throw new Error('Error');
+  //     }
+
+  //     const getUserResponse = await getUser.json();
+
+  //     const userImg = getUserResponse.profile_medium;
+  //     const userFirstName = getUserResponse.firstname;
+  //     const userLastName = getUserResponse.lastname;
+
+  //     const userPreview = { userImg, userFirstName, userLastName };
+  //     setLoading(false);
+  //     setUserPreviewAState({ ...userPreview });
+  //   } catch (error) {
+  //     setError(true);
+  //     setLoading(false);
+  //     console.error(error);
+  //   }
+  // };
+  const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
+  useEffect(() => {
+    const getUserPreview = async () => {
+      console.log('USE EFFECT');
+
+      try {
+        if (moochLocalStorage === null) {
+          throw new Error('Error');
+        }
+        console.log(moochLocalStorage);
+        const getUser = await fetch(
+          `https://www.strava.com/api/v3/athlete?access_token=${moochLocalStorage.accessToken}`
+        );
+
+        if (getUser.status !== 200) {
+          throw new Error('Error');
+        }
+
+        const getUserResponse = await getUser.json();
+
+        const userImg = getUserResponse.profile_medium;
+        const userFirstName = getUserResponse.firstname;
+        const userLastName = getUserResponse.lastname;
+
+        const userPreview = { userImg, userFirstName, userLastName };
+
+        setLoading(false);
+        setUserPreviewAState({ ...userPreview });
+      } catch (error) {
+        setError(true);
+        setLoading(false);
+        console.error(error);
       }
-
-      const getUser = await fetch(
-        'https://www.strava.com/api/v3/athlete?access_token=f5ea5be9623d6f84364ed7f5b183cdc55eb182c1'
-      );
-
-      if (getUser.status !== 200) {
-        throw new Error('Error');
-      }
-
-      const getUserResponse = await getUser.json();
-
-      const userImg = getUserResponse.profile_medium;
-      const userFirstName = getUserResponse.firstname;
-      const userLastName = getUserResponse.lastname;
-
-      const userPreview = { userImg, userFirstName, userLastName };
-      setLoading(false);
-      setUserPreviewAState({ ...userPreview });
-    } catch (error) {
-      setError(true);
-      setLoading(false);
-      console.error(error);
-    }
+    };
+    getUserPreview();
   }, []);
 
-  useEffect(() => {
-    getUserPreview();
-  }, [getUserPreview]);
-
-  const fireBaseSignUp = async (e) => {
+  const fireBaseSignUp = async () => {
     // setLoading(true);
 
     try {
-      // await signUp(emailRef.current.value, passwordRef.current.value); get from local storage
-      return true;
+      // setLoading(true);
+      const newUser = await signUp(
+        moochLocalStorage.email,
+        moochLocalStorage.password
+      ); // get from local storage
+      console.log(currentUser);
+      console.log('FIREBASE');
+      // setLoading(false);
+      console.log(currentUser);
+      return newUser.uid;
     } catch (error) {
-      if (error.name === 'FirebaseError') {
-        // errorHandler(setError, setLoading, 'Failed to create an account');
-        setError(true);
-      } else {
-        // errorHandler(setError, setLoading, error.message);
-        setError(true);
-      }
+      console.log(error.message);
+      setError(true);
     }
   };
 
   const moochAPISignUP = async (uid) => {
+    console.log('MOOCH');
     try {
-      let moochLocalStorage = localStorage.getItem('moochSignUP');
+      // let moochLocalStorage = localStorage.getItem('moochSignUP');
       const completeSignUpBody = {
-        userId: currentUser.uid,
-        ...JSON.parse(moochLocalStorage),
+        uid: uid,
+        ...moochLocalStorage,
       };
 
       // const completeMoochApiAthleteReg = await fetch(
@@ -107,22 +144,37 @@ const RegisterConfirm = () => {
       // console.log(completeSignUpJson);
       console.log(completeMoochApiAthleteReg.status);
       // navigate('/dashboard');
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // moochAPISignUP();
-
+  // console.log(currentUser.uid);
   const nRegisterHandler = async () => {
     try {
+      // console.log(currentUser);
       const completeFirebaseSignUp = await fireBaseSignUp();
-      const completeMoochApiSignUp = await moochAPISignUP();
-
-      if (!completeFirebaseSignUp && !completeMoochApiSignUp) {
+      // console.log(currentUser.uid);
+      console.log('BEFOE MOOCH');
+      console.log(completeFirebaseSignUp);
+      if (loading === false) {
+        const completeMoochApiSignUp = await moochAPISignUP(
+          completeFirebaseSignUp
+        );
+      }
+      // console.log(completeFirebaseSignUp);
+      // console.log(completeMoochApiSignUp);
+      if (!completeFirebaseSignUp) {
         throw new Error('signup error');
       }
     } catch (error) {
+      console.log('CATCH ERROR');
       console.error(error.message);
     }
+
+    console.log('SIGNUP COMPLETE');
+    console.log(currentUser);
 
     // const completeFirebaseSignup = await fireBaseSignUp();
 
@@ -132,7 +184,7 @@ const RegisterConfirm = () => {
     // }
   };
 
-  nRegisterHandler();
+  // nRegisterHandler();
 
   // NEED TO CHMAGE AD NO LONGER SEND REQUEST TO STRAVA FOR NEW ACCESS CODE
   const registerHandler = async () => {
@@ -175,6 +227,12 @@ const RegisterConfirm = () => {
     navigate('/dashboard');
   };
 
+  useEffect(() => {
+    if (currentUser) {
+      console.log('HELLLOEEEE');
+    }
+  }, [currentUser]);
+
   const setProfileCardContent = (userState, loadingState, errorState) => {
     if (loadingState) {
       return (
@@ -182,41 +240,51 @@ const RegisterConfirm = () => {
           <Spinner />
         </Card>
       );
-    } else if (errorState) {
-      return <ErrorComponent errorMessageProps={'SIGNUP ERROR'} />;
-    } else {
-      return (
-        <Card>
-          <div className={classes.profile_img_container}>
-            <img src={userState.userImg} alt="user profile"></img>
-          </div>
-          <div className={classes.confirm_card_container}>
-            <p>
-              <span>{userState.userFirstName}</span>&nbsp;
-              <span>{userState.userLastName}</span>
-            </p>
-            <p>
-              Ready to link&nbsp;
-              <span data-heading={'logo-small'}>MoOCH</span>&nbsp;&amp;&nbsp;
-              <span className={classes.strava}>STRAVA</span>
-            </p>
-            <p>please complete your account setup</p>
-            <div className={classes.confirm_card_btn_container}>
-              <ButtonGreen
-                contentProps={'Complete'}
-                onClickProps={registerHandler}
-              />
-              <ButtonGreen
-                contentProps={'Cancel'}
-                onClickProps={() => {
-                  navigate('/');
-                }}
-              />
-            </div>
-          </div>
-        </Card>
-      );
     }
+
+    if (errorState) {
+      return <ErrorComponent errorMessageProps="SIGNUP ERROR" />;
+    }
+
+    return (
+      <Card>
+        <div className={classes.profile_img_container}>
+          <img src={userState.userImg} alt="user profile" />
+        </div>
+        <div className={classes.confirm_card_container}>
+          <p>
+            <span>{userState.userFirstName}</span>&nbsp;
+            <span>{userState.userLastName}</span>
+          </p>
+          <p>
+            Ready to link&nbsp;
+            <span data-heading="logo-small">MoOCH</span>&nbsp;&amp;&nbsp;
+            <span className={classes.strava}>STRAVA</span>
+          </p>
+          <p>please complete your account setup</p>
+          <div className={classes.confirm_card_btn_container}>
+            <ButtonGreen
+              contentProps="Complete"
+              onClickProps={async () => {
+                await nRegisterHandler();
+              }}
+            />
+            <ButtonGreen
+              contentProps="Cancel"
+              onClickProps={() => {
+                navigate('/');
+              }}
+            />
+            <ButtonGreen
+              contentProps="current"
+              onClickProps={() => {
+                console.log(currentUser);
+              }}
+            ></ButtonGreen>
+          </div>
+        </div>
+      </Card>
+    );
   };
 
   // const profileCardContent = setProfileCardContent(userPreviewState);
