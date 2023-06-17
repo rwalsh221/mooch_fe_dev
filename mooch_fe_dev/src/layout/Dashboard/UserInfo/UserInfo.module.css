@@ -7,6 +7,7 @@
   width: 80%;
   padding: var(--padding-100);
   border: 1px solid var(--primary-color-green-800);
+  box-shadow: 2px 2px 5px black;
 }
 
 .user_img {
@@ -14,6 +15,8 @@
   height: 10rem;
   border-radius: 100%;
   margin: var(--margin-100) 0;
+  padding: 5px;
+  border: 5px solid var(--secondary-color-orange);
 }
 
 .user_info h2 {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './DesktopDashboard.module.css';
@@ -9,6 +10,7 @@ import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
 const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
   // TODO: USERSEGMENTS PROPTYPES
+  console.log(userInfoProps);
   const userInfoContent = userInfoProps ? (
     <UserInfo
       userImgProps={userInfoProps.userProfile[0].profileImgUrl}
@@ -28,7 +30,7 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
     />
   ) : null;
 
-  const userSegmentContent = () => {
+  const UserSegmentContent = () => {
     if (!userInfoProps) {
       return null;
     }
@@ -89,7 +91,7 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
             />
           </div>
           <div className={classes.dashboard_segment_leaderboard}>
-            {userSegmentContent}
+            {<UserSegmentContent />}
           </div>
         </div>
       </div>
@@ -109,12 +111,12 @@ DesktopDashboard.propTypes = {
 
     userStats: PropTypes.arrayOf(
       PropTypes.shape({
-        rideYearDist: PropTypes.number.isRequired,
-        rideAllTimeDist: PropTypes.number.isRequired,
-        runYearDist: PropTypes.number.isRequired,
-        runAllTimeDist: PropTypes.number.isRequired,
-        swimYearDist: PropTypes.number.isRequired,
-        swimAllTimeDist: PropTypes.number.isRequired,
+        rideYearDist: PropTypes.string.isRequired,
+        rideAllTimeDist: PropTypes.string.isRequired,
+        runYearDist: PropTypes.string.isRequired,
+        runAllTimeDist: PropTypes.string.isRequired,
+        swimYearDist: PropTypes.string.isRequired,
+        swimAllTimeDist: PropTypes.string.isRequired,
       })
     ),
 

@@ -49,7 +49,7 @@ const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
 };
 
 StravaSyncBtn.propTypes = {
-  uidProps: PropTypes.number.isRequired,
+  uidProps: PropTypes.string.isRequired,
   getUserDataProps: PropTypes.func.isRequired,
 };
 export default StravaSyncBtn;

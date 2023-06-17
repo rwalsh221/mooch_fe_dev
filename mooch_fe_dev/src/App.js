@@ -13,7 +13,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Register />} />
       <Route path="*" element={<Register />} />
-      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="dashboard" element={<Dashboard />} exact />
       <Route path="account" element={<UserAccount />} />
       <Route path="forgot-password" element={<ForgotPassword />} />
       <Route path="register-confirm" element={<RegisterConfirm />} />

@@ -1,5 +1,5 @@
-/* eslint-disable */
-import React, { useState, useEffect, useCallback } from 'react';
+// /* eslint-disable */
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 import Header from '../../components/Header/Header';
@@ -13,8 +13,6 @@ import Footer from '../../components/Footer/Footer';
 import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
-  // TODO: remove error from user preview state
-  // TODO: bring in firebase sign up from signup
   // TODO: maybe error handler func
 
   const [error, setError] = useState(false);
@@ -22,20 +20,19 @@ const RegisterConfirm = () => {
   const [userPreviewState, setUserPreviewAState] = useState(null);
   const [signUpComplete, setSignUpComplete] = useState(false);
 
-  const { currentUser, signUp } = useAuth();
+  const { currentUser, signUp, signOut } = useAuth();
   const navigate = useNavigate();
 
   // const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
   useEffect(() => {
     const getUserPreview = async () => {
-      console.log('USE EFFECT');
       const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
 
       try {
         if (moochLocalStorage === null) {
           throw new Error('Error');
         }
-        console.log(moochLocalStorage);
+
         const getUser = await fetch(
           `https://www.strava.com/api/v3/athlete?access_token=${moochLocalStorage.accessToken}`
         );
@@ -64,15 +61,13 @@ const RegisterConfirm = () => {
   }, []);
 
   const fireBaseSignUp = async (localStorage) => {
-    // setLoading(true);
-
     try {
-      // setLoading(true);
+      if (currentUser) {
+        await signOut();
+      }
+
       const newUser = await signUp(localStorage.email, localStorage.password); // get from local storage
-      console.log(currentUser);
-      console.log('FIREBASE');
-      // setLoading(false);
-      console.log(currentUser);
+
       return newUser.uid;
     } catch (error) {
       console.log(error.message);
@@ -81,23 +76,11 @@ const RegisterConfirm = () => {
   };
 
   const moochAPISignUP = async (uid, localStorage) => {
-    console.log('MOOCH');
-    // const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
-
     try {
-      // let moochLocalStorage = localStorage.getItem('moochSignUP');
       const completeSignUpBody = {
         uid,
         ...localStorage,
       };
-
-      // const completeMoochApiAthleteReg = await fetch(
-      //   `${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`,
-      //   {
-      //     method: 'POST',
-      //     body: JSON.stringify(completeSignUpBody),
-      //   }
-      // );
 
       await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/test/register/`, {
         method: 'POST',
@@ -108,61 +91,21 @@ const RegisterConfirm = () => {
     }
   };
 
-  const nRegisterHandler = async () => {
+  const registerHandler = async () => {
     const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
 
     try {
+      setLoading(true);
       const firebaseUid = await fireBaseSignUp(moochLocalStorage);
 
       await moochAPISignUP(firebaseUid, moochLocalStorage);
 
       setSignUpComplete(true);
-      // on complete set signupcomplete = true
+      setLoading(false);
     } catch (error) {
       console.log('CATCH ERROR');
       console.error(error.message);
     }
-  };
-
-  // NEED TO CHMAGE AD NO LONGER SEND REQUEST TO STRAVA FOR NEW ACCESS CODE
-  const registerHandler = async () => {
-    // 1 get code param from url
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const authCode = urlParams.get('code');
-    // 2, get local stored sign up data
-    let moochLocalStorage = localStorage.getItem('moochSignUP');
-    const signUpData = { ...JSON.parse(moochLocalStorage), authCode };
-    // 3, send sign up data to mooch back end
-    const submitSignUp = await fetch(
-      `${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/registerAuth/`,
-      {
-        method: 'POST',
-        body: JSON.stringify(signUpData),
-        // authCode,
-      }
-    );
-
-    const submitSignUpResponse = await submitSignUp.json();
-
-    // ABOVE NO LONGER NEEDED AS WAS USED TO EXCHANGE STRAVA AUTH TOKEN FOR READ_ALL
-    const completeSignUpBody = {
-      ...submitSignUpResponse,
-      userId: currentUser.uid,
-      ...JSON.parse(moochLocalStorage),
-    };
-
-    const completeSignUp = await fetch(
-      `${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`,
-      {
-        method: 'POST',
-        body: JSON.stringify(completeSignUpBody),
-      }
-    );
-
-    const completeSignUpJson = await completeSignUp.text();
-    console.log(completeSignUpJson);
-    navigate('/dashboard');
   };
 
   const setProfileCardContent = (userState, loadingState, errorState) => {
@@ -199,7 +142,7 @@ const RegisterConfirm = () => {
               <ButtonGreen
                 contentProps="Complete"
                 onClickProps={async () => {
-                  await nRegisterHandler();
+                  await registerHandler();
                 }}
               />
               <ButtonGreen

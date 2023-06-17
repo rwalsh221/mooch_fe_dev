@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useCallback } from 'react';
 import classes from './Dashboard.module.css';
 import { useAuth } from '../../contexts/AuthContext';
@@ -6,6 +7,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import DesktopDashboard from './DesktopDashboard/DesktopDashboard';
 import MobileDashboard from './MobileDashboard/MobileDashboard';
+import Spinner from '../../components/Spinner/Spinner';
 
 // add mobile nav and make responsive *done*
 
@@ -31,6 +33,7 @@ import MobileDashboard from './MobileDashboard/MobileDashboard';
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const { currentUser } = useAuth();
 
@@ -59,6 +62,7 @@ const Dashboard = () => {
         userStats: getUserStatsJson,
         userSegments: getUserSegmentsJson,
       });
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -72,7 +76,9 @@ const Dashboard = () => {
     <>
       <Header signOutProps />
       <main className={classes.dashboard}>
-        {window.screen.width > 820 ? (
+        {loading ? (
+          <Spinner />
+        ) : window.screen.width > 820 ? (
           <DesktopDashboard
             userInfoProps={userInfo}
             uidProps={currentUser.uid}
