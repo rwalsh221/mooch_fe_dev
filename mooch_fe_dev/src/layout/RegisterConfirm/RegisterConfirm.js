@@ -82,7 +82,7 @@ const RegisterConfirm = () => {
         ...localStorage,
       };
 
-      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/register/`, {
+      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`, {
         method: 'POST',
         body: JSON.stringify(completeSignUpBody),
       });
