@@ -26,7 +26,11 @@ const SegmentSnapshotSmall = ({
     return (
       <div className={classes.segment_snapshot_no_seg}>
         <h2>YOU DO NOT HAVE ANY SEGMENTS</h2>
-        <p>please sync MoOCH with STRAVA</p>
+        <p>
+          please sync&nbsp;<span data-heading="logo-small">MoOCH</span>{' '}
+          with&nbsp;
+          <span data-heading="logo-strava">STRAVA</span>
+        </p>
       </div>
     );
   }

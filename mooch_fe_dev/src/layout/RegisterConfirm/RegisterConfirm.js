@@ -1,6 +1,6 @@
 // /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 import Header from '../../components/Header/Header';
 import classes from './RegisterConfirm.module.css';
@@ -13,7 +13,7 @@ import Footer from '../../components/Footer/Footer';
 import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
-  // TODO: maybe error handler func
+  // TODO: needs to error if any step fails
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -22,8 +22,9 @@ const RegisterConfirm = () => {
 
   const { currentUser, signUp, signOut } = useAuth();
   const navigate = useNavigate();
+  const formSubmitted = useLocation();
+  console.log(formSubmitted);
 
-  // const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
   useEffect(() => {
     const getUserPreview = async () => {
       const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
@@ -93,17 +94,19 @@ const RegisterConfirm = () => {
 
   const registerHandler = async () => {
     const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
-
+    let firebaseUid;
     try {
       setLoading(true);
-      const firebaseUid = await fireBaseSignUp(moochLocalStorage);
+      firebaseUid = await fireBaseSignUp(moochLocalStorage);
 
       await moochAPISignUP(firebaseUid, moochLocalStorage);
 
       setSignUpComplete(true);
       setLoading(false);
     } catch (error) {
-      console.log('CATCH ERROR');
+      if (currentUser.uid === firebaseUid) {
+        await currentUser.delete();
+      }
       console.error(error.message);
     }
   };
@@ -192,7 +195,11 @@ const RegisterConfirm = () => {
         data-wrapper="max-content-width"
       >
         <div className={classes.register_confirm_container}>
-          {setProfileCardContent(userPreviewState, loading, error)}
+          {formSubmitted.state?.submit ? (
+            setProfileCardContent(userPreviewState, loading, error)
+          ) : (
+            <Navigate to="/" />
+          )}
         </div>
       </main>
       <Footer />

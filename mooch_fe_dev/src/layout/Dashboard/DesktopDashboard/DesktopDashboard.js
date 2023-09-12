@@ -1,4 +1,4 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './DesktopDashboard.module.css';
@@ -9,7 +9,7 @@ import SegmentSnapshotSmall from '../SegmentSnapshotSmall/SegmentSnapshotSmall';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
 const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
-  // TODO: USERSEGMENTS PROPTYPES
+  // TODO USERSEGMENTCONTENT
   console.log(userInfoProps);
   const userInfoContent = userInfoProps ? (
     <UserInfo
@@ -30,7 +30,7 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
     />
   ) : null;
 
-  const UserSegmentContent = () => {
+  const userSegmentContent = () => {
     if (!userInfoProps) {
       return null;
     }
@@ -91,7 +91,7 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
             />
           </div>
           <div className={classes.dashboard_segment_leaderboard}>
-            {<UserSegmentContent />}
+            {userSegmentContent()}
           </div>
         </div>
       </div>

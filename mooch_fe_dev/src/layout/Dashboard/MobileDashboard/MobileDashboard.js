@@ -7,7 +7,7 @@ import UserStats from '../UserStats/UserStats';
 import SegmentSnapshotSmall from '../SegmentSnapshotSmall/SegmentSnapshotSmall';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
-// TODO: REFACTOR WITH DESKTOP DASHBOARD
+// : REFACTOR WITH DESKTOP DASHBOARD
 const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
   const [mdContent, setMdContent] = useState(null);
   const yourStatsContent = userInfoProps ? (

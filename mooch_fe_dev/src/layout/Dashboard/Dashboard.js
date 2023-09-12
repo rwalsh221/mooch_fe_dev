@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import classes from './Dashboard.module.css';
 import { useAuth } from '../../contexts/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -9,33 +10,16 @@ import DesktopDashboard from './DesktopDashboard/DesktopDashboard';
 import MobileDashboard from './MobileDashboard/MobileDashboard';
 import Spinner from '../../components/Spinner/Spinner';
 
-// add mobile nav and make responsive *done*
-
-// add logout btn to header *done*
-
-// need elev gain on segment card *done*
-
-// add sport switch func for icon on segment card
-
-// refactor sync mooch starva func and add get segment cards *done*
-
-// add loading info to sync with strava button *done*
-
-// adjust layout so all inline on left side. *done*
-
-// TODO: look at error when sign in failed. *done*
 // TODO: add fastest user img to segment card. need to get from backend
 // TODO: look at backend headers
-// TODO: ADD ERROR COMPONENT
 // TODO: ADD PRIVATE ROUTES
-
-// TODO: DELETE USER FROM FIREBASE IF CANCEL ON MO ST SYNC OR FAILED SIGNUP firebase.auth().currentUser.delete()
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const { currentUser } = useAuth();
+  console.log(currentUser);
 
   const getUserData = useCallback(async () => {
     try {
@@ -71,7 +55,7 @@ const Dashboard = () => {
   useEffect(() => {
     getUserData();
   }, [getUserData]);
-
+  console.log(currentUser);
   return (
     <>
       <Header signOutProps />

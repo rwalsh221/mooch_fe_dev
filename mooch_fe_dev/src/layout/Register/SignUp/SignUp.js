@@ -14,17 +14,10 @@ import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponen
 
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage last thing
-  // TODO: 1, set session storage with strava data, 1b, redirect to reg cofirm 2, signup to firebase, 3,  set mooch db with starva data,FAIL rdiect to error compnent
 
   // TODO:  need to make a new error component - for dashboard access when not signed in. error boundray WDS
 
   // TODO: Add github link to footer
-
-  // TODO: test
-  // TODO: ADD FORM VALIDATION and add error component from sign in to signup. done
-  // TODO: FORM REF OR STATE. done
-
-  // TODO: eslint
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -39,8 +32,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const emailTest = 'test@test.com';
-  sessionStorage.setItem('email', emailTest);
 
   const validate = new SignUpValidation();
 
@@ -56,12 +47,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
 
     localStorage.setItem('moochSignUP', JSON.stringify(data));
   };
-
-  // const clearForm = (...refs) => {
-  //   refs.forEach((el) => {
-  //     el.current.value = '';
-  //   });
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,7 +72,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           throw unavailableEmailErr;
         }
         setSignUpLocalStorage();
-        navigate('/register-confirm');
+        navigate('/register-confirm', { state: { submit: true } });
       } catch (error) {
         if (error.name === 'emailUnavailable') {
           // manually add validateInput.errorObj for email unavailable error
