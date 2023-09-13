@@ -15,7 +15,7 @@ import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponen
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage last thing
 
-  // TODO:  need to make a new error component - for dashboard access when not signed in. error boundray WDS
+  // TODO:  need to make a new error component - for dashboard access when not signed in. error boundray WDS -add url param to show signup or signin form see bytegrad video
 
   // TODO: Add github link to footer
 
