@@ -12,17 +12,37 @@ import ErrorBoundaryFallback from './components/ErrorComponents/ErrorBoundary/Er
 
 const App = () => (
   <AuthProvider>
-    <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
-      {/* add private route for dashboard and account */}
-      <Routes>
-        <Route path="/" element={<Register />} />
-        <Route path="*" element={<Register />} />
-        <Route path="dashboard" element={<Dashboard />} exact />
-        <Route path="account" element={<UserAccount />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="register-confirm" element={<RegisterConfirm />} />
-      </Routes>
-    </ErrorBoundary>
+    <Routes>
+      <Route path="/" element={<Register />} />
+      <Route path="*" element={<Register />} />
+      <Route path="landing" element={<Register />} />
+      <Route
+        path="dashboard"
+        element={
+          <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+            <Dashboard />
+          </ErrorBoundary>
+        }
+        exact
+      />
+      <Route
+        path="account"
+        element={
+          <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+            <UserAccount />
+          </ErrorBoundary>
+        }
+      />
+      <Route
+        path="forgot-password"
+        element={
+          <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+            <ForgotPassword />
+          </ErrorBoundary>
+        }
+      />
+      <Route path="register-confirm" element={<RegisterConfirm />} />
+    </Routes>
   </AuthProvider>
 );
 

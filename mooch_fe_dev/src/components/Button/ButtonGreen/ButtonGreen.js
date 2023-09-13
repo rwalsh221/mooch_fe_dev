@@ -8,6 +8,7 @@ const ButtonGreen = ({ contentProps, disabledProps, onClickProps }) => (
     disabled={disabledProps}
     onClick={onClickProps}
     // type={typeProps ? typeProps : 'button'}
+    type="button"
   >
     {contentProps}
   </button>
