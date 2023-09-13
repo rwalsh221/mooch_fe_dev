@@ -8,10 +8,11 @@ import { AuthProvider } from './contexts/AuthContext';
 import UserAccount from './layout/UserAccount/UserAccount';
 import ForgotPassword from './layout/ForgotPassword/ForgotPassword';
 import RegisterConfirm from './layout/RegisterConfirm/RegisterConfirm';
+import ErrorBoundaryFallback from './components/ErrorComponents/ErrorBoundary/ErrorBoundaryFallback/ErrorBoundaryFallback';
 
 const App = () => (
   <AuthProvider>
-    <ErrorBoundary fallback={<Register />}>
+    <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
       {/* add private route for dashboard and account */}
       <Routes>
         <Route path="/" element={<Register />} />

@@ -1,0 +1,27 @@
+.error_boundary {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error_boundary_content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  padding: 6rem;
+}
+
+.error_boundary_content p {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  color: red;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.error_boundary_content button {
+  margin: 2rem;
+}
