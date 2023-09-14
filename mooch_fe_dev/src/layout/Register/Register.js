@@ -11,9 +11,22 @@ import SignUpHelp from './SignUpHelp/SignUpHelp';
 import forestBackground from '../../assets/img/forest_bg.jpg';
 
 const Register = () => {
-  const [registerFormContent, setRegisterFormContent] = useState({
+  const queryString = window.location.search;
+
+  const urlParams = new URLSearchParams(queryString);
+
+  const initRegisterFormContent = {
     signIn: false,
     signUp: true,
+  };
+
+  if (urlParams.get('state') === 'signin') {
+    initRegisterFormContent.signIn = true;
+    initRegisterFormContent.signUp = false;
+  }
+
+  const [registerFormContent, setRegisterFormContent] = useState({
+    ...initRegisterFormContent,
   });
 
   const [needHelp, setNeedHelp] = useState(false);

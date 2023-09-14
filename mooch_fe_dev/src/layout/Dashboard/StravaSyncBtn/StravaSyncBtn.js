@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classes from './StravaSyncBtn.module.css';
+// import MoochLogo from '../../../components/Typography/MoochLogo/MoochLogo';
 
 const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
-  const [btnContent, setBtnContent] = useState('Sync MoOCH with STRAVA');
+  const [btnContent, setBtnContent] = useState(`Sync MoOCH with STRAVA`);
 
   const syncWithStrava = async () => {
     try {
