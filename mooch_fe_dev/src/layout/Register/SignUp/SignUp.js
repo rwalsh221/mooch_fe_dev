@@ -15,8 +15,6 @@ import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponen
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage last thing
 
-  // TODO:  need to make a new error component - for dashboard access when not signed in. error boundray WDS -add url param to show signup or signin form see bytegrad video
-
   // TODO: Add github link to footer
 
   const emailRef = useRef();
@@ -49,6 +47,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log('submit');
     e.preventDefault();
     setLoading(true);
     const validateInput = validate.validateInputHandler(
@@ -96,6 +95,10 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
 
   return (
     <>
+      <ButtonGreen
+        contentProps="hi"
+        onClickProps={() => navigate('/dashboard')}
+      />
       <h3 className={classes.register_card__heading}>
         Create your MoOCH Account
       </h3>
@@ -170,7 +173,11 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           validationErrorProps={validationError}
         />
         <div className={classes.form_btn_container}>
-          <ButtonGreen contentProps="sign up" disabledProps={loading} />
+          <ButtonGreen
+            contentProps="sign up"
+            disabledProps={loading}
+            btnTypeProps="submit"
+          />
           {error && <ErrorComponentSml errorMessageProps={error} />}
         </div>
       </form>

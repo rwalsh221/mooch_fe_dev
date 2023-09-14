@@ -10,7 +10,12 @@ export const secondsToMinutes = (seconds) => {
   }
   const splitMinutesString = minutesString.split('.');
   const secondsDecimal = `0.${splitMinutesString[1]}`;
-  const convertedSeconds = (secondsDecimal * 60).toFixed();
+  let convertedSeconds = (secondsDecimal * 60).toFixed();
+
+  if (convertedSeconds.length === 1) {
+    convertedSeconds = `0${convertedSeconds}`;
+  }
+
   return `${splitMinutesString[0]}:${convertedSeconds}`;
 };
 
@@ -20,5 +25,8 @@ export const calculateSpeed = (distance, time) => {
   const kilometersPerSecond = metersPerSecond / 1000; // converts to kilometers per second
   const kilometersPerMinute = kilometersPerSecond * 60; // converts to kilometers per minute
   const kilometersPerHour = kilometersPerMinute * 60; // converts to kilomters per hour
+  console.log(distance);
+  console.log(time);
+  console.log(kilometersPerHour.toFixed(1));
   return kilometersPerHour.toFixed(1);
 };
