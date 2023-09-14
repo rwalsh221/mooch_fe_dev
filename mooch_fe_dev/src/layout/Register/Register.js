@@ -5,7 +5,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
-
+import MoochLogo from '../../components/Typography/MoochLogo/MoochLogo';
 import SignUpHelp from './SignUpHelp/SignUpHelp';
 // ASSETS
 import forestBackground from '../../assets/img/forest_bg.jpg';
@@ -51,7 +51,7 @@ const Register = () => {
               className={classes.register_card__logo}
               data-heading="logo-small"
             >
-              MoOCH
+              <MoochLogo logoSizeProps="small" />
             </h2>
             {registerFormContent.signIn && (
               <SignIn formContentHandlerProps={formContentHandler} />

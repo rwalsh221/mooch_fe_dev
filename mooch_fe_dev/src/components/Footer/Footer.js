@@ -1,13 +1,13 @@
 import React from 'react';
 import classes from './Footer.module.css';
 
+import MoochLogo from '../Typography/MoochLogo/MoochLogo';
+
 const Footer = () => (
   <footer className={classes.footer}>
     <div className={classes.footer_container} data-wrapper="max-content-width">
       <div>
-        <p className={classes.footer_logo} data-heading="logo-small">
-          MoOCH
-        </p>
+        <MoochLogo logoSizeProps="large" />
         <p className={classes.footer_copyright}>&copy;&nbsp;2022 MoOCH</p>
       </div>
       <div className={classes.footer_content}>

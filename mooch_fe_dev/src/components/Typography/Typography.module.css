@@ -1,0 +1,19 @@
+.mooch_logo {
+  color: var(--primary-color-green);
+
+  font-family: var(--logo-font);
+  width: max-content;
+  letter-spacing: 0.5px;
+}
+
+.mooch_logo_default {
+  font-size: 2.5rem;
+}
+
+.mooch_logo_large {
+  font-size: 4rem;
+}
+
+.mooch_logo_small {
+  font-size: 1.5rem;
+}

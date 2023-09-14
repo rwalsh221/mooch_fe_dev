@@ -47,7 +47,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log('submit');
     e.preventDefault();
     setLoading(true);
     const validateInput = validate.validateInputHandler(
@@ -95,10 +94,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
 
   return (
     <>
-      <ButtonGreen
-        contentProps="hi"
-        onClickProps={() => navigate('/dashboard')}
-      />
       <h3 className={classes.register_card__heading}>
         Create your MoOCH Account
       </h3>

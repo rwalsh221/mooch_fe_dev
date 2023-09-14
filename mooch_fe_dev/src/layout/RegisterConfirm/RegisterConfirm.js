@@ -14,6 +14,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
   // TODO: needs to error if any step fails
+  // TODO: refactor
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
