@@ -1,28 +1,26 @@
 // /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
+import { useLocation, Navigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 import Header from '../../components/Header/Header';
 import classes from './RegisterConfirm.module.css';
 
+import SignUpContinue from './SignUpContinue/SignUpContinue';
+import SignUpLink from './SignUpLink/SignUpLink';
 import Spinner from '../../components/Spinner/Spinner';
 import Card from '../../components/Layout/Card/Card';
 import ErrorComponent from '../../components/ErrorComponents/ErrorComponent/ErrorComponent';
 import Footer from '../../components/Footer/Footer';
 
-import { useAuth } from '../../contexts/AuthContext';
-
 const RegisterConfirm = () => {
-  // TODO: needs to error if any step fails
   // TODO: refactor
-
+  const { currentUser, signOut, signUp, getCurrentUser } = useAuth();
+  console.log('REENENENENENENENENENENENENENENENENENENENNE', getCurrentUser());
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userPreviewState, setUserPreviewAState] = useState(null);
   const [signUpComplete, setSignUpComplete] = useState(false);
 
-  const { currentUser, signUp, signOut } = useAuth();
-  const navigate = useNavigate();
   const formSubmitted = useLocation();
   console.log(formSubmitted);
 
@@ -65,54 +63,79 @@ const RegisterConfirm = () => {
   const fireBaseSignUp = async (localStorage) => {
     try {
       if (currentUser) {
+        console.log('SIGNOUT CURREnt');
         await signOut();
+        console.log(currentUser);
       }
 
       const newUser = await signUp(localStorage.email, localStorage.password); // get from local storage
-
+      console.log('SIGNUP', newUser, currentUser);
       return newUser.uid;
     } catch (error) {
       console.log(error.message);
-      setError(true);
+      // setError(true);
     }
   };
 
   const moochAPISignUP = async (uid, localStorage) => {
+    console.log('MOOCHCHCHC', getCurrentUser());
     try {
       const completeSignUpBody = {
         uid,
         ...localStorage,
       };
 
-      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`, {
+      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/athete/register/`, {
         method: 'POST',
         body: JSON.stringify(completeSignUpBody),
       });
+      return true;
     } catch (error) {
       console.error(error);
+      return false;
     }
   };
 
   const registerHandler = async () => {
     const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
     let firebaseUid;
+    console.log('regis', currentUser);
     try {
       setLoading(true);
       firebaseUid = await fireBaseSignUp(moochLocalStorage);
 
-      await moochAPISignUP(firebaseUid, moochLocalStorage);
+      if ((await moochAPISignUP(firebaseUid, moochLocalStorage)) === false) {
+        throw new Error();
+      }
 
       setSignUpComplete(true);
       setLoading(false);
     } catch (error) {
-      if (currentUser.uid === firebaseUid) {
-        await currentUser.delete();
-      }
+      console.log(getCurrentUser());
+      console.log(
+        'REGISTER HANDLER CATCH *****************************************************************************************************',
+        currentUser
+      );
+      console.log(currentUser?.uid, firebaseUid);
+      // if (firebaseUid) {
+      //   console.log('HEHHEHEHEHEHEHELLLLOPOPPOPPOPO');
+      //   currentUser
+      //     .delete()
+      //     .then(() => {
+      //       console.log('user deleted');
+      //     })
+      //     .catch((error) => {
+      //       console.error(error);
+      //     });
+      // }
+      setError(true);
+      setLoading(false);
       console.error(error.message);
     }
   };
 
   const setProfileCardContent = (userState, loadingState, errorState) => {
+    console.log('SETCARD', currentUser);
     if (loadingState) {
       return (
         <Card>
@@ -127,65 +150,17 @@ const RegisterConfirm = () => {
 
     if (signUpComplete === false) {
       return (
-        <Card>
-          <div className={classes.profile_img_container}>
-            <img src={userState.userImg} alt="user profile" />
-          </div>
-          <div className={classes.confirm_card_container}>
-            <p>
-              <span>{userState.userFirstName}</span>&nbsp;
-              <span>{userState.userLastName}</span>
-            </p>
-            <p>
-              Ready to link&nbsp;
-              <span data-heading="logo-small">MoOCH</span>&nbsp;&amp;&nbsp;
-              <span className={classes.strava}>STRAVA</span>
-            </p>
-            <p>please complete your account setup</p>
-            <div className={classes.confirm_card_btn_container}>
-              <ButtonGreen
-                contentProps="Complete"
-                onClickProps={async () => {
-                  await registerHandler();
-                }}
-              />
-              <ButtonGreen
-                contentProps="Cancel"
-                onClickProps={() => {
-                  navigate('/');
-                }}
-              />
-            </div>
-          </div>
-        </Card>
+        <SignUpLink
+          userStateProps={userState}
+          setErrorProps={setError}
+          setSignUpCompleteProps={setSignUpComplete}
+          setLoadingProps={setLoading}
+          currentUserProps={currentUser}
+          registerHandlerProps={registerHandler}
+        />
       );
     }
-    return (
-      <Card>
-        <div className={classes.profile_img_container}>
-          <img src={userState.userImg} alt="user profile" />
-        </div>
-        <div className={classes.confirm_card_container}>
-          <p>
-            <span>{userState.userFirstName}</span>&nbsp;
-            <span>{userState.userLastName}</span>
-          </p>
-          <p>
-            <span data-heading="logo-small">MoOCH</span>&nbsp;&amp;&nbsp;
-            <span className={classes.strava}>STRAVA</span>&nbsp; link Complete
-          </p>
-          <p>please continue to your dashboard</p>
-          <div className={classes.confirm_card_btn_container}>
-            <ButtonGreen
-              contentProps="Complete"
-              onClickProps={() => {
-                navigate('/dashboard');
-              }}
-            />
-          </div>
-        </div>
-      </Card>
-    );
+    return <SignUpContinue userStateProps={userState} />;
   };
 
   return (

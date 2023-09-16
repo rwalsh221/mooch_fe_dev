@@ -12,7 +12,6 @@ import Spinner from '../../components/Spinner/Spinner';
 
 // TODO: add fastest user img to segment card. need to get from backend
 // TODO: look at backend headers
-// TODO: second minute convert ?????
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState(null);

@@ -23,6 +23,8 @@ const AuthProvider = ({ children }) => {
 
   const checkEmail = (email) => auth.fetchSignInMethodsForEmail(email);
 
+  const getCurrentUser = () => currentUser;
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -34,6 +36,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
+    getCurrentUser,
     signUp,
     signIn,
     signOut,
