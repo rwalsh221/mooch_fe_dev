@@ -16,6 +16,7 @@ const ErrorComponent = ({ errorMessageProps }) => {
         <ButtonGreen
           contentProps="Return Home"
           onClickProps={() => navigate('/')}
+          btnTypeProps="button"
         />
       </div>
     </Card>

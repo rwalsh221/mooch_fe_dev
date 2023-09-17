@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header';
 import classes from './RegisterConfirm.module.css';
 
 import SignUpContinue from './SignUpContinue/SignUpContinue';
+import SignUpFirebase from './SignUpFirebase/SignUpFirebase';
 import SignUpLink from './SignUpLink/SignUpLink';
 import Spinner from '../../components/Spinner/Spinner';
 import Card from '../../components/Layout/Card/Card';
@@ -14,15 +15,17 @@ import Footer from '../../components/Footer/Footer';
 
 const RegisterConfirm = () => {
   // TODO: refactor
-  const { currentUser, signOut, signUp, getCurrentUser } = useAuth();
-  console.log('REENENENENENENENENENENENENENENENENENENENNE', getCurrentUser());
+  const { currentUser, signOut, signUp } = useAuth();
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userPreviewState, setUserPreviewAState] = useState(null);
-  const [signUpComplete, setSignUpComplete] = useState(false);
+  const [signUpComplete, setSignUpComplete] = useState({
+    firebase: false,
+    moochApi: false,
+  });
 
   const formSubmitted = useLocation();
-  console.log(formSubmitted);
 
   useEffect(() => {
     const getUserPreview = async () => {
@@ -60,83 +63,57 @@ const RegisterConfirm = () => {
     getUserPreview();
   }, []);
 
-  const fireBaseSignUp = async (localStorage) => {
+  const fireBaseSignUp = async () => {
+    const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
     try {
+      setLoading(true);
       if (currentUser) {
-        console.log('SIGNOUT CURREnt');
         await signOut();
-        console.log(currentUser);
       }
 
-      const newUser = await signUp(localStorage.email, localStorage.password); // get from local storage
-      console.log('SIGNUP', newUser, currentUser);
-      return newUser.uid;
+      await signUp(moochLocalStorage.email, moochLocalStorage.password); // get from local storage
+
+      setSignUpComplete({ ...signUpComplete, firebase: true });
+
+      setLoading(false);
     } catch (error) {
-      console.log(error.message);
-      // setError(true);
+      console.error(error.message);
+      setError(true);
+      setLoading(false);
     }
   };
 
-  const moochAPISignUP = async (uid, localStorage) => {
-    console.log('MOOCHCHCHC', getCurrentUser());
+  const moochAPISignUP = async () => {
+    const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
+
     try {
+      setLoading(true);
+      if (!currentUser) {
+        throw new Error();
+      }
+
       const completeSignUpBody = {
-        uid,
-        ...localStorage,
+        uid: currentUser.uid,
+        ...moochLocalStorage,
       };
 
-      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/athete/register/`, {
+      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`, {
         method: 'POST',
         body: JSON.stringify(completeSignUpBody),
       });
-      return true;
+      setSignUpComplete({ ...signUpComplete, moochApi: true });
+      setLoading(false);
     } catch (error) {
       console.error(error);
+      await currentUser.delete();
+      setError(true);
+      setLoading(false);
       return false;
     }
   };
 
-  const registerHandler = async () => {
-    const moochLocalStorage = JSON.parse(localStorage.getItem('moochSignUP'));
-    let firebaseUid;
-    console.log('regis', currentUser);
-    try {
-      setLoading(true);
-      firebaseUid = await fireBaseSignUp(moochLocalStorage);
-
-      if ((await moochAPISignUP(firebaseUid, moochLocalStorage)) === false) {
-        throw new Error();
-      }
-
-      setSignUpComplete(true);
-      setLoading(false);
-    } catch (error) {
-      console.log(getCurrentUser());
-      console.log(
-        'REGISTER HANDLER CATCH *****************************************************************************************************',
-        currentUser
-      );
-      console.log(currentUser?.uid, firebaseUid);
-      // if (firebaseUid) {
-      //   console.log('HEHHEHEHEHEHEHELLLLOPOPPOPPOPO');
-      //   currentUser
-      //     .delete()
-      //     .then(() => {
-      //       console.log('user deleted');
-      //     })
-      //     .catch((error) => {
-      //       console.error(error);
-      //     });
-      // }
-      setError(true);
-      setLoading(false);
-      console.error(error.message);
-    }
-  };
-
-  const setProfileCardContent = (userState, loadingState, errorState) => {
-    console.log('SETCARD', currentUser);
-    if (loadingState) {
+  const setProfileCardContent = () => {
+    if (loading) {
       return (
         <Card>
           <Spinner />
@@ -144,23 +121,29 @@ const RegisterConfirm = () => {
       );
     }
 
-    if (errorState) {
+    if (error) {
       return <ErrorComponent errorMessageProps="SIGNUP ERROR" />;
     }
 
-    if (signUpComplete === false) {
+    if (signUpComplete.firebase === false) {
       return (
-        <SignUpLink
-          userStateProps={userState}
-          setErrorProps={setError}
-          setSignUpCompleteProps={setSignUpComplete}
-          setLoadingProps={setLoading}
-          currentUserProps={currentUser}
-          registerHandlerProps={registerHandler}
+        <SignUpFirebase
+          userStateProps={userPreviewState}
+          fireBaseSignUpProps={fireBaseSignUp}
         />
       );
     }
-    return <SignUpContinue userStateProps={userState} />;
+
+    if (signUpComplete.moochApi === false) {
+      return (
+        <SignUpLink
+          userStateProps={userPreviewState}
+          registerMoochApiProps={moochAPISignUP}
+          currentUserProps={currentUser}
+        />
+      );
+    }
+    return <SignUpContinue userStateProps={userPreviewState} />;
   };
 
   return (
@@ -172,7 +155,7 @@ const RegisterConfirm = () => {
       >
         <div className={classes.register_confirm_container}>
           {formSubmitted.state?.submit ? (
-            setProfileCardContent(userPreviewState, loading, error)
+            setProfileCardContent()
           ) : (
             <Navigate to="/" />
           )}

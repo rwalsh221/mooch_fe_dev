@@ -1,13 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-
 import classes from '../RegisterConfirm.module.css';
+
 import Card from '../../../components/Layout/Card/Card';
 import ButtonGreen from '../../../components/Button/ButtonGreen/ButtonGreen';
 
-const SignUpLink = ({ userStateProps, registerHandlerProps }) => {
+const SignUpLink = ({
+  userStateProps,
+  registerMoochApiProps,
+  currentUserProps,
+}) => {
   const navigate = useNavigate();
+
+  const continueHandler = async () => {
+    await registerMoochApiProps();
+  };
+
+  const cancelHandler = async () => {
+    try {
+      await currentUserProps.delete();
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Card>
@@ -24,19 +41,23 @@ const SignUpLink = ({ userStateProps, registerHandlerProps }) => {
           <span data-heading="logo-small">MoOCH</span>&nbsp;&amp;&nbsp;
           <span className={classes.strava}>STRAVA</span>
         </p>
-        <p>please complete your account setup</p>
+        <p>
+          please continue to link <span data-heading="logo-small">MoOCH</span>
+          &nbsp;&amp;&nbsp;
+          <span className={classes.strava}>STRAVA</span>
+        </p>
         <div className={classes.confirm_card_btn_container}>
           <ButtonGreen
-            contentProps="Complete"
+            contentProps="Continue"
             onClickProps={async () => {
-              await registerHandlerProps();
+              await continueHandler();
             }}
             btnTypeProps="button"
           />
           <ButtonGreen
             contentProps="Cancel"
             onClickProps={() => {
-              navigate('/');
+              cancelHandler();
             }}
             btnTypeProps="button"
           />
@@ -47,11 +68,14 @@ const SignUpLink = ({ userStateProps, registerHandlerProps }) => {
 };
 
 SignUpLink.propTypes = {
-  registerHandlerProps: PropTypes.func.isRequired,
+  registerMoochApiProps: PropTypes.func.isRequired,
   userStateProps: PropTypes.shape({
     userImg: PropTypes.string.isRequired,
     userFirstName: PropTypes.string.isRequired,
     userLastName: PropTypes.string.isRequired,
+  }).isRequired,
+  currentUserProps: PropTypes.shape({
+    delete: PropTypes.func.isRequired,
   }).isRequired,
 };
 
