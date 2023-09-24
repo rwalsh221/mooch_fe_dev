@@ -90,8 +90,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
     }
   };
 
-  // SIGN UP CODE ABOVE NEEDS TO MOVE TO REGISTER CONFIRM
-
   return (
     <>
       <h3 className={classes.register_card__heading}>

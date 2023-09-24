@@ -12,11 +12,11 @@ const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
       setBtnContent('Syncing with STRAVA');
       // 2, send request to php file to sync with strava and set database with api call result
       const statsResponse = await fetch(
-        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/set/?userId=${uidProps}`
+        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/set?userId=${uidProps}`
       );
 
       const segmentsResponse = await fetch(
-        `${process.env.REACT_APP_MOOCH_API_URL}/segments/set/?userId=${uidProps}`
+        `${process.env.REACT_APP_MOOCH_API_URL}/segments/set?userId=${uidProps}`
       );
 
       if (statsResponse.ok && segmentsResponse.ok) {

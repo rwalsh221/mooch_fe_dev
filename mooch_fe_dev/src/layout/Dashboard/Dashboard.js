@@ -23,19 +23,21 @@ const Dashboard = () => {
   const getUserData = useCallback(async () => {
     try {
       const getUserInfo = await fetch(
-        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/?userId=${currentUser.uid}`
+        `${process.env.REACT_APP_MOOCH_API_URL}/athlete?userId=${currentUser.uid}`
       );
 
       const getUserInfoJson = await getUserInfo.json();
 
+      console.log(getUserInfoJson);
+
       const getUserStats = await fetch(
-        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats/?userId=${currentUser.uid}`
+        `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats?userId=${currentUser.uid}`
       );
 
       const getUserStatsJson = await getUserStats.json();
 
       const getUserSegments = await fetch(
-        `${process.env.REACT_APP_MOOCH_API_URL}/segments/?userId=${currentUser.uid}`
+        `${process.env.REACT_APP_MOOCH_API_URL}/segments?userId=${currentUser.uid}`
       );
 
       const getUserSegmentsJson = await getUserSegments.json();

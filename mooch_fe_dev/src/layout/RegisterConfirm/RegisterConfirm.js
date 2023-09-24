@@ -97,10 +97,14 @@ const RegisterConfirm = () => {
         ...moochLocalStorage,
       };
 
-      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/athlete/register/`, {
+      await fetch(`${process.env.REACT_APP_MOOCH_API_URL}/athlete/`, {
         method: 'POST',
         body: JSON.stringify(completeSignUpBody),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
       setSignUpComplete({ ...signUpComplete, moochApi: true });
       setLoading(false);
     } catch (error) {

@@ -7,7 +7,7 @@ POST  http://localhost/mooch_be_dev/test/register/ HTTP/1.1
 content-type: application/json
 
 {
-    "uid": "uid23323434234",
+    "uid": "uid233234342345555",
     "clientId": "94702",
     "clientSecret": "a9146f57456db6cfbb01729c74779c286777b5b0",
     "accessToken": "8a0ac6be2d14f658b23e22c0425db0b107cc0d84",
