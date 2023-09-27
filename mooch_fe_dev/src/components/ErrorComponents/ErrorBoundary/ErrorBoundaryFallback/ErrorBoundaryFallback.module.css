@@ -1,5 +1,5 @@
 .error_boundary {
-  min-height: 70vh;
+  min-height: 70dvh;
   display: flex;
   justify-content: center;
   align-items: center;

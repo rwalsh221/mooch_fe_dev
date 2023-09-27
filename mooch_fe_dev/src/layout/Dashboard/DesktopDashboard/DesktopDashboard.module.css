@@ -13,7 +13,7 @@
   display: grid;
 
   grid-template-columns: 1fr 2fr 1fr;
-  min-height: 70vh;
+  min-height: 70dvh;
   width: 90%;
   margin-right: auto;
 }

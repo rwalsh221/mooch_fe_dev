@@ -1,7 +1,7 @@
 .register_grid {
   display: grid;
-  grid-template-rows: max-content minmax(70vh, max-content) minmax(
-      30vh,
+  grid-template-rows: max-content minmax(70dvh, max-content) minmax(
+      30dvh,
       max-content
     );
 }
