@@ -65,6 +65,7 @@ const SignIn = ({ formContentHandlerProps }) => {
           inputPlaceholderProps="email"
           inputRefProps={signInEmailRef}
           validationErrorProps={validationError}
+          autoCompleteProps="username"
         />
         <br />
         <Input
@@ -75,6 +76,7 @@ const SignIn = ({ formContentHandlerProps }) => {
           inputPlaceholderProps="password"
           inputRefProps={signInPasswordRef}
           validationErrorProps={validationError}
+          autoCompleteProps="current-password"
         />
         <div className={classes.form_btn_container}>
           <ButtonGreen contentProps="login" disabledProps={loading} />

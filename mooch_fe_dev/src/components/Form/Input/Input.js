@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes, { bool, string } from 'prop-types';
 import classes from './Input.module.css';
 
+// TODO: AUTCOMPLETE PROPS OR OFF https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
+
 const Input = ({
   inputTypeProps,
   inputIdProps,
@@ -10,6 +12,7 @@ const Input = ({
   inputRefProps,
   inputPlaceholderProps,
   validationErrorProps,
+  autoCompleteProps,
 }) => {
   const [inputState, setInputState] = useState('');
 
@@ -48,7 +51,7 @@ const Input = ({
         required
         ref={inputRefProps}
         value={inputState}
-        autoComplete="new-password"
+        autoComplete={autoCompleteProps}
         onChange={(e) => setInputState(e.target.value)}
       />
       <div className={classes.inputContainer_placeholder}>
@@ -63,6 +66,7 @@ const Input = ({
 
 Input.defaultProps = {
   validationErrorProps: null,
+  autoCompleteProps: 'off',
 };
 
 Input.propTypes = {
@@ -73,6 +77,7 @@ Input.propTypes = {
   inputRefProps: PropTypes.shape({}).isRequired,
   inputPlaceholderProps: PropTypes.string.isRequired,
   validationErrorProps: PropTypes.shape({ error: bool, inputName: string }),
+  autoCompleteProps: PropTypes.string,
 };
 
 export default Input;

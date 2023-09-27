@@ -106,6 +106,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputPlaceholderProps="email"
           inputRefProps={emailRef}
           validationErrorProps={validationError}
+          autoCompleteProps="email"
         />
         {/* PASSWORD */}
         <Input
@@ -116,6 +117,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputPlaceholderProps="password"
           inputRefProps={passwordRef}
           validationErrorProps={validationError}
+          autoCompleteProps="new-password"
         />
         {/* PASSWORD-CONFIRM */}
         <Input
@@ -126,6 +128,7 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
           inputPlaceholderProps="confirm"
           inputRefProps={passwordConfirmRef}
           validationErrorProps={validationError}
+          autoCompleteProps="new-password"
         />
         {/* STRAVA KEYS */}
         <h4>Strava Api Application Keys</h4>
