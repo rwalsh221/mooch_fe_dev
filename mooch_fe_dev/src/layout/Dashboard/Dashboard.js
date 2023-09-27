@@ -18,7 +18,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   const { currentUser } = useAuth();
-  console.log(currentUser);
 
   const getUserData = useCallback(async () => {
     try {
@@ -27,8 +26,6 @@ const Dashboard = () => {
       );
 
       const getUserInfoJson = await getUserInfo.json();
-
-      console.log(getUserInfoJson);
 
       const getUserStats = await fetch(
         `${process.env.REACT_APP_MOOCH_API_URL}/athlete/stats?userId=${currentUser.uid}`
@@ -56,13 +53,15 @@ const Dashboard = () => {
   useEffect(() => {
     getUserData();
   }, [getUserData]);
-  console.log(currentUser);
+
   return (
     <>
       <Header signOutProps />
       <main className={classes.dashboard}>
         {loading ? (
-          <Spinner />
+          <div className={classes.dashboard_spinner_container}>
+            <Spinner />
+          </div>
         ) : window.screen.width > 820 ? (
           <DesktopDashboard
             userInfoProps={userInfo}

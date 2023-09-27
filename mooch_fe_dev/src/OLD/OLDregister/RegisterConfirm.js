@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import ButtonGreen from '../../components/Button/ButtonGreen/ButtonGreen';
 import Header from '../../components/Header/Header';
@@ -11,7 +13,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 const RegisterConfirm = () => {
   const { currentUser } = useAuth();
-  console.log(currentUser);
+
   const navigate = useNavigate();
 
   const registerHandler = async () => {

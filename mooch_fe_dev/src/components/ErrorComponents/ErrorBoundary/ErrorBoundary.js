@@ -10,21 +10,16 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    console.log('hello');
     return { hasError: true };
   }
 
   componentDidMount() {
     this.prevPath = window.location.pathname;
-    console.log(this.prevPath);
   }
 
-  componentDidCatch(error, info) {
-    console.log(error, info);
-  }
+  componentDidCatch(error, info) {}
 
   componentDidUpdate() {
-    console.log('hehehehehhehehehhehee');
     if (window.location.pathname !== this.prevPath) {
       this.setState({ error: null, errorInfo: null });
       this.prevPath = window.location.pathname;
@@ -32,10 +27,7 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    // const { hasError } = this.state;
-    console.log(this.state);
     if (this.state.hasError) {
-      console.log('ifi iifif', this.props);
       return this.props.fallback;
     }
     return this.props.children;

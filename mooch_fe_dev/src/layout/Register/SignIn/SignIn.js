@@ -79,7 +79,11 @@ const SignIn = ({ formContentHandlerProps }) => {
           autoCompleteProps="current-password"
         />
         <div className={classes.form_btn_container}>
-          <ButtonGreen contentProps="login" disabledProps={loading} />
+          <ButtonGreen
+            contentProps="login"
+            disabledProps={loading}
+            btnTypeProps="submit"
+          />
           {error && <ErrorComponentSml errorMessageProps={error} />}
         </div>
       </form>

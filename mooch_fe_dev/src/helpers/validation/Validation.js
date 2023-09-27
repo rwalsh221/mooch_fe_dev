@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable */
 
 class Validation {
   constructor() {
@@ -24,13 +25,9 @@ class Validation {
   }
 
   validateEmail(input) {
-    console.log(this);
-    console.log('VALALSLSLSLSLSLSLS');
     const emailFormat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    console.log(emailFormat);
-    console.log(this.regExp);
+
     if (input.match(emailFormat)) {
-      console.log('MATCH');
       return true;
     }
     return false;

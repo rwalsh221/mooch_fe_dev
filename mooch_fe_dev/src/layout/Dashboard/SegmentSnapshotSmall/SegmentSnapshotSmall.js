@@ -122,7 +122,7 @@ const SegmentSnapshotSmall = ({
 };
 
 SegmentSnapshotSmall.propTypes = {
-  newUserProps: PropTypes.bool.isRequired,
+  newUserProps: PropTypes.bool,
   segmentNameProps: PropTypes.string.isRequired,
   cityProps: PropTypes.string.isRequired,
   stateProps: PropTypes.string.isRequired,
@@ -131,9 +131,13 @@ SegmentSnapshotSmall.propTypes = {
   elevationLowProps: PropTypes.number.isRequired,
   avgGradeProps: PropTypes.number.isRequired,
   komProps: PropTypes.number.isRequired,
-  leaderboardProps: PropTypes.number.isRequired,
-  uidProps: PropTypes.number.isRequired,
+  leaderboardProps: PropTypes.shape({}).isRequired,
+  uidProps: PropTypes.string.isRequired,
   userImgProps: PropTypes.string.isRequired,
+};
+
+SegmentSnapshotSmall.defaultProps = {
+  newUserProps: false,
 };
 
 export default SegmentSnapshotSmall;

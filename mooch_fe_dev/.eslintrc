@@ -41,6 +41,7 @@
     "react/button-has-type": "warn",
     "no-return-await": "warn",
     "react/no-array-index-key": "warn",
-    "no-console": ["warn", { "allow": ["error"] }]
+    "no-console": ["warn", { "allow": ["error"] }],
+    "class-methods-use-this": "warn"
   }
 }

@@ -25,8 +25,6 @@ export const calculateSpeed = (distance, time) => {
   const kilometersPerSecond = metersPerSecond / 1000; // converts to kilometers per second
   const kilometersPerMinute = kilometersPerSecond * 60; // converts to kilometers per minute
   const kilometersPerHour = kilometersPerMinute * 60; // converts to kilomters per hour
-  console.log(distance);
-  console.log(time);
-  console.log(kilometersPerHour.toFixed(1));
+
   return kilometersPerHour.toFixed(1);
 };

@@ -92,30 +92,16 @@ const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
 
 MobileDashboard.propTypes = {
   userInfoProps: PropTypes.shape({
-    userProfile: PropTypes.arrayOf(
-      PropTypes.shape({
-        profileImgUrl: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-      })
-    ),
-
-    userStats: PropTypes.arrayOf(
-      PropTypes.shape({
-        rideYearDist: PropTypes.number.isRequired,
-        rideAllTimeDist: PropTypes.number.isRequired,
-        runYearDist: PropTypes.number.isRequired,
-        runAllTimeDist: PropTypes.number.isRequired,
-        swimYearDist: PropTypes.number.isRequired,
-        swimAllTimeDist: PropTypes.number.isRequired,
-      })
-    ),
-
-    // userSegments: PropTypes
-  }).isRequired,
-
+    userProfile: PropTypes.shape({}),
+    userStats: PropTypes.shape({}),
+    userSegments: PropTypes.arrayOf(PropTypes.shape({})),
+  }),
   uidProps: PropTypes.string.isRequired,
   getUserDataProps: PropTypes.func.isRequired,
+};
+
+MobileDashboard.defaultProps = {
+  userInfoProps: null,
 };
 
 export default MobileDashboard;

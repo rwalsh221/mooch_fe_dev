@@ -61,7 +61,6 @@ const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
 
     if (validateInput.validatedInputs) {
       try {
-        // await signUp(emailRef.current.value, passwordRef.current.value);
         const emailIsAvaliable = await checkEmail(emailRef.current.value);
 
         if (emailIsAvaliable.length > 0) {

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import PropTypes, { bool, string } from 'prop-types';
 import classes from './Input.module.css';
 
-// TODO: AUTCOMPLETE PROPS OR OFF https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
-
 const Input = ({
   inputTypeProps,
   inputIdProps,

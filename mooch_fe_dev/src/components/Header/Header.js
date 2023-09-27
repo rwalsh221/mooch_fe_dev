@@ -28,7 +28,11 @@ const Header = ({ signOutProps }) => {
             </Link>
           </h1>
           {signOutProps && (
-            <ButtonGreen contentProps="Sign Out" onClickProps={handleSignOut} />
+            <ButtonGreen
+              contentProps="Sign Out"
+              onClickProps={handleSignOut}
+              btnTypeProps="button"
+            />
           )}
         </div>
       </div>

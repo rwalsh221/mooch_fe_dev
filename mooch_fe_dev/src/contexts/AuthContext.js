@@ -44,8 +44,6 @@ const AuthProvider = ({ children }) => {
     checkEmail,
   };
 
-  console.log(value);
-
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}

@@ -13,7 +13,6 @@ import ErrorComponent from '../../components/ErrorComponents/ErrorComponent/Erro
 import Footer from '../../components/Footer/Footer';
 
 const RegisterConfirm = () => {
-  // TODO: refactor
   const { currentUser, signOut, signUp } = useAuth();
 
   const [error, setError] = useState(false);

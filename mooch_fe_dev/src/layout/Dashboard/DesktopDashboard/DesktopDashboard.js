@@ -1,4 +1,3 @@
-// /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './DesktopDashboard.module.css';
@@ -10,7 +9,6 @@ import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
 const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
   // TODO USERSEGMENTCONTENT
-  console.log(userInfoProps);
   const userInfoContent = userInfoProps ? (
     <UserInfo
       userImgProps={userInfoProps.userProfile[0].profileImgUrl}
@@ -29,7 +27,6 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
       swimAllProps={parseInt(userInfoProps.userStats[0].swimAllTimeDist, 10)}
     />
   ) : null;
-
   const userSegmentContent = () => {
     if (!userInfoProps) {
       return null;
@@ -55,29 +52,6 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
     return <SegmentSnapshotSmall newUserProps />;
   };
 
-  // const userSegmentContent = userInfoProps ? (
-  //   userInfoProps.userSegments.length !== 0 ? (
-  //     userInfoProps.userSegments.map((el, index) => (
-  //       <SegmentSnapshotSmall
-  //         segmentNameProps={el[0].name}
-  //         cityProps={el[0].city}
-  //         stateProps={el[0].state}
-  //         distanceProps={el[0].distance}
-  //         elevationHighProps={el[0].elevationHigh}
-  //         elevationLowProps={el[0].elevationLow}
-  //         avgGradeProps={el[0].avgGrade}
-  //         komProps={el[0].kom}
-  //         leaderboardProps={el.segmentTimes}
-  //         uidProps={uidProps}
-  //         userImgProps={userInfoProps.userProfile[0].profileImgUrl}
-  //         key={index}
-  //       />
-  //     ))
-  //   ) : (
-  //     <SegmentSnapshotSmall newUserProps={true} />
-  //   )
-  // ) : null;
-
   return (
     <section className={classes.dashboard}>
       <div data-wrapper="max-content-width">
@@ -88,6 +62,7 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
             <StravaSyncBtn
               uidProps={uidProps}
               getUserDataProps={getUserDataProps}
+              btnTypeProps="button"
             />
           </div>
           <div className={classes.dashboard_segment_leaderboard}>
@@ -101,30 +76,16 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
 
 DesktopDashboard.propTypes = {
   userInfoProps: PropTypes.shape({
-    userProfile: PropTypes.arrayOf(
-      PropTypes.shape({
-        profileImgUrl: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-      })
-    ),
-
-    userStats: PropTypes.arrayOf(
-      PropTypes.shape({
-        rideYearDist: PropTypes.string.isRequired,
-        rideAllTimeDist: PropTypes.string.isRequired,
-        runYearDist: PropTypes.string.isRequired,
-        runAllTimeDist: PropTypes.string.isRequired,
-        swimYearDist: PropTypes.string.isRequired,
-        swimAllTimeDist: PropTypes.string.isRequired,
-      })
-    ),
-
-    // userSegments: PropTypes
-  }).isRequired,
-
+    userProfile: PropTypes.shape({}),
+    userStats: PropTypes.shape({}),
+    userSegments: PropTypes.arrayOf(PropTypes.shape({})),
+  }),
   uidProps: PropTypes.string.isRequired,
   getUserDataProps: PropTypes.func.isRequired,
+};
+
+DesktopDashboard.defaultProps = {
+  userInfoProps: null,
 };
 
 export default DesktopDashboard;

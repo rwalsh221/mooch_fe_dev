@@ -60,7 +60,7 @@ class SignUpValidation extends Validation {
       }
       const currentInputId = inputs[i].current.id;
       const currentInputValue = inputs[i].current.value;
-      console.log(currentInputId);
+
       switch (currentInputId) {
         case this.inputs.registerEmail:
           this.validated.validatedInputs =

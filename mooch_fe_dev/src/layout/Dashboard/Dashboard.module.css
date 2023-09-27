@@ -1,0 +1,12 @@
+main {
+  min-height: 60dvh;
+  /* display: flex; */
+}
+
+.dashboard_spinner_container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
