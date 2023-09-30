@@ -39,6 +39,15 @@ const SegmentSnapshotSmall = ({
       ? elevationHighProps - elevationLowProps
       : elevationLowProps - elevationHighProps;
 
+  console.log(leaderboardProps);
+
+  const formatTime = (time) => {
+    if (time < 60) {
+      return `${time}s`;
+    }
+    return `${secondsToMinutes(leaderboardProps[uidProps].time)}s`;
+  };
+
   return (
     <div className={classes.segment_snapshot_sml}>
       <h2>{segmentNameProps}</h2>
@@ -71,25 +80,39 @@ const SegmentSnapshotSmall = ({
           </span>
         </div>
       </div>
+      <div className={classes.strava_kom}>
+        <p>
+          <span data-heading="logo-strava">STRAVA KOM</span>&nbsp;
+          <span>
+            {komProps < 60 ? `${komProps}s` : secondsToMinutes(komProps)}
+          </span>
+        </p>
+      </div>
       <div className={classes.segment_leaderboard}>
         <h3>leaderboard</h3>
         <div className={classes.leaderboard_user}>
           <div className={classes.leaderboard_user_pr}>
-            <p>
-              PR&nbsp;
-              {leaderboardProps[uidProps].time <= 60
-                ? `${leaderboardProps[uidProps].time}s`
-                : secondsToMinutes(leaderboardProps[uidProps].time)}
-            </p>
+            <div>
+              <h4>YOUR PR</h4>
+            </div>
+            <div>
+              <p>{formatTime(leaderboardProps[uidProps].time)}</p>
+            </div>
           </div>
           <div className={classes.leaderboard_user_img}>
             <img src={userImgProps} alt="user" />
           </div>
           <div className={classes.leaderboard_user_kom}>
-            <p>
-              KOM&nbsp;
-              {komProps < 60 ? `${komProps}s` : secondsToMinutes(komProps)}
-            </p>
+            <div>
+              <h4>MoOCH KOM</h4>
+            </div>
+            <div>
+              <p>
+                {formatTime(
+                  leaderboardProps[Object.keys(leaderboardProps)[0]].time
+                )}
+              </p>
+            </div>
           </div>
         </div>
         <div className={classes.leaderboard_all}>
