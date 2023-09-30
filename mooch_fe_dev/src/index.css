@@ -180,6 +180,10 @@ a:active {
 }
 
 @media screen and (max-width: 412px) {
+  [data-wrapper='max-content-width'] {
+    max-width: 412px;
+  }
+
   html {
     font-size: 55%;
   }
