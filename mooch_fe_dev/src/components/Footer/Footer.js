@@ -6,9 +6,14 @@ import MoochLogo from '../Typography/MoochLogo/MoochLogo';
 const Footer = () => (
   <footer className={classes.footer}>
     <div className={classes.footer_container} data-wrapper="max-content-width">
-      <div>
+      <div className={classes.footer_logo}>
         <MoochLogo logoSizeProps="large" />
         <p className={classes.footer_copyright}>&copy;&nbsp;2022 MoOCH</p>
+      </div>
+      <div className={classes.footer_logo__github}>
+        <a href="https://github.com/rwalsh221/mooch_fe_dev">
+          <ion-icon name="logo-github" />
+        </a>
       </div>
       <div className={classes.footer_content}>
         <h5>menu</h5>

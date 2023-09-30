@@ -5,11 +5,29 @@
 
 .footer_container {
   display: grid;
+  grid-template-rows: 1fr 1fr;
   grid-template-columns: 2fr repeat(2, 1fr) 2fr;
   color: var(--secondary-color-white);
   padding-top: var(--padding-200);
   padding-bottom: var(--padding-200);
   padding-right: var(--padding-400);
+}
+
+.footer_logo {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.footer_logo__github {
+  height: max-content;
+  width: max-content;
+  border: 5px solid var(--primary-color-green);
+  font-size: 10rem;
+}
+
+.footer_logo__github a {
+  vertical-align: middle;
+  display: flex;
 }
 
 .footer_container > :first-child {
@@ -28,6 +46,7 @@
 }
 
 .footer_content {
+  grid-row: 1 / span 2;
   text-transform: uppercase;
 }
 
@@ -72,7 +91,21 @@
 
 @media screen and (max-width: 600px) {
   .footer_container {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .footer_logo {
+    flex-basis: 40%;
+  }
+
+  .footer_logo__github {
+    /* flex-basis: 40%; */
+    margin: 0 auto;
+  }
+
+  .footer_content {
+    width: 100%;
   }
 
   .footer_list__social {
