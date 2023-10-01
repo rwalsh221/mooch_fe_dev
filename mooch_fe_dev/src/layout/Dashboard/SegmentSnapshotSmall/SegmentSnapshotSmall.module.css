@@ -22,6 +22,10 @@
   margin: var(--margin-200) 0;
 }
 
+.segment_info__title {
+  font-weight: bold;
+}
+
 .segment_info div {
   flex: 1 1 33%;
   display: flex;
@@ -107,12 +111,13 @@
   color: var(--primary-color-white);
   padding: var(--padding-100) 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr repeat(3, 2fr);
   justify-items: center;
 }
 
 .leaderboard_all__header p {
   color: var(--secondary-color-white);
+  font-weight: bold;
 }
 
 .leaderboard_all {
@@ -150,6 +155,16 @@
   color: var(--primary-color-green-100);
   background-color: var(--primary-color-green-800);
   border: 3px solid var(--secondary-color-orange);
+}
+
+.title_athlete,
+.title_time,
+.title_speed {
+  /* border: 1px solid var(--primary-color-green-100); */
+  background-color: var(--primary-color-green-600);
+  padding: 5px;
+  width: 80%;
+  text-align: center;
 }
 
 @media screen and (max-width: 1650px) {

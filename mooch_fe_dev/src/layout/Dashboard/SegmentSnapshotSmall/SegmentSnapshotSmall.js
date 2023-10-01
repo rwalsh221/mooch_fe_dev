@@ -20,7 +20,6 @@ const SegmentSnapshotSmall = ({
   komProps,
   leaderboardProps,
   uidProps,
-  // userImgProps,
 }) => {
   if (newUserProps) {
     return (
@@ -46,8 +45,6 @@ const SegmentSnapshotSmall = ({
 
     return `${secondsToMinutes(time)}s`;
   };
-
-  console.log('render');
 
   return (
     <div className={classes.segment_snapshot_sml}>
@@ -122,6 +119,9 @@ const SegmentSnapshotSmall = ({
         <div className={classes.leaderboard_all}>
           <div className={classes.leaderboard_all__header}>
             <p data-card-style="title" className={classes.title_athlete}>
+              pos
+            </p>
+            <p data-card-style="title" className={classes.title_athlete}>
               athlete
             </p>
             <p data-card-style="title" className={classes.title_time}>
@@ -161,7 +161,6 @@ SegmentSnapshotSmall.propTypes = {
   komProps: PropTypes.number.isRequired,
   leaderboardProps: PropTypes.shape({}).isRequired,
   uidProps: PropTypes.string.isRequired,
-  // userImgProps: PropTypes.string.isRequired,
 };
 
 SegmentSnapshotSmall.defaultProps = {
