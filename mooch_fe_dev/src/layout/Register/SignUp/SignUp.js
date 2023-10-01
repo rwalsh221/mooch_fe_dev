@@ -15,8 +15,6 @@ import ErrorComponentSml from '../../../components/ErrorComponents/ErrorComponen
 const SignUp = ({ formContentHandlerProps, needHelpHandlerProps }) => {
   // TODO: replace localstorage with session storage last thing
 
-  // TODO: Add github link to footer
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();

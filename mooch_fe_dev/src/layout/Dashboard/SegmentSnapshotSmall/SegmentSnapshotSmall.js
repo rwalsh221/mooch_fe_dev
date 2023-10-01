@@ -20,7 +20,7 @@ const SegmentSnapshotSmall = ({
   komProps,
   leaderboardProps,
   uidProps,
-  userImgProps,
+  // userImgProps,
 }) => {
   if (newUserProps) {
     return (
@@ -39,14 +39,15 @@ const SegmentSnapshotSmall = ({
       ? elevationHighProps - elevationLowProps
       : elevationLowProps - elevationHighProps;
 
-  console.log(leaderboardProps);
-
   const formatTime = (time) => {
     if (time < 60) {
       return `${time}s`;
     }
-    return `${secondsToMinutes(leaderboardProps[uidProps].time)}s`;
+
+    return `${secondsToMinutes(time)}s`;
   };
+
+  console.log('render');
 
   return (
     <div className={classes.segment_snapshot_sml}>
@@ -83,9 +84,7 @@ const SegmentSnapshotSmall = ({
       <div className={classes.strava_kom}>
         <p>
           <span data-heading="logo-strava">STRAVA KOM</span>&nbsp;
-          <span>
-            {komProps < 60 ? `${komProps}s` : secondsToMinutes(komProps)}
-          </span>
+          <span>{formatTime(komProps)}</span>
         </p>
       </div>
       <div className={classes.segment_leaderboard}>
@@ -100,11 +99,16 @@ const SegmentSnapshotSmall = ({
             </div>
           </div>
           <div className={classes.leaderboard_user_img}>
-            <img src={userImgProps} alt="user" />
+            <img
+              src={leaderboardProps[Object.keys(leaderboardProps)[0]].img}
+              alt="user"
+            />
           </div>
           <div className={classes.leaderboard_user_kom}>
             <div>
-              <h4>MoOCH KOM</h4>
+              <h4>
+                <span data-heading="logo-small">MoOCH KOM</span>
+              </h4>
             </div>
             <div>
               <p>
@@ -134,6 +138,7 @@ const SegmentSnapshotSmall = ({
                 athleteTimeProps={leaderboardProps[el].time}
                 segmentDistanceProps={distanceProps}
                 leaderboardPositionProps={index + 1}
+                formatTimeProps={formatTime}
                 key={index}
               />
             ))}
@@ -156,7 +161,7 @@ SegmentSnapshotSmall.propTypes = {
   komProps: PropTypes.number.isRequired,
   leaderboardProps: PropTypes.shape({}).isRequired,
   uidProps: PropTypes.string.isRequired,
-  userImgProps: PropTypes.string.isRequired,
+  // userImgProps: PropTypes.string.isRequired,
 };
 
 SegmentSnapshotSmall.defaultProps = {

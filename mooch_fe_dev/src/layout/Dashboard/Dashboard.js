@@ -1,8 +1,7 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React, { useState, useEffect, useCallback } from 'react';
 import classes from './Dashboard.module.css';
 import { useAuth } from '../../contexts/AuthContext';
-import { Navigate } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -50,6 +49,25 @@ const Dashboard = () => {
     }
   }, [currentUser.uid]);
 
+  const dashboardSizeHandler = () => {
+    if (window.screen.width > 820) {
+      return (
+        <DesktopDashboard
+          userInfoProps={userInfo}
+          uidProps={currentUser.uid}
+          getUserDataProps={getUserData}
+        />
+      );
+    }
+    return (
+      <MobileDashboard
+        userInfoProps={userInfo}
+        uidProps={currentUser.uid}
+        getUserDataProps={getUserData}
+      />
+    );
+  };
+
   useEffect(() => {
     getUserData();
   }, [getUserData]);
@@ -62,18 +80,8 @@ const Dashboard = () => {
           <div className={classes.dashboard_spinner_container}>
             <Spinner />
           </div>
-        ) : window.screen.width > 820 ? (
-          <DesktopDashboard
-            userInfoProps={userInfo}
-            uidProps={currentUser.uid}
-            getUserDataProps={getUserData}
-          />
         ) : (
-          <MobileDashboard
-            userInfoProps={userInfo}
-            uidProps={currentUser.uid}
-            getUserDataProps={getUserData}
-          />
+          dashboardSizeHandler()
         )}
       </main>
       <Footer />

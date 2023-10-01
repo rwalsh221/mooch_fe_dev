@@ -8,7 +8,8 @@ import SegmentSnapshotSmall from '../SegmentSnapshotSmall/SegmentSnapshotSmall';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
 const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
-  // TODO USERSEGMENTCONTENT
+  // TODO: USERSEGMENTCONTENT
+  // TODO: create seperate compoent for new user no segments
   const userInfoContent = userInfoProps ? (
     <UserInfo
       userImgProps={userInfoProps.userProfile[0].profileImgUrl}

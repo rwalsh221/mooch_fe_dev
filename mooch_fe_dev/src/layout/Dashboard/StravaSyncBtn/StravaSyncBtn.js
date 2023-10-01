@@ -4,6 +4,7 @@ import classes from './StravaSyncBtn.module.css';
 // import MoochLogo from '../../../components/Typography/MoochLogo/MoochLogo';
 
 const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
+  // TODO create comonpnets for btn contnet
   const [btnContent, setBtnContent] = useState(`Sync MoOCH with STRAVA`);
 
   const syncWithStrava = async () => {
