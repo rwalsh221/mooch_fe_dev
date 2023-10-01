@@ -9,7 +9,6 @@ import DesktopDashboard from './DesktopDashboard/DesktopDashboard';
 import MobileDashboard from './MobileDashboard/MobileDashboard';
 import Spinner from '../../components/Spinner/Spinner';
 
-// TODO: add fastest user img to segment card. need to get from backend
 // TODO: look at backend headers
 
 const Dashboard = () => {

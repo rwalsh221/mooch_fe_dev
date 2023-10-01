@@ -5,11 +5,13 @@ import classes from './DesktopDashboard.module.css';
 import UserInfo from '../UserInfo/UserInfo';
 import UserStats from '../UserStats/UserStats';
 import SegmentSnapshotSmall from '../SegmentSnapshotSmall/SegmentSnapshotSmall';
+import NoSegments from '../NoSegments/NoSegments';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
 const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
   // TODO: USERSEGMENTCONTENT
   // TODO: create seperate compoent for new user no segments
+  // TODO: TEST WITH NEW USER
   const userInfoContent = userInfoProps ? (
     <UserInfo
       userImgProps={userInfoProps.userProfile[0].profileImgUrl}
@@ -29,9 +31,6 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
     />
   ) : null;
   const userSegmentContent = () => {
-    if (!userInfoProps) {
-      return null;
-    }
     if (userInfoProps.userSegments.length !== 0) {
       return userInfoProps.userSegments.map((el, index) => (
         <SegmentSnapshotSmall
@@ -50,7 +49,7 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
         />
       ));
     }
-    return <SegmentSnapshotSmall newUserProps />;
+    return <NoSegments />;
   };
 
   return (

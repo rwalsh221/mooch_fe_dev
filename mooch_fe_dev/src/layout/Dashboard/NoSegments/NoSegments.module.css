@@ -1,0 +1,8 @@
+.no_segments {
+  grid-column: 1 / span 2;
+  margin: 0 auto;
+  background-color: var(--primary-color-green-100);
+  text-align: center;
+  border: 1px solid var(--primary-color-green-800);
+  padding: var(--padding-900);
+}
