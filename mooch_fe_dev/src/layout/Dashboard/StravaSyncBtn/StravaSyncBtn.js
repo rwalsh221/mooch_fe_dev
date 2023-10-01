@@ -4,7 +4,6 @@ import classes from './StravaSyncBtn.module.css';
 // import MoochLogo from '../../../components/Typography/MoochLogo/MoochLogo';
 
 const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
-  // TODO create comonpnets for btn contnet
   const [btnContent, setBtnContent] = useState(`Sync MoOCH with STRAVA`);
 
   const syncWithStrava = async () => {
@@ -26,13 +25,14 @@ const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
       } else {
         throw new Error();
       }
+      // 3, set btnContent to sync complete
       setBtnContent('MoOCH STRAVA sync complete');
 
+      // 4, settimeout 5sec to set btnContent back to init
       setTimeout(() => {
+        document.querySelector('#strava_sync_btn').blur();
         setBtnContent('Sync MoOCH with STRAVA');
       }, 5000);
-      // 3, set btnContent to sync complete
-      // 4, settimeout 5sec to set btnContent back to init
     } catch (error) {
       setBtnContent('error.message');
       console.error(error);
@@ -41,6 +41,7 @@ const StravaSyncBtn = ({ uidProps, getUserDataProps }) => {
 
   return (
     <button
+      id="strava_sync_btn"
       type="button"
       onClick={syncWithStrava}
       className={classes.strava_sync_btn}

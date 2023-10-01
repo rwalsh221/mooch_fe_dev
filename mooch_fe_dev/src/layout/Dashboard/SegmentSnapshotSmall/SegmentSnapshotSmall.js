@@ -9,7 +9,6 @@ import {
 } from '../../../helpers/unitConversion';
 
 const SegmentSnapshotSmall = ({
-  newUserProps,
   segmentNameProps,
   cityProps,
   stateProps,
@@ -21,18 +20,6 @@ const SegmentSnapshotSmall = ({
   leaderboardProps,
   uidProps,
 }) => {
-  if (newUserProps) {
-    return (
-      <div className={classes.segment_snapshot_no_seg}>
-        <h2>YOU DO NOT HAVE ANY SEGMENTS</h2>
-        <p>
-          please sync&nbsp;<span data-heading="logo-small">MoOCH</span>{' '}
-          with&nbsp;
-          <span data-heading="logo-strava">STRAVA</span>
-        </p>
-      </div>
-    );
-  }
   const elevationGain =
     avgGradeProps.toString().indexOf('-') === -1 // avggradeprops is number
       ? elevationHighProps - elevationLowProps
@@ -150,7 +137,6 @@ const SegmentSnapshotSmall = ({
 };
 
 SegmentSnapshotSmall.propTypes = {
-  newUserProps: PropTypes.bool,
   segmentNameProps: PropTypes.string.isRequired,
   cityProps: PropTypes.string.isRequired,
   stateProps: PropTypes.string.isRequired,
@@ -161,10 +147,6 @@ SegmentSnapshotSmall.propTypes = {
   komProps: PropTypes.number.isRequired,
   leaderboardProps: PropTypes.shape({}).isRequired,
   uidProps: PropTypes.string.isRequired,
-};
-
-SegmentSnapshotSmall.defaultProps = {
-  newUserProps: false,
 };
 
 export default SegmentSnapshotSmall;

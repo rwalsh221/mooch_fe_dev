@@ -7,7 +7,11 @@ const SignUpHelp = ({ needHelpHandlerProps }) => (
   <div className={classes.help}>
     <div>
       <h2>Sign Up Guide</h2>
-      <ButtonGreen onClickProps={needHelpHandlerProps} contentProps="close" />
+      <ButtonGreen
+        onClickProps={needHelpHandlerProps}
+        contentProps="close"
+        btnTypeProps="button"
+      />
     </div>
 
     <ol>

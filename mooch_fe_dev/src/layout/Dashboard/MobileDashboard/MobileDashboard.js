@@ -6,11 +6,12 @@ import UserInfo from '../UserInfo/UserInfo';
 import UserStats from '../UserStats/UserStats';
 import SegmentSnapshotSmall from '../SegmentSnapshotSmall/SegmentSnapshotSmall';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
+import NoSegments from '../NoSegments/NoSegments';
 
 // : REFACTOR WITH DESKTOP DASHBOARD
 const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
   const [mdContent, setMdContent] = useState(null);
-  const yourStatsContent = userInfoProps ? (
+  const yourStatsContent = (
     <>
       <UserInfo
         userImgProps={userInfoProps.userProfile[0].profileImgUrl}
@@ -27,31 +28,34 @@ const MobileDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
       />
       <StravaSyncBtn uidProps={uidProps} getUserDataProps={getUserDataProps} />
     </>
-  ) : null;
-
-  const yourSegmentsContent = userInfoProps ? (
+  );
+  const yourSegmentsContent = (
     <>
       <StravaSyncBtn uidProps={uidProps} getUserDataProps={getUserDataProps} />
       <div className={classes.md_content_grid}>
-        {userInfoProps.userSegments.map((el, index) => (
-          <SegmentSnapshotSmall
-            segmentNameProps={el[0].name}
-            cityProps={el[0].city}
-            stateProps={el[0].state}
-            distanceProps={el[0].distance}
-            elevationHighProps={el[0].elevationHigh}
-            elevationLowProps={el[0].elevationLow}
-            avgGradeProps={el[0].avgGrade}
-            komProps={el[0].kom}
-            leaderboardProps={el.segmentTimes}
-            uidProps={uidProps}
-            userImgProps={userInfoProps.userProfile[0].profileImgUrl}
-            key={index}
-          />
-        ))}
+        {userInfoProps.userSegments.length > 0 ? (
+          userInfoProps.userSegments.map((el, index) => (
+            <SegmentSnapshotSmall
+              segmentNameProps={el[0].name}
+              cityProps={el[0].city}
+              stateProps={el[0].state}
+              distanceProps={el[0].distance}
+              elevationHighProps={el[0].elevationHigh}
+              elevationLowProps={el[0].elevationLow}
+              avgGradeProps={el[0].avgGrade}
+              komProps={el[0].kom}
+              leaderboardProps={el.segmentTimes}
+              uidProps={uidProps}
+              userImgProps={userInfoProps.userProfile[0].profileImgUrl}
+              key={index}
+            />
+          ))
+        ) : (
+          <NoSegments />
+        )}
       </div>
     </>
-  ) : null;
+  );
 
   const setMdContentHandler = (content) => {
     if (content === 'stats') {

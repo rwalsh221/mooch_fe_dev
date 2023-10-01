@@ -9,27 +9,6 @@ import NoSegments from '../NoSegments/NoSegments';
 import StravaSyncBtn from '../StravaSyncBtn/StravaSyncBtn';
 
 const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
-  // TODO: USERSEGMENTCONTENT
-  // TODO: create seperate compoent for new user no segments
-  // TODO: TEST WITH NEW USER
-  const userInfoContent = userInfoProps ? (
-    <UserInfo
-      userImgProps={userInfoProps.userProfile[0].profileImgUrl}
-      firstnameProps={userInfoProps.userProfile[0].firstName}
-      lastnameProps={userInfoProps.userProfile[0].lastName}
-    />
-  ) : null;
-
-  const userStatsContent = userInfoProps ? (
-    <UserStats
-      rideYearProps={parseInt(userInfoProps.userStats[0].rideYearDist, 10)}
-      rideAllProps={parseInt(userInfoProps.userStats[0].rideAllTimeDist, 10)}
-      runYearProps={parseInt(userInfoProps.userStats[0].runYearDist, 10)}
-      runAllProps={parseInt(userInfoProps.userStats[0].runAllTimeDist, 10)}
-      swimYearProps={parseInt(userInfoProps.userStats[0].swimYearDist, 10)}
-      swimAllProps={parseInt(userInfoProps.userStats[0].swimAllTimeDist, 10)}
-    />
-  ) : null;
   const userSegmentContent = () => {
     if (userInfoProps.userSegments.length !== 0) {
       return userInfoProps.userSegments.map((el, index) => (
@@ -57,8 +36,37 @@ const DesktopDashboard = ({ userInfoProps, uidProps, getUserDataProps }) => {
       <div data-wrapper="max-content-width">
         <div className={classes.dashboard_container}>
           <div className={classes.dashboard_user}>
-            {userInfoContent}
-            {userStatsContent}
+            <UserInfo
+              userImgProps={userInfoProps.userProfile[0].profileImgUrl}
+              firstnameProps={userInfoProps.userProfile[0].firstName}
+              lastnameProps={userInfoProps.userProfile[0].lastName}
+            />
+            <UserStats
+              rideYearProps={parseInt(
+                userInfoProps.userStats[0].rideYearDist,
+                10
+              )}
+              rideAllProps={parseInt(
+                userInfoProps.userStats[0].rideAllTimeDist,
+                10
+              )}
+              runYearProps={parseInt(
+                userInfoProps.userStats[0].runYearDist,
+                10
+              )}
+              runAllProps={parseInt(
+                userInfoProps.userStats[0].runAllTimeDist,
+                10
+              )}
+              swimYearProps={parseInt(
+                userInfoProps.userStats[0].swimYearDist,
+                10
+              )}
+              swimAllProps={parseInt(
+                userInfoProps.userStats[0].swimAllTimeDist,
+                10
+              )}
+            />
             <StravaSyncBtn
               uidProps={uidProps}
               getUserDataProps={getUserDataProps}

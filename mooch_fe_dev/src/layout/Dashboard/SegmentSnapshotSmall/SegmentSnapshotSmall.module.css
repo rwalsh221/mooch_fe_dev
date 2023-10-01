@@ -141,15 +141,6 @@
   margin-right: calc(var(--margin-100) * 2.5);
 }
 
-.segment_snapshot_no_seg {
-  grid-column: 1 / span 2;
-  margin: 0 auto;
-  background-color: var(--primary-color-green-100);
-  text-align: center;
-  border: 1px solid var(--primary-color-green-800);
-  padding: var(--padding-900);
-}
-
 .strava_kom span:last-of-type {
   padding: 0.5rem;
   color: var(--primary-color-green-100);
